@@ -80,4 +80,3 @@ std::ostream& operator<<(std::ostream& os, const JoystickEvent& e)
   return os;
 }
 
-

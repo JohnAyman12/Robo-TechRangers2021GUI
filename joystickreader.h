@@ -1,7 +1,7 @@
 #ifndef JOYSTICKREADER_H
 #define JOYSTICKREADER_H
 #include<QObject>
-#include </home/john/ROV/joystick-master/joystick.hh>
+#include <joystick.h>
 class joystickreader:public QObject
 {
     Q_OBJECT
