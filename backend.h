@@ -14,20 +14,12 @@ class BackEnd : public QObject
     QML_ELEMENT
 
     // axises properties
-
-//    Q_PROPERTY(QString axis0 MEMBER axis0 WRITE setUserName NOTIFY userNameChanged)
-//    Q_PROPERTY(QString axis1 MEMBER axis1 WRITE setUserName NOTIFY userNameChanged)
-//    Q_PROPERTY(QString axis2 MEMBER axis2 WRITE setUserName NOTIFY userNameChanged)
-//    Q_PROPERTY(QString axis3 MEMBER axis3 WRITE setUserName NOTIFY userNameChanged)
-//    Q_PROPERTY(QString axis4 MEMBER axis4 WRITE setUserName NOTIFY userNameChanged)
-//    Q_PROPERTY(QString axis5 MEMBER axis5 WRITE setUserName NOTIFY userNameChanged)
     Q_PROPERTY(QString axis0 READ axis0 WRITE setUserName NOTIFY userNameChanged)
     Q_PROPERTY(QString axis1 READ axis1 WRITE setUserName NOTIFY userNameChanged)
     Q_PROPERTY(QString axis2 READ axis2 WRITE setUserName NOTIFY userNameChanged)
     Q_PROPERTY(QString axis3 READ axis3 WRITE setUserName NOTIFY userNameChanged)
     Q_PROPERTY(QString axis4 READ axis4 WRITE setUserName NOTIFY userNameChanged)
     Q_PROPERTY(QString axis5 READ axis5 WRITE setUserName NOTIFY userNameChanged)
-
 
     // buttons properties
 

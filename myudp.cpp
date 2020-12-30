@@ -10,7 +10,7 @@ myUDP::myUDP(QObject *parent) :
 
 void myUDP::send(QString myData)
 {
-    qDebug() << myData;
+//    qDebug() << myData;
     QByteArray data;
     data.append(myData);
     socket->writeDatagram(data,QHostAddress("192.168.1.7"),4321);

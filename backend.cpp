@@ -148,10 +148,9 @@ void BackEnd::call(JoystickEvent event)
     valueIn = event.value;
 
     // choosing the axes textbox
-
     if(event.isAxis())
     {
-        valueOut = (((valueIn - joyMax) / (joyMax - joyMini)) * ourMini) + ourMax;
+        //        valueOut = (((valueIn - joyMax) / (joyMax - joyMini)) * ourMini) + ourMax;
         if(number == 0)
         {
             axis_0 = "axis 0 is " + QString::number(valueIn);
@@ -174,14 +173,15 @@ void BackEnd::call(JoystickEvent event)
         }
         if(number == 4)
         {
-            axis_4 = "axis 4 is " + QString::number(valueOut);
+            axis_4 = "axis 4 is " + QString::number(valueIn);
             axis4();
         }
         if(number == 5)
         {
-            axis_5 = "axis 5 is " + QString::number(valueOut);
+            axis_5 = "axis 5 is " + QString::number(valueIn);
             axis5();
         }
+
     }
 
     // chossing the button textbox
