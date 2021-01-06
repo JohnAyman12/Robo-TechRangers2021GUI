@@ -18,6 +18,9 @@ ApplicationWindow {
 
         Page2Form {
         }
+
+        Page3Form {
+        }
     }
 
     footer: TabBar {
@@ -29,6 +32,9 @@ ApplicationWindow {
         }
         TabButton {
             text: qsTr("Buttons")
+        }
+        TabButton {
+            text: qsTr("Motors")
         }
     }
 }

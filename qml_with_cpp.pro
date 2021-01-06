@@ -35,3 +35,5 @@ HEADERS += \
     joystick.h \
     joystickreader.h \
     myudp.h
+
+FORMS +=

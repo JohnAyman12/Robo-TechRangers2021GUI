@@ -16,7 +16,7 @@ void joystickreader::read(){
     }
     while (joystick.isFound()) {
         // Restrict rate
-        usleep(10000);
+        usleep(100);
 
         // Attempt to sample an event from the joystick
         JoystickEvent event;

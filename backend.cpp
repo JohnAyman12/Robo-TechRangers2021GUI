@@ -1,10 +1,9 @@
 #include "backend.h"
 #include "QDebug"
-#include "/home/john/ROV/joystick-master/joystick.hh"
+#include "joystickreader.h"
 #include<pthread.h>
 #include<QProcess>
-//#include "unistd.h"
-//#include<pthread.h>
+
 BackEnd::BackEnd(QObject *parent) :
     QObject(parent)
 {
@@ -19,7 +18,7 @@ BackEnd::BackEnd(QObject *parent) :
     emit readjoy();
 }
 
-// axis
+// axises
 
 QString BackEnd::axis0()
 {
@@ -130,16 +129,42 @@ QString BackEnd::button11()
     return button_11;
 }
 
+//motors
 
-void BackEnd::setUserName(const QString &userName)
+QString BackEnd::frontRightMotor()
 {
-    if (userName == m_userName)
-        return;
-
-    m_userName = userName;
-    qDebug() <<m_userName;
     emit userNameChanged();
+    return frontRight_Motor;
+}
 
+QString BackEnd::frontLeftMotor()
+{
+    emit userNameChanged();
+    return frontLeft_Motor;
+}
+
+QString BackEnd::backRightMotor()
+{
+    emit userNameChanged();
+    return backRight_Motor;
+}
+
+QString BackEnd::backLeftMotor()
+{
+    emit userNameChanged();
+    return backLeft_Motor;
+}
+
+QString BackEnd::up_downFrontMotor()
+{
+    emit userNameChanged();
+    return up_downFront_Motor;
+}
+
+QString BackEnd::up_downBackMotor()
+{
+    emit userNameChanged();
+    return up_downBack_Motor;
 }
 
 void BackEnd::call(JoystickEvent event)
@@ -148,37 +173,49 @@ void BackEnd::call(JoystickEvent event)
     valueIn = event.value;
 
     // choosing the axes textbox
+
     if(event.isAxis())
     {
-        //        valueOut = (((valueIn - joyMax) / (joyMax - joyMini)) * ourMini) + ourMax;
-        if(number == 0)
+        valueOut = valueIn * 500.0 / 32767.0 + 1500.0;
+        if (abs(valueOut - 1500) > 100)
         {
-            axis_0 = "axis 0 is " + QString::number(valueIn);
+            if(number == 0)
+            {
+                axis_0 = "axis 0 is " + QString::number(valueOut);
+                axis0();
+            }
+            if(number == 1)
+            {
+                axis_1 = "axis 1 is " + QString::number(valueOut);
+                axis1();
+            }
+            if(number == 2)
+            {
+                axis_2 = "axis 2 is " + QString::number(valueOut);
+                axis2();
+            }
+        } else
+        {
+            axis_0 = "axis 0 is 1500";
             axis0();
-        }
-        if(number == 1)
-        {
-            axis_1 = "axis 1 is " + QString::number(valueIn);
+            axis_1 = "axis 1 is 1500";
             axis1();
-        }
-        if(number == 2)
-        {
-            axis_2 = "axis 2 is " + QString::number(valueIn);
+            axis_2 = "axis 2 is 1500";
             axis2();
         }
         if(number == 3)
         {
-            axis_3 = "axis 3 is " + QString::number(valueIn);
+            axis_3 = "axis 3 is " + QString::number(valueOut);
             axis3();
         }
         if(number == 4)
         {
-            axis_4 = "axis 4 is " + QString::number(valueIn);
+            axis_4 = "axis 4 is " + QString::number(valueOut);
             axis4();
         }
         if(number == 5)
         {
-            axis_5 = "axis 5 is " + QString::number(valueIn);
+            axis_5 = "axis 5 is " + QString::number(valueOut);
             axis5();
         }
 
@@ -200,7 +237,7 @@ void BackEnd::call(JoystickEvent event)
         }
         if(number == 2)
         {
-            button_2 = "button 2 is " + QString::number(valueIn);
+            button_2 = "button 2 is " +  QString::number(valueIn);
             button2();
         }
         if(number == 3)
@@ -254,5 +291,11 @@ void BackEnd::call(JoystickEvent event)
             button11();
         }
     }
+    frontRightMotor();
+    frontLeftMotor();
+    backRightMotor();
+    backLeftMotor();
+    up_downFrontMotor();
+    up_downBackMotor();
     socket->send(QString::number(valueIn));
 }

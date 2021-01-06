@@ -18,68 +18,62 @@ Page {
 
     // axises TextFields
     TextField {
-        id:axis0
-        text: backend.axis0
+        id:frontLeftMotor
+        text: backend.frontLeftMotor
+        width: 200
         readOnly : true
         anchors.verticalCenterOffset: -125
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis0")
+        placeholderText: qsTr("frontLeft")
         anchors.centerIn: parent
     }
 
     TextField {
-        id:axis1
-        text: backend.axis1
+        id:frontRightMotor
+        text: backend.frontRightMotor
+        width: 200
         readOnly : true
         anchors.verticalCenterOffset: -75
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis1")
+        placeholderText: qsTr("frontRight")
         anchors.centerIn: parent
     }
 
     TextField {
-        id:axis2
-        text: backend.axis2
+        id:backLeftMotor
+        text: backend.backLeftMotor
+        width: 200
         readOnly : true
         anchors.verticalCenterOffset: -25
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis2")
+        placeholderText: qsTr("backLeft")
         anchors.centerIn: parent
     }
 
     TextField {
-        id:axis3
-        text: backend.axis3
+        id:backRightMotor
+        text: backend.backRightMotor
+        width: 200
         readOnly : true
         anchors.verticalCenterOffset: 25
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis3")
+        placeholderText: qsTr("backRight")
         anchors.centerIn: parent
     }
 
     TextField {
-        id:axis4
-        text: backend.axis4
+        id:up_downFrontMotor
+        text: backend.up_downFrontMotor
+        width: 200
         readOnly : true
         anchors.verticalCenterOffset: 75
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis4")
+        placeholderText: qsTr("up/downFront")
         anchors.centerIn: parent
     }
 
     TextField {
-        id:axis5
-        text: backend.axis5
-        readOnly : trueBackEnd
+        id:up_downBackMotor
+        text: backend.up_downBackMotor
+        width: 200
+        readOnly : true
         anchors.verticalCenterOffset: 125
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis5")
+        placeholderText: qsTr("up/downBack")
         anchors.centerIn: parent
     }
 }
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:1.75}
-}
-##^##*/
