@@ -5,9 +5,10 @@
 #include <QString>
 #include <qqml.h>
 #include<QThread>
+#include <QMap>
 #include "joystickreader.h"
 #include"myudp.h"
-
+using namespace std;
 class BackEnd : public QObject
 {
     Q_OBJECT
@@ -37,14 +38,21 @@ class BackEnd : public QObject
     Q_PROPERTY(QString button10 READ button10 NOTIFY userNameChanged)
     Q_PROPERTY(QString button11 READ button11 NOTIFY userNameChanged)
 
-    // motors properties
-    Q_PROPERTY(QString frontRightMotor READ frontRightMotor NOTIFY userNameChanged)
-    Q_PROPERTY(QString frontLeftMotor READ frontLeftMotor NOTIFY userNameChanged)
-    Q_PROPERTY(QString backRightMotor READ backRightMotor NOTIFY userNameChanged)
-    Q_PROPERTY(QString backLeftMotor READ backLeftMotor NOTIFY userNameChanged)
-    Q_PROPERTY(QString up_downFrontMotor READ up_downFrontMotor NOTIFY userNameChanged)
-    Q_PROPERTY(QString up_downBackMotor READ up_downBackMotor NOTIFY userNameChanged)
+    // motors values properties
+    Q_PROPERTY(int frontRightMotor READ frontRightMotor NOTIFY userNameChanged)
+    Q_PROPERTY(int frontLeftMotor READ frontLeftMotor NOTIFY userNameChanged)
+    Q_PROPERTY(int backRightMotor READ backRightMotor NOTIFY userNameChanged)
+    Q_PROPERTY(int backLeftMotor READ backLeftMotor NOTIFY userNameChanged)
+    Q_PROPERTY(int up_downFrontMotor READ up_downFrontMotor NOTIFY userNameChanged)
+    Q_PROPERTY(int up_downBackMotor READ up_downBackMotor NOTIFY userNameChanged)
 
+    // motors directions properties
+    Q_PROPERTY(int frontRightMotorDir READ frontRightMotorDir NOTIFY userNameChanged)
+    Q_PROPERTY(int frontLeftMotorDir READ frontLeftMotorDir NOTIFY userNameChanged)
+    Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY userNameChanged)
+    Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY userNameChanged)
+    Q_PROPERTY(int up_downFrontMotorDir READ up_downFrontMotorDir NOTIFY userNameChanged)
+    Q_PROPERTY(int up_downBackMotorDir READ up_downBackMotorDir NOTIFY userNameChanged)
 
 public:
     joystickreader *reader;
@@ -58,12 +66,7 @@ public:
 
     // axises variables and functions
 
-    QString axis_0;
-    QString axis_1;
-    QString axis_2;
-    QString axis_3;
-    QString axis_4;
-    QString axis_5;
+    int axisNum[6];
     QString axis0();
     QString axis1();
     QString axis2();
@@ -72,21 +75,9 @@ public:
     QString axis5();
     int valueOut;  // the output of mapping evaluation
 
-
     //buttons variables and functions
 
-    QString button_0;
-    QString button_1;
-    QString button_2;
-    QString button_3;
-    QString button_4;
-    QString button_5;
-    QString button_6;
-    QString button_7;
-    QString button_8;
-    QString button_9;
-    QString button_10;
-    QString button_11;
+    QString button[12];
     QString button0();
     QString button1();
     QString button2();
@@ -101,18 +92,24 @@ public:
     QString button11();
 
     // motors variables and functions
-    QString frontRight_Motor = "front-right motor is ";
-    QString frontLeft_Motor = "front-left motor is ";
-    QString backRight_Motor = "back-right motor is ";
-    QString backLeft_Motor = "back-left motor is ";
-    QString up_downFront_Motor = "up-down-front motor is ";
-    QString up_downBack_Motor = "up-down-back motor is ";
-    QString frontRightMotor();
-    QString frontLeftMotor();
-    QString backRightMotor();
-    QString backLeftMotor();
-    QString up_downFrontMotor();
-    QString up_downBackMotor();
+
+    int direction;
+    int axisPriority;
+    QMap<QString, int> motorValues;
+    QMap<QString, int> motorDirections;
+    int frontRightMotor();
+    int frontLeftMotor();
+    int backRightMotor();
+    int backLeftMotor();
+    int up_downFrontMotor();
+    int up_downBackMotor();
+
+    int frontRightMotorDir();
+    int frontLeftMotorDir();
+    int backRightMotorDir();
+    int backLeftMotorDir();
+    int up_downFrontMotorDir();
+    int up_downBackMotorDir();
 
 public slots:
     void call(JoystickEvent);

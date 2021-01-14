@@ -5,18 +5,18 @@
 
 void joystickreader::read(){
     // Create an instance of Joystick
-    Joystick joystick("/dev/input/by-id/usb-Logitech_Logitech_Extreme_3D-joystick");
+    Joystick joystick("/dev/input/by-id/usb-0810_Twin_USB_Gamepad-joystick");
 //    Joystick joystick("/dev/input/js0");
 
     // Ensure that it was found and that we can use it
     if (!joystick.isFound())
     {
         printf("open failed.\n");
-        exit(1);
+//        exit(1);
     }
     while (joystick.isFound()) {
         // Restrict rate
-        usleep(100);
+        usleep(100000);
 
         // Attempt to sample an event from the joystick
         JoystickEvent event;

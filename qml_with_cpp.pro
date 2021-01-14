@@ -37,3 +37,5 @@ HEADERS += \
     myudp.h
 
 FORMS +=
+
+DISTFILES +=

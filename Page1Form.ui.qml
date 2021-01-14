@@ -1,8 +1,10 @@
 import QtQuick 2.12
+import QtQuick.Window 2.12
 import QtQuick.Controls 2.5
 import io.qt.examples.backend 1.0
 
 Page {
+    id:mainPage
     width: mainWindow.width
     height: mainWindow.height
 
@@ -16,65 +18,64 @@ Page {
         id: backend
     }
 
-    // axises TextFields
-    TextField {
-        id:axis0
-        text: backend.axis0
-        readOnly : true
-        anchors.verticalCenterOffset: -125
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis0")
-        anchors.centerIn: parent
+    property int axis0: backend.axis0
+    property int axis1: backend.axis1
+    property int axis2: backend.axis2
+    property int axis3: backend.axis3
+    property int axis4: backend.axis4
+    property int axis5: backend.axis5
+    property int fields_xAxis: 356
+    property int firstField_yAxis: 175
+    property int spaceBetweenFields: 50
+
+
+    Axis {
+        lableText: "axis 0"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenFields * 0)
+        axisValue: axis0
     }
 
-    TextField {
-        id:axis1
-        text: backend.axis1
-        readOnly : true
-        anchors.verticalCenterOffset: -75
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis1")
-        anchors.centerIn: parent
+    Axis {
+        lableText: "axis 1"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenFields * 1)
+        axisValue: axis1
     }
 
-    TextField {
-        id:axis2
-        text: backend.axis2
-        readOnly : true
-        anchors.verticalCenterOffset: -25
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis2")
-        anchors.centerIn: parent
+    Axis {
+        lableText: "axis 2"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenFields * 2)
+        axisValue: axis2
     }
 
-    TextField {
-        id:axis3
-        text: backend.axis3
-        readOnly : true
-        anchors.verticalCenterOffset: 25
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis3")
-        anchors.centerIn: parent
+    Axis {
+        lableText: "axis 3"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenFields * 3)
+        axisValue: axis3
     }
 
-    TextField {
-        id:axis4
-        text: backend.axis4
-        readOnly : true
-        anchors.verticalCenterOffset: 75
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis4")
-        anchors.centerIn: parent
+    Axis {
+        lableText: "axis 3"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenFields * 3)
+        axisValue: axis3
     }
 
-    TextField {
-        id:axis5
-        text: backend.axis5
-        readOnly : trueBackEnd
-        anchors.verticalCenterOffset: 125
-//        anchors.horizontalCenterOffset: 125
-        placeholderText: qsTr("axis5")
-        anchors.centerIn: parent
+    Axis {
+        lableText: "axis 4"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenFields * 4)
+        axisValue: axis4
+    }
+
+    Axis {
+        lableText: "axis 5"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenFields * 5)
+        axisValue: axis5
     }
 }
 
