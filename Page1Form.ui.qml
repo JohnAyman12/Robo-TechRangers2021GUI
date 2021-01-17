@@ -45,6 +45,7 @@ Page {
 
     Axis {
         lableText: "axis 2"
+        fieldWidth: 40
         xAll: fields_xAxis
         yAll: firstField_yAxis + (spaceBetweenFields * 2)
         axisValue: axis2
@@ -58,14 +59,8 @@ Page {
     }
 
     Axis {
-        lableText: "axis 3"
-        xAll: fields_xAxis
-        yAll: firstField_yAxis + (spaceBetweenFields * 3)
-        axisValue: axis3
-    }
-
-    Axis {
         lableText: "axis 4"
+        fieldWidth: 40
         xAll: fields_xAxis
         yAll: firstField_yAxis + (spaceBetweenFields * 4)
         axisValue: axis4

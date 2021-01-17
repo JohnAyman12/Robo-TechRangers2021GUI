@@ -11,8 +11,8 @@ void joystickreader::read(){
     // Ensure that it was found and that we can use it
     if (!joystick.isFound())
     {
-        printf("open failed.\n");
-//        exit(1);
+        qDebug() << "open failed.\n";
+        exit(1);
     }
     while (joystick.isFound()) {
         // Restrict rate

@@ -3,6 +3,7 @@
 #include "joystickreader.h"
 #include<pthread.h>
 #include<QProcess>
+#include <map>
 
 BackEnd::BackEnd(QObject *parent) :
     QObject(parent)
@@ -20,6 +21,8 @@ BackEnd::BackEnd(QObject *parent) :
 
 void BackEnd::call(JoystickEvent event)
 {
+    number = event.number;
+    valueIn = event.value;
     motorValues["front-right"];
     motorValues["front-left"];
     motorValues["back-right"];
@@ -32,23 +35,27 @@ void BackEnd::call(JoystickEvent event)
     motorDirections["back-left"];
     motorDirections["up/down-front"];
     motorDirections["up/down-back"];
-    number = event.number;
-    valueIn = event.value;
 
     // choosing the axes textbox
 
     if(event.isAxis())
     {
-        valueOut = abs(valueIn) * 255 / 32767;
-        axisNum[number] = valueOut;
+        valuePilgeDC = abs(valueIn) * 255 / 32767;
+        valueT1001 = 1000 + (((-valueIn + 32767) * 500) / 32767);
+        valueT1002 = 1000 + (((valueIn + 32767) * 500) / 32767);
+        axisNum[number] = valuePilgeDC;
+        if (number == 2 or number == 3)
+        {
+            axisNum[number] = valueT1001;
+        }
         if (valueIn == 0)
         {
             motorValues["front-right"] = 0;
             motorValues["front-left"] = 0;
             motorValues["back-right"] = 0;
             motorValues["back-left"] = 0;
-            motorValues["up/down-front"] = 0;
-            motorValues["up/down-back"] = 0;
+            motorValues["up/down-front"] = 1500;
+            motorValues["up/down-back"] = 1500;
             motorDirections["front-right"] = 0;
             motorDirections["front-left"] = 0;
             motorDirections["back-right"] = 0;
@@ -66,7 +73,18 @@ void BackEnd::call(JoystickEvent event)
             {
                 direction = 1;
             }
-            if (axisNum[1] > axisNum[0])
+            if (number == 0)
+            {// right left (sway degree of freedom)
+                motorValues["front-right"] = axisNum[0];
+                motorValues["front-left"] = axisNum[0];
+                motorValues["back-right"]  = axisNum[0];
+                motorValues["back-left"] = axisNum[0];
+                motorDirections["front-right"] = direction;
+                motorDirections["back-left"] = direction;
+                motorDirections["back-right"] =  -1 * direction;
+                motorDirections["front-left"] = -1 * direction;
+            }
+            else if (number == 1)
             { // forward back (surge degree of freedom)
                 motorValues["front-right"] = axisNum[1];
                 motorValues["front-left"] = axisNum[1];
@@ -77,35 +95,26 @@ void BackEnd::call(JoystickEvent event)
                 motorDirections["back-right"] = direction;
                 motorDirections["back-left"] = direction;
             }
-            else if (axisNum[1] < axisNum[0])
-            { // right left (sway degree of freedom)
-                motorValues["front-right"] = axisNum[0];
-                motorValues["front-left"] = axisNum[0];
-                motorValues["back-right"]  = axisNum[0];
-                motorValues["back-left"] = axisNum[0];
-                motorDirections["front-right"] = direction;
-                motorDirections["back-left"] = direction;
-                motorDirections["back-right"] =  -1 * direction;
-                motorDirections["front-left"] = -1 * direction;
-            }
-            else if (axisNum[2] > axisNum[3])
+            else if (number == 2)
             { // up down (heave degree of freedom)
-                motorDirections["front-right"] = 0;
-                motorDirections["front-left"] = 0;
-                motorDirections["back-right"] = 0;
-                motorDirections["back-left"] = 0;
-
                 motorValues["up/down-front"] = axisNum[2];
                 motorValues["up/down-back"] = axisNum[2];
                 motorDirections["up/down-front"] = direction;
                 motorDirections["up/down-back"] = direction;
             }
-            else if (axisNum[2] < axisNum[3])
+            else if (number == 3)
+            {// up down (roll degree of freedom)
+                motorValues["up/down-front"] = valueT1001;
+                motorValues["up/down-back"] = valueT1002;
+                motorDirections["up/down-front"] = -1 * direction;
+                motorDirections["up/down-back"] = direction;
+            }
+            else if(number == 4)
             { // right left (sway degree of freedom)
-                motorValues["front-right"] = axisNum[3];
-                motorValues["front-left"] = axisNum[3];
-                motorValues["back-right"]  = axisNum[3];
-                motorValues["back-left"] = axisNum[3];
+                motorValues["front-right"] = axisNum[4];
+                motorValues["front-left"] = axisNum[4];
+                motorValues["back-right"]  = axisNum[4];
+                motorValues["back-left"] = axisNum[4];
                 motorDirections["front-right"] = direction;
                 motorDirections["back-right"] = direction;
                 motorDirections["front-left"] = -1 * direction;
@@ -118,59 +127,6 @@ void BackEnd::call(JoystickEvent event)
     if(event.isButton())
     {
         button[number] = "button " + QString::number(number) + " is " + QString::number(valueIn);
-        if(number == 0)
-        {
-            button0();
-        }
-        if(number == 1)
-        {
-            button1();
-        }
-        if(number == 2)
-        {
-            button2();
-        }
-        if(number == 3)
-        {
-            button3();
-        }
-        if(number == 4)
-        {
-            button4();
-        }
-        if(number == 5)
-        {
-            button5();
-        }
-        if(number == 6)
-        {
-            button6();
-        }
-
-        if(number == 7)
-        {
-            button7();
-        }
-
-        if(number == 8)
-        {
-            button8();
-        }
-
-        if(number == 9)
-        {
-            button9();
-        }
-
-        if(number == 10)
-        {
-            button10();
-        }
-
-        if(number == 11)
-        {
-            button11();
-        }
     }
     frontRightMotor();
     frontLeftMotor();
@@ -178,52 +134,45 @@ void BackEnd::call(JoystickEvent event)
     backLeftMotor();
     up_downFrontMotor();
     up_downBackMotor();
-
-    //    frontRightMotorDir();
-    //    frontLeftMotorDir();
-    //    backRightMotorDir();
-    //    backLeftMotorDir();
-    //    up_downFrontMotorDir();
-    //    up_downBackMotorDir();
     socket->send(QString::number(valueIn));
 }
 
 // axises
 
-QString BackEnd::axis0()
+int BackEnd::axis0()
 {
     emit userNameChanged();
-    return QString::number(axisNum[0]);
+    return axisNum[0];
 }
 
-QString BackEnd::axis1()
+int BackEnd::axis1()
 {
     emit userNameChanged();
-    return QString::number(axisNum[1]);
+    return axisNum[1];
 }
 
-QString BackEnd::axis2()
+int BackEnd::axis2()
 {
     emit userNameChanged();
-    return QString::number(axisNum[2]);
+    return axisNum[2];
 }
 
-QString BackEnd::axis3()
+int BackEnd::axis3()
 {
     emit userNameChanged();
-    return QString::number(axisNum[3]);
+    return axisNum[3];
 }
 
-QString BackEnd::axis4()
+int BackEnd::axis4()
 {
     emit userNameChanged();
-    return QString::number(axisNum[4]);
+    return axisNum[4];
 }
 
-QString BackEnd::axis5()
+int BackEnd::axis5()
 {
     emit userNameChanged();
-    return QString::number(axisNum[5]);
+    return axisNum[5];
 }
 
 // buttons

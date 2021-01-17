@@ -6,5 +6,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>Page3Form.ui.qml</file>
         <file>Axis.qml</file>
+        <file>Motor.qml</file>
     </qresource>
 </RCC>

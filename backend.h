@@ -16,12 +16,12 @@ class BackEnd : public QObject
 
     // axises properties
 
-    Q_PROPERTY(QString axis0 READ axis0 NOTIFY userNameChanged)
-    Q_PROPERTY(QString axis1 READ axis1 NOTIFY userNameChanged)
-    Q_PROPERTY(QString axis2 READ axis2 NOTIFY userNameChanged)
-    Q_PROPERTY(QString axis3 READ axis3 NOTIFY userNameChanged)
-    Q_PROPERTY(QString axis4 READ axis4 NOTIFY userNameChanged)
-    Q_PROPERTY(QString axis5 READ axis5 NOTIFY userNameChanged)
+    Q_PROPERTY(int axis0 READ axis0 NOTIFY userNameChanged)
+    Q_PROPERTY(int axis1 READ axis1 NOTIFY userNameChanged)
+    Q_PROPERTY(int axis2 READ axis2 NOTIFY userNameChanged)
+    Q_PROPERTY(int axis3 READ axis3 NOTIFY userNameChanged)
+    Q_PROPERTY(int axis4 READ axis4 NOTIFY userNameChanged)
+    Q_PROPERTY(int axis5 READ axis5 NOTIFY userNameChanged)
 
     // buttons properties
 
@@ -67,13 +67,15 @@ public:
     // axises variables and functions
 
     int axisNum[6];
-    QString axis0();
-    QString axis1();
-    QString axis2();
-    QString axis3();
-    QString axis4();
-    QString axis5();
-    int valueOut;  // the output of mapping evaluation
+    int axis0();
+    int axis1();
+    int axis2();
+    int axis3();
+    int axis4();
+    int axis5();
+    int valuePilgeDC;  // the output of mapping evaluation for pilge motors
+    int valueT1001;  // the output of mapping evaluation for T100 motors
+    int valueT1002;  // the output of mapping evaluation for T100 motors
 
     //buttons variables and functions
 

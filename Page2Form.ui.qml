@@ -23,7 +23,7 @@ Page {
         text: backend.button0
         readOnly : true
         anchors.verticalCenterOffset: -300
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button0")
         anchors.centerIn: parent
     }
@@ -33,7 +33,7 @@ Page {
         text: backend.button1
         readOnly : true
         anchors.verticalCenterOffset: -250
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button1")
         anchors.centerIn: parent
     }
@@ -43,7 +43,7 @@ Page {
         text: backend.button2
         readOnly : true
         anchors.verticalCenterOffset: -200
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button2")
         anchors.centerIn: parent
     }
@@ -53,7 +53,7 @@ Page {
         text: backend.button3
         readOnly : true
         anchors.verticalCenterOffset: -150
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button3")
         anchors.centerIn: parent
     }
@@ -63,7 +63,7 @@ Page {
         text: backend.button4
         readOnly : true
         anchors.verticalCenterOffset: -100
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button4")
         anchors.centerIn: parent
     }
@@ -73,7 +73,7 @@ Page {
         text: backend.button5
         readOnly : true
         anchors.verticalCenterOffset: -50
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button5")
         anchors.centerIn: parent
     }
@@ -83,7 +83,7 @@ Page {
         text: backend.button6
         readOnly : true
         anchors.verticalCenterOffset: 0
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button6")
         anchors.centerIn: parent
     }
@@ -93,7 +93,7 @@ Page {
         text: backend.button7
         readOnly : true
         anchors.verticalCenterOffset: 50
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button7")
         anchors.centerIn: parent
     }
@@ -103,7 +103,7 @@ Page {
         text: backend.button8
         readOnly : true
         anchors.verticalCenterOffset: 100
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button8")
         anchors.centerIn: parent
     }
@@ -113,7 +113,7 @@ Page {
         text: backend.button9
         readOnly : true
         anchors.verticalCenterOffset: 150
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button9")
         anchors.centerIn: parent
     }
@@ -123,7 +123,7 @@ Page {
         text: backend.button10
         readOnly : true
         anchors.verticalCenterOffset: 200
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button10")
         anchors.centerIn: parent
     }
@@ -133,7 +133,7 @@ Page {
         text: backend.button11
         readOnly : true
         anchors.verticalCenterOffset: 250
-//        anchors.horizontalCenterOffset: -125
+        //        anchors.horizontalCenterOffset: -125
         placeholderText: qsTr("button11")
         anchors.centerIn: parent
     }

@@ -16,240 +16,83 @@ Page {
         id: backend
     }
 
-    // motors TextFields
-
-    // front-left motor
-
-    Label {
-        text: qsTr("front-left motor")
-        font.bold : true
-        anchors.verticalCenterOffset: -125
-        anchors.horizontalCenterOffset: -80
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:frontLeftMotor
-        text: backend.frontLeftMotor
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: -125
-        placeholderText: qsTr("frontLeft")
-        anchors.centerIn: parent
-    }
-
-    Label {
-        text: qsTr("direction")
-        font.bold : true
-        anchors.verticalCenterOffset: -125
-        anchors.horizontalCenterOffset: 50
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:frontLeftMotorDir
-        text: backend.frontLeftMotorDir
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: -125
-        anchors.horizontalCenterOffset: 100
-        placeholderText: qsTr("frontLeft")
-        anchors.centerIn: parent
-    }
+    property int frontRight: backend.frontRightMotor
+    property int frontLeft: backend.frontLeftMotor
+    property int backRight: backend.backRightMotor
+    property int backLeft: backend.backLeftMotor
+    property int up_downFront: backend.up_downFrontMotor
+    property int up_downBack: backend.up_downBackMotor
+    property int frontRightDir: backend.frontRightMotorDir
+    property int frontLeftDir: backend.frontLeftMotorDir
+    property int backRightDir: backend.backRightMotorDir
+    property int backLeftDir: backend.backLeftMotorDir
+    property int fields_xAxis: 370
+    property int firstField_yAxis: 192
+    property int spaceBetweenFields: 50
 
     // front-right motor
 
-    Label {
-        text: qsTr("front-right motor")
-        font.bold : true
-        anchors.verticalCenterOffset: -75
-        anchors.horizontalCenterOffset: -80
-        anchors.centerIn: parent
+    Motor {
+        lableText: "front-right motor"
+        motorValue: frontRight
+        motorDirection: frontRightDir
+        x: fields_xAxis
+        y: firstField_yAxis + (spaceBetweenFields * 0)
     }
 
-    TextField {
-        id:frontRightMotor
-        text: backend.frontRightMotor
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: -75
-        placeholderText: qsTr("frontRight")
-        anchors.centerIn: parent
-    }
+    // front-left motor
 
-    Label {
-        text: qsTr("direction")
-        font.bold : true
-        anchors.verticalCenterOffset: -75
-        anchors.horizontalCenterOffset: 50
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:frontRightMotorDir
-        text: backend.frontRightMotorDir
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: -75
-        anchors.horizontalCenterOffset: 100
-        placeholderText: qsTr("frontLeft")
-        anchors.centerIn: parent
-    }
-
-    // back-left motor
-
-    Label {
-        text: qsTr("back-left motor")
-        font.bold : true
-        anchors.verticalCenterOffset: -25
-        anchors.horizontalCenterOffset: -80
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:backLeftMotor
-        text: backend.backLeftMotor
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: -25
-        placeholderText: qsTr("backLeft")
-        anchors.centerIn: parent
-    }
-
-    Label {
-        text: qsTr("direction")
-        font.bold : true
-        anchors.verticalCenterOffset: -25
-        anchors.horizontalCenterOffset: 50
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:backLeftMotorDir
-        text: backend.backLeftMotorDir
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: -25
-        anchors.horizontalCenterOffset: 100
-        placeholderText: qsTr("frontLeft")
-        anchors.centerIn: parent
+    Motor {
+        lableText: "front-left motor"
+        motorValue: frontLeft
+        motorDirection: frontLeftDir
+        x: fields_xAxis
+        y: firstField_yAxis + (spaceBetweenFields * 1)
     }
 
     // back-right motor
 
-    Label {
-        text: qsTr("back-right motor")
-        font.bold : true
-        anchors.verticalCenterOffset: 25
-        anchors.horizontalCenterOffset: -80
-        anchors.centerIn: parent
+    Motor {
+        lableText: "back-right motor"
+        motorValue: backRight
+        motorDirection: backRightDir
+        x: fields_xAxis
+        y: firstField_yAxis + (spaceBetweenFields * 2)
     }
 
-    TextField {
-        id:backRightMotor
-        text: backend.backRightMotor
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: 25
-        placeholderText: qsTr("backRight")
-        anchors.centerIn: parent
+    // back-left motor
+
+    Motor {
+        lableText: "back-left motor"
+        motorValue: backLeft
+        motorDirection: backLeftDir
+        x: fields_xAxis
+        y: firstField_yAxis + (spaceBetweenFields * 3)
     }
 
-    Label {
-        text: qsTr("direction")
-        font.bold : true
-        anchors.verticalCenterOffset: 25
-        anchors.horizontalCenterOffset: 50
-        anchors.centerIn: parent
+    // up/down-front motor
+
+    Motor {
+        lableText: "up/down-front motor"
+        valueFieldWidth: 40
+        directionvisibility: false
+        motorValue: up_downFront
+        farFromLable1: 30
+        farFromLable2: 10
+        x: fields_xAxis + 55
+        y: firstField_yAxis + (spaceBetweenFields * 4)
     }
 
-    TextField {
-        id:backRightMotorDir
-        text: backend.backRightMotorDir
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: 25
-        anchors.horizontalCenterOffset: 100
-        placeholderText: qsTr("frontLeft")
-        anchors.centerIn: parent
+    // up/down-back motor
+
+    Motor {
+        lableText: "up/down-back motor"
+        valueFieldWidth: 40
+        directionvisibility: false
+        motorValue: up_downBack
+        farFromLable1: 28
+        farFromLable2: 10
+        x: fields_xAxis + 55
+        y: firstField_yAxis + (spaceBetweenFields * 5)
     }
-
-    // up/down front motor
-
-    Label {
-        text: qsTr("up/down front motor")
-        font.bold : true
-        anchors.verticalCenterOffset: 75
-        anchors.horizontalCenterOffset: -90
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:up_downFrontMotor
-        text: backend.up_downFrontMotor
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: 75
-        placeholderText: qsTr("up/downFront")
-        anchors.centerIn: parent
-    }
-
-    Label {
-        text: qsTr("direction")
-        font.bold : true
-        anchors.verticalCenterOffset: 75
-        anchors.horizontalCenterOffset: 50
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:up_downFrontMotorDir
-        text: backend.up_downFrontMotorDir
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: 75
-        anchors.horizontalCenterOffset: 100
-        placeholderText: qsTr("frontLeft")
-        anchors.centerIn: parent
-    }
-
-    // up/down back motor
-
-    Label {
-        text: qsTr("up/down back motor")
-        font.bold : true
-        anchors.verticalCenterOffset: 125
-        anchors.horizontalCenterOffset: -90
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:up_downBackMotor
-        text: backend.up_downBackMotor
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: 125
-        placeholderText: qsTr("up/downBack")
-        anchors.centerIn: parent
-    }
-
-    Label {
-        text: qsTr("direction")
-        font.bold : true
-        anchors.verticalCenterOffset: 125
-        anchors.horizontalCenterOffset: 50
-        anchors.centerIn: parent
-    }
-
-    TextField {
-        id:up_downBackMotorDir
-        text: backend.up_downBackMotorDir
-        width: 30
-        readOnly : true
-        anchors.verticalCenterOffset: 125
-        anchors.horizontalCenterOffset: 100
-        placeholderText: qsTr("frontLeft")
-        anchors.centerIn: parent
-    }
-
 }
