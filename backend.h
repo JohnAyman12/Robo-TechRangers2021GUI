@@ -51,8 +51,6 @@ class BackEnd : public QObject
     Q_PROPERTY(int frontLeftMotorDir READ frontLeftMotorDir NOTIFY userNameChanged)
     Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY userNameChanged)
     Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY userNameChanged)
-    Q_PROPERTY(int up_downFrontMotorDir READ up_downFrontMotorDir NOTIFY userNameChanged)
-    Q_PROPERTY(int up_downBackMotorDir READ up_downBackMotorDir NOTIFY userNameChanged)
 
 public:
     joystickreader *reader;
@@ -99,6 +97,10 @@ public:
     int axisPriority;
     QMap<QString, int> motorValues;
     QMap<QString, int> motorDirections;
+    int frontRightDir[2];
+    int frontLeftDir[2];
+    int backRightDir[2];
+    int backLeftDir[2];
     int frontRightMotor();
     int frontLeftMotor();
     int backRightMotor();
@@ -110,8 +112,6 @@ public:
     int frontLeftMotorDir();
     int backRightMotorDir();
     int backLeftMotorDir();
-    int up_downFrontMotorDir();
-    int up_downBackMotorDir();
 
 public slots:
     void call(JoystickEvent);

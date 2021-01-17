@@ -60,8 +60,6 @@ void BackEnd::call(JoystickEvent event)
             motorDirections["front-left"] = 0;
             motorDirections["back-right"] = 0;
             motorDirections["back-left"] = 0;
-            motorDirections["up/down-front"] = 0;
-            motorDirections["up/down-back"]  = 0;
         }
         else
         {
@@ -80,9 +78,13 @@ void BackEnd::call(JoystickEvent event)
                 motorValues["back-right"]  = axisNum[0];
                 motorValues["back-left"] = axisNum[0];
                 motorDirections["front-right"] = direction;
-                motorDirections["back-left"] = direction;
-                motorDirections["back-right"] =  -1 * direction;
+                frontRightDir[0] = 0; frontRightDir[1] = 1;
                 motorDirections["front-left"] = -1 * direction;
+                frontLeftDir[0] = 1; frontLeftDir[1] = 0;
+                motorDirections["back-right"] =  -1 * direction;
+                backRightDir[0] = 1; backRightDir[1] = 0;
+                motorDirections["back-left"] = direction;
+                backLeftDir[0] = 0; backLeftDir[1] = 1;
             }
             else if (number == 1)
             { // forward back (surge degree of freedom)
@@ -91,9 +93,13 @@ void BackEnd::call(JoystickEvent event)
                 motorValues["back-right"] = axisNum[1];
                 motorValues["back-left"] = axisNum[1];
                 motorDirections["front-right"] = direction;
+                frontRightDir[0] = 0; frontRightDir[1] = 1;
                 motorDirections["front-left"] = direction;
+                frontLeftDir[0] = 0; frontLeftDir[1] = 1;
                 motorDirections["back-right"] = direction;
+                backRightDir[0] = 0; backRightDir[1] = 1;
                 motorDirections["back-left"] = direction;
+                backLeftDir[0] = 0; backLeftDir[1] = 1;
             }
             else if (number == 2)
             { // up down (heave degree of freedom)
@@ -110,15 +116,19 @@ void BackEnd::call(JoystickEvent event)
                 motorDirections["up/down-back"] = direction;
             }
             else if(number == 4)
-            { // right left (sway degree of freedom)
+            { // clockwise anticlockwise (sway degree of freedom)
                 motorValues["front-right"] = axisNum[4];
                 motorValues["front-left"] = axisNum[4];
                 motorValues["back-right"]  = axisNum[4];
                 motorValues["back-left"] = axisNum[4];
                 motorDirections["front-right"] = direction;
-                motorDirections["back-right"] = direction;
+                frontRightDir[0] = 0; frontRightDir[1] = 1;
                 motorDirections["front-left"] = -1 * direction;
-                motorDirections["back-left"] =  -1 * direction;
+                frontLeftDir[0] = 1; frontLeftDir[1] = 0;
+                motorDirections["back-right"] = direction;
+                backRightDir[0] = 0; backRightDir[1] = 1;
+                motorDirections["back-left"] = -1 * direction;
+                backLeftDir[0] = 1; backLeftDir[1] = 0;
             }
         }
     }
@@ -305,14 +315,4 @@ int BackEnd::backRightMotorDir(){
 int BackEnd::backLeftMotorDir(){
     emit userNameChanged();
     return motorDirections["back-left"];
-}
-
-int BackEnd::up_downFrontMotorDir(){
-    emit userNameChanged();
-    return motorDirections["up/down-front"];
-}
-
-int BackEnd::up_downBackMotorDir(){
-    emit userNameChanged();
-    return motorDirections["up/down-back"];
 }
