@@ -1,5 +1,5 @@
 import QtQuick 2.0
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.15
 
 Item {
     id:motor
@@ -10,42 +10,70 @@ Item {
     property int farFromLable1: 0
     property int farFromLable2: 0
     property int valueFieldWidth: 30
+    property int dialMinimum: 0
+    property int dialMaximum: 255
     property int xAll
     property int yAll
 
-    Label {
+    function valueNumber()
+    {
+        var place
+        if(motorValue < 100)
+        {
+            place = 44
+        }
+        else if(motorValue <256)
+        {
+            place = 35
+        }
+        else
+        {
+            place = 26
+        }
+        return place
+    }
+
+    Label { // motor name
         text: motor.lableText
         font.bold : true
         font.pixelSize: 15
         color: "black"
-        x: motor.xAll - 125 - motor.farFromLable1
+        x: motor.xAll + 10
+        y: motor.yAll - 15
+    }
+
+    Dial {
+        from: motor.dialMinimum
+        to: motor.dialMaximum
+        value: motor.motorValue
+        x: motor.xAll
         y: motor.yAll
     }
 
-    TextField {
+    Label { // motor value
         text: motor.motorValue
-        width: valueFieldWidth
-        readOnly : true
-        x: motor.xAll + 3
-        y: motor.yAll - 11
+        font.pixelSize: 20
+        color: "black"
+        x: motor.xAll + valueNumber()
+        y: motor.yAll + 36
     }
 
-    Label {
+    Label { // direction text
         text: qsTr("direction")
         font.bold : true
         visible: motor.directionvisibility
         font.pixelSize: 15
         color: "black"
-        x: motor.xAll + 35 + motor.farFromLable2
-        y: motor.yAll
+        x: motor.xAll + 10
+        y: motor.yAll + 100
     }
 
-    TextField {
+    Label { // direction value
         text: motor.motorDirection
-        width: 30
+        font.pixelSize: 20
+        color: "black"
         visible: motor.directionvisibility
-        readOnly : true
-        x:motor.xAll + 104 + motor.farFromLable2
-        y:motor.yAll - 12
+        x:motor.xAll + 80
+        y:motor.yAll + 95
     }
 }

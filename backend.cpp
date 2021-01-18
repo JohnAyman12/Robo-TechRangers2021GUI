@@ -1,5 +1,6 @@
 #include "backend.h"
 #include "QDebug"
+#include<QProcess>
 #include "joystickreader.h"
 #include<pthread.h>
 #include<QProcess>
@@ -19,10 +20,22 @@ BackEnd::BackEnd(QObject *parent) :
     emit readjoy();
 }
 
+//QString BackEnd::getSpeed()
+//{
+//    return m_speed;
+//}
+
+//void BackEnd::setSpeed(const QString &speed)
+//{
+//    m_speed = speed;
+//    emit frontEnd();
+//}
+
 void BackEnd::call(JoystickEvent event)
 {
     number = event.number;
     valueIn = event.value;
+
     motorValues["front-right"];
     motorValues["front-left"];
     motorValues["back-right"];
@@ -33,8 +46,6 @@ void BackEnd::call(JoystickEvent event)
     motorDirections["front-left"];
     motorDirections["back-right"];
     motorDirections["back-left"];
-    motorDirections["up/down-front"];
-    motorDirections["up/down-back"];
 
     // choosing the axes textbox
 
@@ -136,7 +147,14 @@ void BackEnd::call(JoystickEvent event)
 
     if(event.isButton())
     {
-        button[number] = "button " + QString::number(number) + " is " + QString::number(valueIn);
+        if (valueIn == 0){
+            button[number] = false;
+        }
+        else
+        {
+            button[number] = true;
+        }
+        //        button[number] = "button " + QString::number(number) + " is " + QString::number(valueIn);
     }
     frontRightMotor();
     frontLeftMotor();
@@ -151,111 +169,111 @@ void BackEnd::call(JoystickEvent event)
 
 int BackEnd::axis0()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return axisNum[0];
 }
 
 int BackEnd::axis1()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return axisNum[1];
 }
 
 int BackEnd::axis2()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return axisNum[2];
 }
 
 int BackEnd::axis3()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return axisNum[3];
 }
 
 int BackEnd::axis4()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return axisNum[4];
 }
 
 int BackEnd::axis5()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return axisNum[5];
 }
 
 // buttons
 
-QString BackEnd::button0()
+bool BackEnd::button0()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[0];
 }
 
-QString BackEnd::button1()
+bool BackEnd::button1()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[1];
 }
 
-QString BackEnd::button2()
+bool BackEnd::button2()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[2];
 }
 
-QString BackEnd::button3()
+bool BackEnd::button3()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[3];
 }
 
-QString BackEnd::button4()
+bool BackEnd::button4()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[4];
 }
 
-QString BackEnd::button5()
+bool BackEnd::button5()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[5];
 }
 
-QString BackEnd::button6()
+bool BackEnd::button6()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[6];
 }
 
-QString BackEnd::button7()
+bool BackEnd::button7()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[7];
 }
 
-QString BackEnd::button8()
+bool BackEnd::button8()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[8];
 }
 
-QString BackEnd::button9()
+bool BackEnd::button9()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[9];
 }
 
-QString BackEnd::button10()
+bool BackEnd::button10()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[10];
 }
 
-QString BackEnd::button11()
+bool BackEnd::button11()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return button[11];
 }
 
@@ -263,56 +281,56 @@ QString BackEnd::button11()
 
 int BackEnd::frontRightMotor()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return motorValues["front-right"];
 }
 
 int BackEnd::frontLeftMotor()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return motorValues["front-left"];
 }
 
 int BackEnd::backRightMotor()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return motorValues["back-right"];
 }
 
 int BackEnd::backLeftMotor()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return motorValues["back-left"];
 }
 
 int BackEnd::up_downFrontMotor()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return motorValues["up/down-front"];
 }
 
 int BackEnd::up_downBackMotor()
 {
-    emit userNameChanged();
+    emit frontEnd();
     return motorValues["up/down-back"];
 }
 
 int BackEnd::frontRightMotorDir(){
-    emit userNameChanged();
+    emit frontEnd();
     return motorDirections["front-right"];
 }
 
 int BackEnd::frontLeftMotorDir(){
-    emit userNameChanged();
+    emit frontEnd();
     return motorDirections["front-left"];
 }
 
 int BackEnd::backRightMotorDir(){
-    emit userNameChanged();
+    emit frontEnd();
     return motorDirections["back-right"];
 }
 
 int BackEnd::backLeftMotorDir(){
-    emit userNameChanged();
+    emit frontEnd();
     return motorDirections["back-left"];
 }

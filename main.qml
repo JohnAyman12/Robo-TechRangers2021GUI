@@ -1,5 +1,5 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.15
 
 ApplicationWindow {
     id: mainWindow
@@ -13,13 +13,10 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        Page1Form {
+        Page1 {
         }
 
-        Page2Form {
-        }
-
-        Page3Form {
+        Page2 {
         }
     }
 
@@ -28,13 +25,11 @@ ApplicationWindow {
         currentIndex: swipeView.currentIndex
 
         TabButton {
-            text: qsTr("Axis")
+            text: qsTr("Main Page")
         }
+
         TabButton {
-            text: qsTr("Buttons")
-        }
-        TabButton {
-            text: qsTr("Motors")
+            text: qsTr("another Page")
         }
     }
 }
