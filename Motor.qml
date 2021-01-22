@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Controls 2.15
 
 Item {
@@ -7,9 +7,7 @@ Item {
     property string motorValue
     property string motorDirection
     property bool directionvisibility: true
-    property int farFromLable1: 0
-    property int farFromLable2: 0
-    property int valueFieldWidth: 30
+    property int valueFieldWidth: 35
     property int dialMinimum: 0
     property int dialMaximum: 255
     property int xAll
@@ -18,13 +16,9 @@ Item {
     function valueNumber()
     {
         var place
-        if(motorValue < 100)
+        if(motorValue <256)
         {
-            place = 44
-        }
-        else if(motorValue <256)
-        {
-            place = 35
+            place = 32
         }
         else
         {
@@ -50,12 +44,16 @@ Item {
         y: motor.yAll
     }
 
-    Label { // motor value
+    TextField { // motor value
+        id: motorInput
         text: motor.motorValue
         font.pixelSize: 20
+        horizontalAlignment: Text.AlignHCenter
+        width: motor.valueFieldWidth
         color: "black"
         x: motor.xAll + valueNumber()
-        y: motor.yAll + 36
+        y: motor.yAll + 30
+        onTextChanged: {onCurrentChanges(motorInput.text)}
     }
 
     Label { // direction text
@@ -77,3 +75,9 @@ Item {
         y:motor.yAll + 95
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

@@ -5,13 +5,13 @@ Item {
     id: axis
     property string lableText
     property string axisValue
-    property int fieldWidth: 30
     property int xAll
     property int yAll
 
     TextField {
         text: axis.axisValue
-        width: axis.fieldWidth
+        width: 80
+        horizontalAlignment: Text.AlignHCenter
         readOnly : true
         x:axis.xAll
         y:axis.yAll

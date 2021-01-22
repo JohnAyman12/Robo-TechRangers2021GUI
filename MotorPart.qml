@@ -8,29 +8,42 @@ Item {
         id: backend
     }
 
-    property int frontRight: backend.frontRightMotor
-    property int frontLeft: backend.frontLeftMotor
-    property int backRight: backend.backRightMotor
-    property int backLeft: backend.backLeftMotor
-    property int up_downFront: backend.up_downFrontMotor
-    property int up_downBack: backend.up_downBackMotor
+    property int frontRight: backend.horizontalMotor
+    property int frontLeft: backend.horizontalMotor
+    property int backRight: backend.horizontalMotor
+    property int backLeft: backend.horizontalMotor
+    property int up_downFront: backend.verticalMotor
+    property int up_downBack: backend.verticalMotor
     property int frontRightDir: backend.frontRightMotorDir
     property int frontLeftDir: backend.frontLeftMotorDir
     property int backRightDir: backend.backRightMotorDir
     property int backLeftDir: backend.backLeftMotorDir
-    property int fields_xAxis
-    property int firstField_yAxis
+    property int firstDial_xAxis
+    property int firstDial_yAxis
     property int spaceBetweenMotorsX
     property int spaceBetweenMotorsY
+
+    function onCurrentChanges(currentValue)
+    {
+        if (frontRight == 255)
+        {
+            current += 5
+        }
+        else if (frontLeft == 0)
+        {
+            current -= 5
+        }
+    }
 
     // front-right motor
 
     Motor {
+        id: frontRightID
         lableText: "front right"
         motorValue: frontRight
         motorDirection: frontRightDir
-        x: fields_xAxis
-        y: firstField_yAxis + (spaceBetweenMotorsY * 0)
+        x: firstDial_xAxis
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 0)
     }
 
     // front-left motor
@@ -39,8 +52,8 @@ Item {
         lableText: "front left"
         motorValue: frontLeft
         motorDirection: frontLeftDir
-        x: fields_xAxis
-        y: firstField_yAxis + (spaceBetweenMotorsY * 1)
+        x: firstDial_xAxis
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 1)
     }
 
     // back-right motor
@@ -49,8 +62,8 @@ Item {
         lableText: "back right"
         motorValue: backRight
         motorDirection: backRightDir
-        x: fields_xAxis
-        y: firstField_yAxis + (spaceBetweenMotorsY * 2)
+        x: firstDial_xAxis
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 2)
     }
 
     // back-left motor
@@ -59,38 +72,34 @@ Item {
         lableText: "back left"
         motorValue: backLeft
         motorDirection: backLeftDir
-        x: fields_xAxis
-        y: firstField_yAxis + (spaceBetweenMotorsY * 3)
+        x: firstDial_xAxis
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 3)
     }
 
     // up/down-front motor
 
     Motor {
         lableText: "up/down front"
-        valueFieldWidth: 40
+        valueFieldWidth: 50
         directionvisibility: false
         motorValue: up_downFront
-        farFromLable1: 30
-        farFromLable2: 10
         dialMinimum: 1000
         dialMaximum: 2000
-        x: fields_xAxis+ spaceBetweenMotorsX
-        y: firstField_yAxis + (spaceBetweenMotorsY * 0)
+        x: firstDial_xAxis+ spaceBetweenMotorsX
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 0)
     }
 
     // up/down-back motor
 
     Motor {
         lableText: "up/down back"
-        valueFieldWidth: 40
+        valueFieldWidth: 50
         directionvisibility: false
         motorValue: up_downBack
-        farFromLable1: 28
-        farFromLable2: 10
         dialMinimum: 1000
         dialMaximum: 2000
-        x: fields_xAxis+ spaceBetweenMotorsX
-        y: firstField_yAxis + (spaceBetweenMotorsY * 1)
+        x: firstDial_xAxis+ spaceBetweenMotorsX
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 1)
     }
 
 }

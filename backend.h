@@ -1,6 +1,11 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
+#include<QQmlEngine>
+#include<QQmlProperty>
+#include <QQuickItem>
+#include <QQuickView>
+
 #include <QObject>
 #include <QString>
 #include <qqml.h>
@@ -8,6 +13,8 @@
 #include <QMap>
 #include "joystickreader.h"
 #include"myudp.h"
+#include <QQuickView>
+
 using namespace std;
 class BackEnd : public QObject
 {
@@ -22,6 +29,13 @@ class BackEnd : public QObject
     Q_PROPERTY(int axis3 READ axis3 NOTIFY frontEnd)
     Q_PROPERTY(int axis4 READ axis4 NOTIFY frontEnd)
     Q_PROPERTY(int axis5 READ axis5 NOTIFY frontEnd)
+
+    Q_PROPERTY(int pureAxis0 READ pureAxis0 NOTIFY frontEnd)
+    Q_PROPERTY(int pureAxis1 READ pureAxis1 NOTIFY frontEnd)
+    Q_PROPERTY(int pureAxis2 READ pureAxis2 NOTIFY frontEnd)
+    Q_PROPERTY(int pureAxis3 READ pureAxis3 NOTIFY frontEnd)
+    Q_PROPERTY(int pureAxis4 READ pureAxis4 NOTIFY frontEnd)
+    Q_PROPERTY(int pureAxis5 READ pureAxis5 NOTIFY frontEnd)
 
     // buttons properties
 
@@ -39,12 +53,8 @@ class BackEnd : public QObject
     Q_PROPERTY(bool button11 READ button11 NOTIFY frontEnd)
 
     // motors values properties
-    Q_PROPERTY(int frontRightMotor READ frontRightMotor NOTIFY frontEnd)
-    Q_PROPERTY(int frontLeftMotor READ frontLeftMotor NOTIFY frontEnd)
-    Q_PROPERTY(int backRightMotor READ backRightMotor NOTIFY frontEnd)
-    Q_PROPERTY(int backLeftMotor READ backLeftMotor NOTIFY frontEnd)
-    Q_PROPERTY(int up_downFrontMotor READ up_downFrontMotor NOTIFY frontEnd)
-    Q_PROPERTY(int up_downBackMotor READ up_downBackMotor NOTIFY frontEnd)
+    Q_PROPERTY(int horizontalMotor READ horizontalMotors NOTIFY frontEnd)
+    Q_PROPERTY(int verticalMotor READ verticalMotors NOTIFY frontEnd)
 
     // motors directions properties
     Q_PROPERTY(int frontRightMotorDir READ frontRightMotorDir NOTIFY frontEnd)
@@ -52,9 +62,10 @@ class BackEnd : public QObject
     Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY frontEnd)
 
-//    Q_PROPERTY(int speed READ getSpeed WRITE setSpeed NOTIFY frontEnd)
+    //    Q_PROPERTY(int speed READ getSpeed WRITE setSpeed NOTIFY frontEnd)
 
 public:
+
     joystickreader *reader;
     explicit BackEnd(QObject *parent = nullptr);
     QThread thread;
@@ -65,21 +76,29 @@ public:
     double valueIn;  // axis or button value
 
     // axises variables and functions
-
-    int axisNum[6];
+\
+    int axis[6];
+    int pureAxis[6];
+    int axises[6];
     int axis0();
     int axis1();
     int axis2();
     int axis3();
     int axis4();
     int axis5();
+    int pureAxis0();
+    int pureAxis1();
+    int pureAxis2();
+    int pureAxis3();
+    int pureAxis4();
+    int pureAxis5();
     int valuePilgeDC;  // the output of mapping evaluation for pilge motors
-    int valueT1001;  // the output of mapping evaluation for T100 motors
-    int valueT1002;  // the output of mapping evaluation for T100 motors
+    int valueT100;  // the output of mapping evaluation for T100 motors
 
     //buttons variables and functions
 
     bool button[12];
+    bool buttons[12];
     bool button0();
     bool button1();
     bool button2();
@@ -96,37 +115,32 @@ public:
     // motors variables and functions
 
     int direction;
-    QMap<QString, int> motorValues;
-    QMap<QString, int> motorDirections;
-    int frontRightDir[2];
-    int frontLeftDir[2];
-    int backRightDir[2];
-    int backLeftDir[2];
-    int frontRightMotor();
-    int frontLeftMotor();
-    int backRightMotor();
-    int backLeftMotor();
-    int up_downFrontMotor();
-    int up_downBackMotor();
+    short directions[4];
+    short motors[6];
+    int horizontalMotorsVar;
+    int verticalMotorsVar;
+    QMap<int, int> motorDirections;
+    int counter;
+    int frontRightArd[2];
+    int frontLeftArd[2];
+    int backRightArd[2];
+    int backLeftArd[2];
+    int horizontalMotors();
+    int verticalMotors();
 
     int frontRightMotorDir();
     int frontLeftMotorDir();
     int backRightMotorDir();
     int backLeftMotorDir();
 
-
-//    QString getSpeed();
-//    void setSpeed(const QString &speed);
-
 public slots:
     void call(JoystickEvent);
+    void getMaxSpeed(int);
 
 signals:
     void frontEnd();
     void readjoy();
 
-private:
-    QString m_speed;
 };
 
 #endif // BACKEND_H
