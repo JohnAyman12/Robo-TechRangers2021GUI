@@ -55,14 +55,4 @@ Item {
         yAll: firstLable_yAxis + (spaceBetweenLablesY * 5)
         lableVisible: true
     }
-
-    SpinBox {
-        to:255
-        value: 255
-        stepSize: 10
-        onValueChanged:
-        {
-            backend.getMaxSpeed(value)
-        }
-    }
 }

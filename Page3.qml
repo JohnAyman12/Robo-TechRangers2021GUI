@@ -15,9 +15,16 @@ Item {
             padding: 10
         }
         AxisPart {
+            id: axisPart
             fields_xAxis: 500
-            firstField_yAxis: 100
+            firstField_yAxis: 140
             spaceBetweenAxises: 50
+        }
+
+        ButtonPart {
+            buttons_xAxis: axisPart.fields_xAxis + 100
+            firstButton_yAxis: axisPart.firstField_yAxis - 120
+            spaceBetweenButtons: 45
         }
     }
 }

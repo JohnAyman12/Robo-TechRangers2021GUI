@@ -77,7 +77,6 @@ void BackEnd::call(JoystickEvent event)
                 {
                     horizontalMotorsVar = axis[number];
                 }
-
             }
             if (number == 0)
             {// right left (sway degree of freedom)
@@ -107,7 +106,6 @@ void BackEnd::call(JoystickEvent event)
             }
         }
     }
-    // chossing the button textbox
 
     if(event.isButton())
     {
@@ -118,7 +116,6 @@ void BackEnd::call(JoystickEvent event)
         {
             button[number] = true;
         }
-        //        button[number] = "button " + QString::number(number) + " is " + QString::number(valueIn);
     }
 
     for (counter = 0; counter <=5; counter++)
@@ -147,12 +144,15 @@ void BackEnd::call(JoystickEvent event)
             emit frontEnd();
         }
     }
+
+    std::vector<unsigned char> message;
+    SHORT A ;
+    A.num=horizontalMotorsVar;
+    message.insert(message.end(), A.bytes, A.bytes + 2);
+    socket->send(message.data());
 }
 
-void BackEnd::getMaxSpeed(int speed)
-{
-    m_speed = speed;
-}
+void BackEnd::getMaxSpeed(int speed){m_speed = speed;}
 
 // axises
 

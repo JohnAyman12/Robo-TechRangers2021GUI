@@ -40,6 +40,28 @@ Item {
             firstLable_yAxis: 20
             spaceBetweenLablesY: 30
         }
+
+        Label {
+            id: maximumSpeedLable
+            text: "Maximum speed"
+            font.bold : true
+            font.pixelSize: 18
+            x:570
+            y:260
+        }
+
+        SpinBox {
+            editable: true
+            x:maximumSpeedLable.x - 22
+            y:maximumSpeedLable.y + 20
+            to:255
+            value: 255
+            stepSize: 15
+            onValueChanged:
+            {
+                backend.getMaxSpeed(value)
+            }
+        }
     }
 }
 

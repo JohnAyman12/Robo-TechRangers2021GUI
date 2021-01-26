@@ -12,12 +12,12 @@ class myUDP:public QObject
 public:
     explicit myUDP(QObject *parent = 0);
 
-    void send(QString);
+    void send(unsigned char*);
 
 signals:
 
 public slots:
-    void readyRead();
+    void processPendingDatagrams();
 
 private:
     QUdpSocket *socket;

@@ -8,6 +8,12 @@ ApplicationWindow {
     visible: true
     title: qsTr("Robo-Tech Rangers 20/21")
 
+    Shortcut {
+        sequence: "esc"
+        context: Qt.ApplicationShortcut
+        onActivated: Qt.quit()
+    }
+
     Timer {
         interval: 1000; running: true;
         onTriggered: time.text = Date().toString()

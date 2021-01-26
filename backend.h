@@ -22,7 +22,7 @@ class BackEnd : public QObject
     QML_ELEMENT
 
     // axises properties
-
+    int i=0;
     Q_PROPERTY(int axis0 READ axis0 NOTIFY frontEnd)
     Q_PROPERTY(int axis1 READ axis1 NOTIFY frontEnd)
     Q_PROPERTY(int axis2 READ axis2 NOTIFY frontEnd)
@@ -66,6 +66,11 @@ class BackEnd : public QObject
 
 public:
 
+    typedef union{
+        char bytes[2];
+        short num;
+    }SHORT;
+
     joystickreader *reader;
     explicit BackEnd(QObject *parent = nullptr);
     QThread thread;
@@ -96,8 +101,7 @@ public:
     int valueT100;  // the output of mapping evaluation for T100 motors
 
     //buttons variables and functions
-
-    bool button[12];
+    bool button[12]={false};
     bool buttons[12];
     bool button0();
     bool button1();
@@ -117,8 +121,8 @@ public:
     int direction;
     short directions[4];
     short motors[6];
-    int horizontalMotorsVar;
-    int verticalMotorsVar;
+    short horizontalMotorsVar=0;
+    short verticalMotorsVar=0;
     QMap<int, int> motorDirections;
     int counter;
     int frontRightArd[2];

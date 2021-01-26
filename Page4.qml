@@ -14,5 +14,7 @@ Item {
             font.pixelSize: Qt.application.font.pixelSize * 2
             padding: 10
         }
+
+        Collapse{}
     }
 }

@@ -4,26 +4,28 @@ myUDP::myUDP(QObject *parent) :
     QObject(parent)
 {
     socket = new QUdpSocket(this);
-    socket->bind(4321);
-    connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
+    socket->bind(QHostAddress::Any,8888);
+    connect(socket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));
 }
 
-void myUDP::send(QString myData)
+void myUDP::send(unsigned char* myData)
 {
-//    qDebug() << myData;
+//   qDebug() << myData[0];
     QByteArray data;
-    data.append(myData);
-    socket->writeDatagram(data,QHostAddress("192.168.1.7"),4321);
+    data.append((const char*)myData);
+    socket->writeDatagram(data,QHostAddress("192.168.1.7"),8888);
 }
 
-void myUDP::readyRead()
+void myUDP::processPendingDatagrams()
 {
-    QByteArray buffer;
-    buffer.resize(socket->pendingDatagramSize());
+    //    u_int16_t senderport;
     QHostAddress sender;
     quint16 senderport;
-    socket->readDatagram(buffer.data(), buffer.size(), &sender, &senderport);
-    qDebug() << "message from: " << sender.toString();
-    qDebug() << "message port: " << senderport;
-    qDebug() << "message: " << buffer;
+    while (socket->hasPendingDatagrams()){
+        QByteArray buffer1;
+        buffer1.resize(socket->pendingDatagramSize());
+        socket->readDatagram(buffer1.data(), buffer1.size(), &sender, &senderport);
+        std::vector<unsigned char> buffer(buffer1.size());
+        std::copy(buffer1.begin(), buffer1.end(), buffer1.begin());
+    }
 }

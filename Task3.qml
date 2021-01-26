@@ -5,16 +5,12 @@ import QtQuick.Layouts 1.15
 import io.qt.examples.backend 1.0
 
 Item {
-    property int firstCheckBoxY: 60
-    property int spaceBetweenChackBoxes: 40
-    property int plasticDerbis1Value: 0
-    property int plasticDerbis2Value: 0
-    property bool task1Visibilty: true
+    property bool task3Visibilty: false
 
-    visible: task1Visibilty
+    visible: task3Visibilty
 
     Label {
-        text: "Task 1"
+        text: "Task 3"
         font.bold : true
         font.pixelSize: 20
         color: "black"
@@ -27,49 +23,39 @@ Item {
         y: 40
 
         Label {
-            text: "Seabin:"
+            text: "sediment sample:"
             font.bold : true
             font.pixelSize: 18
             color: "black"
         }
 
         CheckBox {
-            text: "Disconnecting the old power connector to the recently installed Seabin"
+            text: "Deploying a device into the pipe to collect a sediment sample"
+            font.pixelSize: 17
+            onCheckStateChanged:
+            {
+                if (checkState != 0) {pointsCounter += 25}
+                else if (checkState == 0) {pointsCounter -= 25}
+            }
+        }
+
+        CheckBox {
+            text: "Returning the sample to the surface"
+            font.pixelSize: 17
+            onCheckStateChanged:
+            {
+                if (checkState != 0) {pointsCounter += 10}
+                else if (checkState == 0) {pointsCounter -= 10}
+            }
+        }
+
+        CheckBox {
+            text: "IDetermining the type of contaminant(s) present in the sediment sample"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 5}
                 else if (checkState == 0) {pointsCounter -= 5}
-            }
-        }
-
-        CheckBox {
-            text: "Removing a previously installed Seabin’s mesh catch bag"
-            font.pixelSize: 17
-            onCheckStateChanged:
-            {
-                if (checkState != 0) {pointsCounter += 10}
-                else if (checkState == 0) {pointsCounter -= 10}
-            }
-        }
-
-        CheckBox {
-            text: "Installing a new mesh catch bag into the Seabin"
-            font.pixelSize: 17
-            onCheckStateChanged:
-            {
-                if (checkState != 0) {pointsCounter += 10}
-                else if (checkState == 0) {pointsCounter -= 10}
-            }
-        }
-
-        CheckBox {
-            text: "Reconnecting a new power connector to the recently installed Seabin"
-            font.pixelSize: 17
-            onCheckStateChanged:
-            {
-                if (checkState != 0) {pointsCounter += 20}
-                else if (checkState == 0) {pointsCounter -= 20}
             }
         }
     }
@@ -163,5 +149,4 @@ Item {
             }
         }
     }
-
 }
