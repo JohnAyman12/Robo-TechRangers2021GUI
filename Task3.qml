@@ -22,8 +22,18 @@ Item {
         x: 25
         y: 40
 
+        CheckBox {
+            text: "Creating a photomosaic of a subway car submerged to create an artificial reef"
+            font.pixelSize: 17
+            onCheckStateChanged:
+            {
+                if (checkState != 0) {pointsCounter += 10}
+                else if (checkState == 0) {pointsCounter -= 10}
+            }
+        }
+
         Label {
-            text: "sediment sample:"
+            text: "Sediment sample:"
             font.bold : true
             font.pixelSize: 18
             color: "black"
@@ -50,7 +60,7 @@ Item {
         }
 
         CheckBox {
-            text: "IDetermining the type of contaminant(s) present in the sediment sample"
+            text: "Determining the type of contaminant(s) present in the sediment sample"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -58,52 +68,16 @@ Item {
                 else if (checkState == 0) {pointsCounter -= 5}
             }
         }
-    }
-
-    Column {
-        x: 620
-        y: 40
-        spacing: 0.5
 
         Label {
-            text: "Remediation:"
+            text: "Mussel bed:"
             font.bold : true
             font.pixelSize: 18
             color: "black"
         }
-        Row{
-            Label {
-                id: plasticDerbisCheckBox1
-                text: "Removing floating plastic debris from the surface"
-                font.pixelSize: 17
-                y: 18
-            }
-
-            SpinBox {
-                id: plasticDerbisSpinBox1
-                to: 6
-                width: 140
-                onValueChanged:
-                {
-                    pointsCounter -= plasticDerbis1Value
-                    var curretValue = plasticDerbisSpinBox1.value
-                    var finalValue = 0
-                    if(curretValue === 0){finalValue = 0}
-                    else if(curretValue === 1 || curretValue === 2)
-                    {finalValue = 5}
-                    else if(curretValue === 3 || curretValue === 4 || curretValue === 5)
-                    {finalValue = 10}
-                    else if(curretValue === 6)
-                    {finalValue = 15}
-                    pointsCounter += finalValue
-                    plasticDerbis1Value = finalValue
-
-                }
-            }
-        }
 
         CheckBox {
-            text: "Pulling a pin to simulate cutting the ghost net free"
+            text: "Deploying a quadrat and counting the number of mussels in the quadrat"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -113,7 +87,7 @@ Item {
         }
 
         CheckBox {
-            text: "Removing the ghost net from the water"
+            text: "Estimating the number of mussels and the total amount of water filtered by the mussel bed"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -122,30 +96,30 @@ Item {
             }
         }
 
+        Label {
+            text: "Eel restoration:"
+            font.bold : true
+            font.pixelSize: 18
+            color: "black"
+        }
 
-        Row{
-            Label {
-                id: plasticDerbisCheckBox2
-                text: "Removing plastic debris from the bottom of the Mariana Trench"
-                font.pixelSize: 17
-                y: 16
+        CheckBox {
+            text: "Removing a trap full of eels from a designated area"
+            font.pixelSize: 17
+            onCheckStateChanged:
+            {
+                if (checkState != 0) {pointsCounter += 10}
+                else if (checkState == 0) {pointsCounter -= 10}
             }
+        }
 
-            SpinBox {
-                id: plasticDerbisSpinBox2
-                to: 2
-                width: 140
-                onValueChanged:
-                {
-                    pointsCounter -= plasticDerbis2Value
-                    var curretValue = plasticDerbisSpinBox2.value
-                    var finalValue = 0
-                    if(curretValue === 0){finalValue = 0}
-                    else if(curretValue === 1){finalValue = 5}
-                    else if(curretValue === 2){finalValue = 10}
-                    pointsCounter += finalValue
-                    plasticDerbis2Value = finalValue
-                }
+        CheckBox {
+            text: "Placing an empty eel trap in a designated area"
+            font.pixelSize: 17
+            onCheckStateChanged:
+            {
+                if (checkState != 0) {pointsCounter += 10}
+                else if (checkState == 0) {pointsCounter -= 10}
             }
         }
     }

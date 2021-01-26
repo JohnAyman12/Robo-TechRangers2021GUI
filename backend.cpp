@@ -59,6 +59,8 @@ void BackEnd::call(JoystickEvent event)
                 horizontalMotorsVar = 0;
                 motorDirections[counter + 6] = 0;
             }
+            microMotorVar = 0;
+            microMotorDirVar = 0;
             verticalMotorsVar = 1500;
         }
         else
@@ -71,6 +73,7 @@ void BackEnd::call(JoystickEvent event)
             {
                 direction = 1;
             }
+
             if (number == 0 or number == 1 or number == 4)
             {
                 for (counter = 0; counter <=3; counter++)
@@ -78,6 +81,11 @@ void BackEnd::call(JoystickEvent event)
                     horizontalMotorsVar = axis[number];
                 }
             }
+            if (number == 5)
+            {
+                microMotorVar = axis[5];
+            }
+
             if (number == 0)
             {// right left (sway degree of freedom)
                 motorDirections[frontRightDir] = direction;
@@ -103,6 +111,10 @@ void BackEnd::call(JoystickEvent event)
                 motorDirections[frontLeftDir] = -1 * direction;
                 motorDirections[backRightDir] = direction;
                 motorDirections[backLeftDir] = -1 * direction;
+            }
+            else if(number == 5)
+            {
+                microMotorDirVar = direction;
             }
         }
     }
@@ -208,9 +220,11 @@ bool BackEnd::button11(){return button[11];}
 
 //motors
 
-int BackEnd::horizontalMotors(){ return horizontalMotorsVar;};
+int BackEnd::horizontalMotors(){ return horizontalMotorsVar;}
 
-int BackEnd::verticalMotors(){ return verticalMotorsVar;};
+int BackEnd::verticalMotors(){ return verticalMotorsVar;}
+
+int BackEnd::microMotor(){return microMotorVar;}
 
 int BackEnd::frontRightMotorDir(){return motorDirections[frontRightDir];}
 
@@ -219,3 +233,5 @@ int BackEnd::frontLeftMotorDir(){return motorDirections[frontLeftDir];}
 int BackEnd::backRightMotorDir(){return motorDirections[backRightDir];}
 
 int BackEnd::backLeftMotorDir(){return motorDirections[backLeftDir];}
+
+int BackEnd::microMotorDir(){return microMotorDirVar;}

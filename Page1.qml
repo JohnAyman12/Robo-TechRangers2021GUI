@@ -28,39 +28,49 @@ Item {
             spaceBetweenButtons: 45
         }
 
+        Row {
+            x: 420
+            y:0
+
+            RadioButton {
+                id: mainCheckBox
+                checked: true
+                text: "Main ROV"
+                font.bold : true
+                font.pixelSize: 20
+                onCheckedChanged:
+                {
+                    motorPart.visibleMotor = mainCheckBox
+                    recievedDataPart.firstLable_yAxis = 340
+                }
+            }
+
+            RadioButton {
+                id: microCheckBox
+                text: "micro rov"
+                font.bold : true
+                font.pixelSize: 20
+                onCheckedChanged:
+                {
+                    motorPart.visibleMotor = !microCheckBox
+                    recievedDataPart.firstLable_yAxis = 310
+                }
+            }
+        }
+
         MotorPart {
+            id:motorPart
             firstDial_xAxis: 440
-            firstDial_yAxis: 0
+            firstDial_yAxis: 80
             spaceBetweenMotorsX: 150
             spaceBetweenMotorsY: 150
         }
 
         RecievedDataPart {
-            firstLable_xAxis: 800
-            firstLable_yAxis: 20
+            id:recievedDataPart
+            firstLable_xAxis: 440
+            firstLable_yAxis: 340
             spaceBetweenLablesY: 30
-        }
-
-        Label {
-            id: maximumSpeedLable
-            text: "Maximum speed"
-            font.bold : true
-            font.pixelSize: 18
-            x:570
-            y:260
-        }
-
-        SpinBox {
-            editable: true
-            x:maximumSpeedLable.x - 22
-            y:maximumSpeedLable.y + 20
-            to:255
-            value: 255
-            stepSize: 15
-            onValueChanged:
-            {
-                backend.getMaxSpeed(value)
-            }
         }
     }
 }

@@ -20,21 +20,12 @@ Item {
 
         Label {
             id: points
-            text: pointsCounter
+            text:"Total points: " + pointsCounter
             font.bold : true
             font.pixelSize: 20
             color: "black"
-            x:1200
+            x:1070
             y:13
-        }
-
-        Label {
-            text: "Total points:"
-            font.bold : true
-            font.pixelSize: 20
-            color: "black"
-            x:points.x - 130
-            y:points.y
         }
 
         Row {

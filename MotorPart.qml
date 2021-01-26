@@ -3,103 +3,133 @@ import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 
 Item {
-
     BackEnd {
         id: backend
     }
 
-    property int frontRight: backend.horizontalMotor
-    property int frontLeft: backend.horizontalMotor
-    property int backRight: backend.horizontalMotor
-    property int backLeft: backend.horizontalMotor
-    property int up_downFront: backend.verticalMotor
-    property int up_downBack: backend.verticalMotor
+    property int horizontalMotor: backend.horizontalMotor
+    property int verticalMotor: backend.verticalMotor
+    property int microMotor: backend.microMotor
     property int frontRightDir: backend.frontRightMotorDir
     property int frontLeftDir: backend.frontLeftMotorDir
     property int backRightDir: backend.backRightMotorDir
     property int backLeftDir: backend.backLeftMotorDir
+    property int microMotorDir: backend.microMotorDir
+    property bool visibleMotor:true
     property int firstDial_xAxis
     property int firstDial_yAxis
     property int spaceBetweenMotorsX
     property int spaceBetweenMotorsY
 
-    function onCurrentChanges(currentValue)
-    {
-        if (frontRight == 255)
-        {
-            current += 5
-        }
-        else if (frontLeft == 0)
-        {
-            current -= 5
-        }
-    }
-
     // front-right motor
 
+
     Motor {
-        id: frontRightID
-        lableText: "front right"
-        motorValue: frontRight
+        id: horizontalMotorsID
+        lableText: "Horizontal Motors"
+        motorVisible: visibleMotor
+        motorValue: horizontalMotor
         motorDirection: frontRightDir
         x: firstDial_xAxis
         y: firstDial_yAxis + (spaceBetweenMotorsY * 0)
     }
 
-    // front-left motor
-
-    Motor {
-        lableText: "front left"
-        motorValue: frontLeft
-        motorDirection: frontLeftDir
-        x: firstDial_xAxis
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 1)
-    }
-
-    // back-right motor
-
-    Motor {
-        lableText: "back right"
-        motorValue: backRight
-        motorDirection: backRightDir
-        x: firstDial_xAxis
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 2)
-    }
-
-    // back-left motor
-
-    Motor {
-        lableText: "back left"
-        motorValue: backLeft
-        motorDirection: backLeftDir
-        x: firstDial_xAxis
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 3)
-    }
-
     // up/down-front motor
 
     Motor {
-        lableText: "up/down front"
+        id:verticalMotors
+        lableText: "Vertical Motors"
+        motorVisible: visibleMotor
         valueFieldWidth: 50
-        directionvisibility: false
-        motorValue: up_downFront
+        motorValue: verticalMotor
+        awayFromCenter: 8
         dialMinimum: 1000
         dialMaximum: 2000
         x: firstDial_xAxis+ spaceBetweenMotorsX
         y: firstDial_yAxis + (spaceBetweenMotorsY * 0)
     }
 
-    // up/down-back motor
+    // micro motor
 
     Motor {
-        lableText: "up/down back"
-        valueFieldWidth: 50
-        directionvisibility: false
-        motorValue: up_downBack
-        dialMinimum: 1000
-        dialMaximum: 2000
-        x: firstDial_xAxis+ spaceBetweenMotorsX
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 1)
+        id:microMotors
+        lableText: "Micro Motor"
+        motorVisible: !visibleMotor
+        motorValue: microMotor
+        awayFromCenter: -11
+        x: firstDial_xAxis+ 0.5*spaceBetweenMotorsX
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 0)
     }
 
+    Column {
+        x:firstDial_xAxis + 60
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 0.8)
+        spacing: 8
+
+        Label {
+            id: maximumSpeedLable
+            text: "Maximum speed"
+            font.bold : true
+            font.pixelSize: 18
+        }
+
+        SpinBox {
+            editable: true
+            to:255
+            value: 255
+            stepSize: 15
+            x: maximumSpeedLable.x - 25
+            onValueChanged:
+            {
+                backend.getMaxSpeed(value)
+            }
+        }
+        Row {
+            spacing: 5
+            x:-35
+            visible: visibleMotor
+
+            Label {
+                id:frontRight
+                text: "Front Right: " + frontRightDir
+                font.pixelSize: 17
+                font.bold: true
+            }
+
+            Label {
+                text: "Front Left:   " + frontLeftDir
+                font.pixelSize: 17
+                font.bold: true
+            }
+        }
+
+        Row {
+            spacing: 5
+            x:-35
+            visible: visibleMotor
+
+            Label {
+                text: "Back Right:  " + backRightDir
+                font.pixelSize: 17
+                font.bold: true
+                x: frontRight.x
+            }
+
+            Label {
+                text: "Back Left:    " + backLeftDir
+                font.pixelSize: 17
+                font.bold: true
+            }
+        }
+
+
+
+        Label {
+            text: "Micro: " + microMotorDir
+            font.pixelSize: 17
+            font.bold: true
+            visible: !visibleMotor
+            x: 40
+        }
+    }
 }

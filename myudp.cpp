@@ -27,5 +27,6 @@ void myUDP::processPendingDatagrams()
         socket->readDatagram(buffer1.data(), buffer1.size(), &sender, &senderport);
         std::vector<unsigned char> buffer(buffer1.size());
         std::copy(buffer1.begin(), buffer1.end(), buffer1.begin());
+        qDebug()<<(short)buffer1[0];
     }
 }

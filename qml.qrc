@@ -15,7 +15,6 @@
         <file>RecievedData.qml</file>
         <file>Task1.qml</file>
         <file>Task2.qml</file>
-        <file>Collapse.qml</file>
         <file>Task3.qml</file>
     </qresource>
     <qresource prefix="/items"/>

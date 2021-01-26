@@ -55,12 +55,14 @@ class BackEnd : public QObject
     // motors values properties
     Q_PROPERTY(int horizontalMotor READ horizontalMotors NOTIFY frontEnd)
     Q_PROPERTY(int verticalMotor READ verticalMotors NOTIFY frontEnd)
+    Q_PROPERTY(int microMotor READ microMotor NOTIFY frontEnd)
 
     // motors directions properties
     Q_PROPERTY(int frontRightMotorDir READ frontRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int frontLeftMotorDir READ frontLeftMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY frontEnd)
+    Q_PROPERTY(int microMotorDir READ microMotorDir NOTIFY frontEnd)
 
     //    Q_PROPERTY(int speed READ getSpeed WRITE setSpeed NOTIFY frontEnd)
 
@@ -123,6 +125,8 @@ public:
     short motors[6];
     short horizontalMotorsVar=0;
     short verticalMotorsVar=0;
+    short microMotorVar;
+    short microMotorDirVar;
     QMap<int, int> motorDirections;
     int counter;
     int frontRightArd[2];
@@ -131,11 +135,13 @@ public:
     int backLeftArd[2];
     int horizontalMotors();
     int verticalMotors();
+    int microMotor();
 
     int frontRightMotorDir();
     int frontLeftMotorDir();
     int backRightMotorDir();
     int backLeftMotorDir();
+    int microMotorDir();
 
 public slots:
     void call(JoystickEvent);
