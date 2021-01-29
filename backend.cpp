@@ -88,6 +88,17 @@ void BackEnd::call(JoystickEvent event)
 
             if (number == 0)
             {// right left (sway degree of freedom)
+                if (direction == -1)
+                {
+                    motorArd[frontRight] = motorArd[backLeft] = 1;
+                    motorArd[backRight] = motorArd[frontLeft] = 0;
+                }
+                else if (direction == 1)
+                {
+                    motorArd[frontRight] = motorArd[backLeft] = 0;
+                    motorArd[backRight] = motorArd[frontLeft] = 1;
+                }
+
                 motorDirections[frontRightDir] = direction;
                 motorDirections[frontLeftDir] = -1 * direction;
                 motorDirections[backRightDir] =  -1 * direction;
@@ -95,6 +106,9 @@ void BackEnd::call(JoystickEvent event)
             }
             else if (number == 1)
             { // forward back (surge degree of freedom)
+                if (direction == -1){motorArd[frontRight] = motorArd[frontLeft] =  motorArd[backRight] = motorArd[backLeft] = 0;}
+                else if (direction == 1){motorArd[frontRight] = motorArd[frontLeft] =  motorArd[backRight] = motorArd[backLeft] = 1;}
+
                 for (counter = 0; counter <=3; counter++)
                 {
                     motorDirections[counter + 6] = direction;
@@ -107,6 +121,16 @@ void BackEnd::call(JoystickEvent event)
             }
             else if(number == 4)
             { // clockwise anticlockwise (sway degree of freedom)
+                if (direction == -1){
+                    motorArd[frontRight] = motorArd[backRight] = 1;
+                    motorArd[frontLeft] = motorArd[backLeft] = 0;
+                }
+                else if (direction == 1)
+                {
+                    motorArd[frontRight] = motorArd[backRight] = 0;
+                    motorArd[frontLeft] = motorArd[backLeft] = 1;
+                }
+
                 motorDirections[frontRightDir] = direction;
                 motorDirections[frontLeftDir] = -1 * direction;
                 motorDirections[backRightDir] = direction;
@@ -114,6 +138,8 @@ void BackEnd::call(JoystickEvent event)
             }
             else if(number == 5)
             {
+//                if (direction == -1){rovDirection = 0;}
+//                else if (direction == 1){rovDirection = 1;}
                 microMotorDirVar = direction;
             }
         }
@@ -128,8 +154,12 @@ void BackEnd::call(JoystickEvent event)
         {
             button[number] = true;
         }
+        if(valueIn == 1 and number ==0)
+        {
+            pnu = !pnu;
+        }
+        button[number] = valueIn;
     }
-
     for (counter = 0; counter <=5; counter++)
     {
         if(motors[counter] != horizontalMotorsVar)
@@ -156,12 +186,23 @@ void BackEnd::call(JoystickEvent event)
             emit frontEnd();
         }
     }
-
+//qDebug()<<motorArd[1];
     std::vector<unsigned char> message;
-    SHORT A ;
+    SHORT A ,*B;
+    short x=1;
+
     A.num=horizontalMotorsVar;
+    B=(SHORT*)motorArd;
     message.insert(message.end(), A.bytes, A.bytes + 2);
-    socket->send(message.data());
+    A.num=verticalMotorsVar;
+    message.insert(message.end(), B[0].bytes, B[0].bytes + 2);
+    message.insert(message.end(), B[1].bytes, B[1].bytes + 2);
+    message.insert(message.end(), B[2].bytes, B[2].bytes + 2);
+    message.insert(message.end(), B[3].bytes, B[3].bytes + 2);
+    message.insert(message.end(),A.bytes,A.bytes+2);
+    A.num=x;
+     message.insert(message.end(),A.bytes,A.bytes+2);
+    socket->send(message.data(),message.size());
 }
 
 void BackEnd::getMaxSpeed(int speed){m_speed = speed;}
@@ -194,7 +235,7 @@ int BackEnd::pureAxis5(){return pureAxis[5];}
 
 // buttons
 
-bool BackEnd::button0(){return button[0];}
+bool BackEnd::button0(){return pnu;}
 
 bool BackEnd::button1(){return button[1];}
 

@@ -103,6 +103,7 @@ public:
     int valueT100;  // the output of mapping evaluation for T100 motors
 
     //buttons variables and functions
+    bool pnu = 0;
     bool button[12]={false};
     bool buttons[12];
     bool button0();
@@ -129,10 +130,8 @@ public:
     short microMotorDirVar;
     QMap<int, int> motorDirections;
     int counter;
-    int frontRightArd[2];
-    int frontLeftArd[2];
-    int backRightArd[2];
-    int backLeftArd[2];
+    short frontRightArd;
+    short motorArd[4] = {0};
     int horizontalMotors();
     int verticalMotors();
     int microMotor();

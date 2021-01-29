@@ -15,7 +15,8 @@ ApplicationWindow {
     }
 
     Timer {
-        interval: 1000; running: true;
+        interval: 1000;
+        running: true;
         onTriggered: time.text = Date().toString()
     }
 

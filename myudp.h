@@ -12,7 +12,7 @@ class myUDP:public QObject
 public:
     explicit myUDP(QObject *parent = 0);
 
-    void send(unsigned char*);
+    void send(unsigned char*,int);
 
 signals:
 
