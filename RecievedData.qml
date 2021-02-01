@@ -8,7 +8,6 @@ Item {
     property int dataValue
     property int xAll
     property int yAll
-    property bool lableVisible: false
 
     Label {// data name
         text: item.dataName
@@ -34,7 +33,6 @@ Item {
         color: "black"
         x: item.xAll + 280
         y: item.yAll
-        visible: item.lableVisible
     }
 
 }

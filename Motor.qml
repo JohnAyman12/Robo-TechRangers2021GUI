@@ -7,15 +7,13 @@ Item {
     property string lableText
     property int motorValue
     property string motorDirection
-    property bool motorVisible: true
     property int valueFieldWidth: 35
     property int dialMinimum: 0
     property int dialMaximum: 255
     property int awayFromCenter: 20
+    property bool dialEnable: true
     property int xAll
     property int yAll
-
-    visible: motorVisible
 
     function valueNumber()
     {
@@ -42,6 +40,7 @@ Item {
 
     Dial {
         id:dial
+        enabled: dialEnable
         from: motor.dialMinimum
         to: motor.dialMaximum
         value: motor.motorValue

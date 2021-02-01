@@ -22,7 +22,7 @@ class BackEnd : public QObject
     QML_ELEMENT
 
     // axises properties
-    int i=0;
+
     Q_PROPERTY(int axis0 READ axis0 NOTIFY frontEnd)
     Q_PROPERTY(int axis1 READ axis1 NOTIFY frontEnd)
     Q_PROPERTY(int axis2 READ axis2 NOTIFY frontEnd)
@@ -56,6 +56,7 @@ class BackEnd : public QObject
     Q_PROPERTY(int horizontalMotor READ horizontalMotors NOTIFY frontEnd)
     Q_PROPERTY(int verticalMotor READ verticalMotors NOTIFY frontEnd)
     Q_PROPERTY(int microMotor READ microMotor NOTIFY frontEnd)
+    Q_PROPERTY(int rollerMotor READ rollerMotor NOTIFY frontEnd)
 
     // motors directions properties
     Q_PROPERTY(int frontRightMotorDir READ frontRightMotorDir NOTIFY frontEnd)
@@ -63,8 +64,7 @@ class BackEnd : public QObject
     Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int microMotorDir READ microMotorDir NOTIFY frontEnd)
-
-    //    Q_PROPERTY(int speed READ getSpeed WRITE setSpeed NOTIFY frontEnd)
+    Q_PROPERTY(int rollerMotorDir READ rollerMotorDir NOTIFY frontEnd)
 
 public:
 
@@ -122,25 +122,30 @@ public:
     // motors variables and functions
 
     int direction;
-    short directions[4];
+    int counter;
+
     short motors[6];
     short horizontalMotorsVar=0;
     short verticalMotorsVar=0;
     short microMotorVar;
-    short microMotorDirVar;
-    QMap<int, int> motorDirections;
-    int counter;
-    short frontRightArd;
-    short motorArd[4] = {0};
+    short rollerMotorVar;
     int horizontalMotors();
     int verticalMotors();
     int microMotor();
+    int rollerMotor();
 
+    short microMotorDirVar;
+    short rollerMotorDirVar;
+    QMap<int, int> motorDirections;
     int frontRightMotorDir();
     int frontLeftMotorDir();
     int backRightMotorDir();
     int backLeftMotorDir();
     int microMotorDir();
+    int rollerMotorDir();
+
+    short directions[4];
+    short motorArd[4] = {0};
 
 public slots:
     void call(JoystickEvent);

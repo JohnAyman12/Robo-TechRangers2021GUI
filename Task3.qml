@@ -6,6 +6,7 @@ import io.qt.examples.backend 1.0
 
 Item {
     property bool task3Visibilty: false
+    property double filteredWater: 0
 
     visible: task3Visibilty
 
@@ -94,6 +95,81 @@ Item {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+        }
+
+        Row {
+            spacing: 8
+
+
+            Label {
+                text: "<i>mussels counted</i>"
+                font.pixelSize: 18
+            }
+
+            TextField {
+                id:mussleField
+                y: -5
+                inputMethodHints: Qt.ImhDigitsOnly
+                horizontalAlignment: Text.AlignHCenter
+                width: 50
+            }
+
+            Label {
+                text: "mussel bed <i>height</i>"
+                font.pixelSize: 18
+            }
+
+             TextField {
+                 id:heightField
+                 y: -5
+                 inputMethodHints: Qt.ImhDigitsOnly
+                 horizontalAlignment: Text.AlignHCenter
+                 width: 50
+             }
+
+             Label {
+                 text: "mussel bed <i>width</i>"
+                 font.pixelSize: 18
+             }
+
+              TextField {
+                  id:widthField
+                  y: -5
+                  inputMethodHints: Qt.ImhDigitsOnly
+                  horizontalAlignment: Text.AlignHCenter
+                  width: 50
+              }
+
+              Label {
+                  text: "<i>filtration rate</i>"
+                  font.pixelSize: 18
+              }
+
+               TextField {
+                   id:filtrationField
+                   y: -5
+                   inputMethodHints: Qt.ImhDigitsOnly
+                   horizontalAlignment: Text.AlignHCenter
+                   width: 50
+               }
+
+               Button {
+                   y: -10
+                   text: "calculate"
+                   onClicked: {
+                       var mussle = mussleField.text
+                       var area = widthField.text * heightField.text
+                       area /= 0.25
+                       var filtration = filtrationField.text
+                       filteredWater =  area * mussle * filtration
+                   }
+               }
+
+               Label {
+                   text: "filtration rate " + filteredWater
+                   font.pixelSize: 18
+                   font.bold : true
+               }
         }
 
         Label {

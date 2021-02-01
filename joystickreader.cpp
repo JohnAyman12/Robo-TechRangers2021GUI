@@ -12,7 +12,7 @@ void joystickreader::read(){
     if (!joystick.isFound())
     {
         qDebug() << "open failed.\n";
-        exit(1);
+//        exit(1);
     }
     while (joystick.isFound()) {
         // Restrict rate

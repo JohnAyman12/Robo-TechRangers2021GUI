@@ -61,6 +61,8 @@ void BackEnd::call(JoystickEvent event)
             }
             microMotorVar = 0;
             microMotorDirVar = 0;
+            rollerMotorVar = 0;
+            rollerMotorDirVar = 0;
             verticalMotorsVar = 1500;
         }
         else
@@ -80,6 +82,10 @@ void BackEnd::call(JoystickEvent event)
                 {
                     horizontalMotorsVar = axis[number];
                 }
+            }
+            if (number == 3)
+            {
+                rollerMotorVar = axis[3];
             }
             if (number == 5)
             {
@@ -106,8 +112,10 @@ void BackEnd::call(JoystickEvent event)
             }
             else if (number == 1)
             { // forward back (surge degree of freedom)
-                if (direction == -1){motorArd[frontRight] = motorArd[frontLeft] =  motorArd[backRight] = motorArd[backLeft] = 0;}
-                else if (direction == 1){motorArd[frontRight] = motorArd[frontLeft] =  motorArd[backRight] = motorArd[backLeft] = 1;}
+                if (direction == -1){motorArd[frontRight] = motorArd[frontLeft]
+                            =  motorArd[backRight] = motorArd[backLeft] = 0;}
+                else if (direction == 1){motorArd[frontRight] = motorArd[frontLeft]
+                            =  motorArd[backRight] = motorArd[backLeft] = 1;}
 
                 for (counter = 0; counter <=3; counter++)
                 {
@@ -118,6 +126,9 @@ void BackEnd::call(JoystickEvent event)
             else if (number == 2)
             { // up down (heave degree of freedom)
                 verticalMotorsVar = axis[2];
+            }
+            else if (number == 3) {
+                rollerMotorDirVar = direction;
             }
             else if(number == 4)
             { // clockwise anticlockwise (sway degree of freedom)
@@ -138,8 +149,6 @@ void BackEnd::call(JoystickEvent event)
             }
             else if(number == 5)
             {
-//                if (direction == -1){rovDirection = 0;}
-//                else if (direction == 1){rovDirection = 1;}
                 microMotorDirVar = direction;
             }
         }
@@ -154,7 +163,7 @@ void BackEnd::call(JoystickEvent event)
         {
             button[number] = true;
         }
-        if(valueIn == 1 and number ==0)
+        if(valueIn == 1 and number == 0)
         {
             pnu = !pnu;
         }
@@ -267,6 +276,8 @@ int BackEnd::verticalMotors(){ return verticalMotorsVar;}
 
 int BackEnd::microMotor(){return microMotorVar;}
 
+int BackEnd::rollerMotor(){return rollerMotorVar;}
+
 int BackEnd::frontRightMotorDir(){return motorDirections[frontRightDir];}
 
 int BackEnd::frontLeftMotorDir(){return motorDirections[frontLeftDir];}
@@ -276,3 +287,5 @@ int BackEnd::backRightMotorDir(){return motorDirections[backRightDir];}
 int BackEnd::backLeftMotorDir(){return motorDirections[backLeftDir];}
 
 int BackEnd::microMotorDir(){return microMotorDirVar;}
+
+int BackEnd::rollerMotorDir(){return rollerMotorDirVar;}

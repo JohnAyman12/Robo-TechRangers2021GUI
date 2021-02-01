@@ -24,52 +24,21 @@ Item {
 
         ButtonPart {
             buttons_xAxis: 200
-            firstButton_yAxis: 20
-            spaceBetweenButtons: 45
-        }
-
-        Row {
-            x: 420
-            y:0
-
-            RadioButton {
-                id: mainCheckBox
-                checked: true
-                text: "Main ROV"
-                font.bold : true
-                font.pixelSize: 20
-                onCheckedChanged:
-                {
-                    motorPart.visibleMotor = mainCheckBox
-                    recievedDataPart.firstLable_yAxis = 340
-                }
-            }
-
-            RadioButton {
-                id: microCheckBox
-                text: "micro rov"
-                font.bold : true
-                font.pixelSize: 20
-                onCheckedChanged:
-                {
-                    motorPart.visibleMotor = !microCheckBox
-                    recievedDataPart.firstLable_yAxis = 310
-                }
-            }
+            buttons_yAxis: 130
         }
 
         MotorPart {
             id:motorPart
-            firstDial_xAxis: 440
-            firstDial_yAxis: 80
+            firstDial_xAxis: 530
+            firstDial_yAxis: 45
             spaceBetweenMotorsX: 150
             spaceBetweenMotorsY: 150
         }
 
         RecievedDataPart {
             id:recievedDataPart
-            firstLable_xAxis: 440
-            firstLable_yAxis: 340
+            firstLable_xAxis: 820
+            firstLable_yAxis: 180
             spaceBetweenLablesY: 30
         }
     }

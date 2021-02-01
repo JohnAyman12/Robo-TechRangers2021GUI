@@ -23,8 +23,7 @@ Item {
 
         ButtonPart {
             buttons_xAxis: axisPart.fields_xAxis + 100
-            firstButton_yAxis: axisPart.firstField_yAxis - 120
-            spaceBetweenButtons: 45
+            buttons_yAxis: axisPart.firstField_yAxis - 120
         }
     }
 }
