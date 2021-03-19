@@ -47,6 +47,15 @@ Item {
         y: motor.yAll
     }
 
+    Image {
+        id: dialImg
+        source: "background.png"
+        width: 110
+        height: 110
+        x: motor.xAll - 5
+        y: motor.yAll - 4
+    }
+
     TextField { // motor value
         id: motorInput
         text: motor.motorValue
