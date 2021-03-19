@@ -144,8 +144,8 @@ public:
     int microMotorDir();
     int rollerMotorDir();
 
-    short directions[4];
-    short motorArd[4] = {0};
+    short directions[4]; // motors directions values in the display formate
+    short motorArd[4] = {1}; // motors directions values in a readable formate for arduino
 
 public slots:
     void call(JoystickEvent);

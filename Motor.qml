@@ -1,4 +1,4 @@
-import QtQuick 2.5
+import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 Item {
@@ -34,7 +34,7 @@ Item {
         font.pixelSize: 15
         color: "black"
         x: motor.xAll - awayFromCenter
-        y: motor.yAll - 15
+        y: motor.yAll - 18
     }
 
     Dial {
@@ -53,7 +53,7 @@ Item {
         width: 110
         height: 110
         x: motor.xAll - 5
-        y: motor.yAll - 4
+        y: motor.yAll - 4.5
     }
 
     TextField { // motor value

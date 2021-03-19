@@ -19,6 +19,7 @@ Item {
     //    property int rollerMotorDir: backend.rollerMotorDir
     property int rollerMotorDir: 0
 
+    property int microArm: 0
     property int firstDial_xAxis
     property int firstDial_yAxis
     property int spaceBetweenMotorsX
@@ -28,7 +29,17 @@ Item {
         id: backend
     }
 
+    Label {
+        id:mainRovDirectionLbl
+        text: "Main Rov Direction"
+        anchors.centerIn: mainRovDirectionImg
+        anchors.verticalCenterOffset: -120
+        font.pixelSize: 20
+        font.bold: true
+    }
+
     Image {
+        id:mainRovDirectionImg
         source:
             if (frontRightDir == 1 && frontLeftDir == 1 && backRightDir == 1){"forward.png"}
             else if (frontRightDir == -1 && frontLeftDir == -1 && backRightDir == -1){"back.png"}
@@ -91,6 +102,14 @@ Item {
         onActivated:{rollerMotor = 255; rollerMotorDir = -1}
     }
 
+    Shortcut {
+        id: shortcutMicroArm
+        sequence: "O"
+        context: Qt.ApplicationShortcut
+        enabled: checkBoxMicro.checked
+        onActivated:{microArm = !microArm}
+    }
+
     Motor { // horizontal motors
         id: horizontalMotorsID
         lableText: "Horizontal Motors"
@@ -116,30 +135,78 @@ Item {
         y: firstDial_yAxis + (spaceBetweenMotorsY * 0.8)
         spacing: 8
 
-        Label {
-            id:frontRight
-            text: "Front Right: " + frontRightDir
-            font.pixelSize: 17
-            font.bold: true
+        Row{
+            spacing: 5
+            Label {
+                id:frontRight
+                text: "Front Right: " + frontRightDir
+                font.pixelSize: 17
+                font.bold: true
+            }
+
+            Image {
+                id: frontRightImg
+                source: if (frontRightDir == 0) {"hold"}
+                        else if (frontRightDir == 1){"clockwise.png"}
+                        else {"anticlockwise.png"}
+                width: 20
+                height: 20
+            }
         }
 
-        Label {
-            text: "Front Left:   " + frontLeftDir
-            font.pixelSize: 17
-            font.bold: true
+        Row{
+            spacing: 5
+            Label {
+                text: "Front Left:   " + frontLeftDir
+                font.pixelSize: 17
+                font.bold: true
+            }
+
+            Image {
+                id: frontLeftImg
+                source: if (frontLeftDir == 0) {"hold"}
+                        else if (frontLeftDir == 1){"clockwise.png"}
+                        else {"anticlockwise.png"}
+                width: 20
+                height: 20
+            }
         }
 
-        Label {
-            text: "Back Right:  " + backRightDir
-            font.pixelSize: 17
-            font.bold: true
-            x: frontRight.x
+        Row {
+            spacing: 5
+            Label {
+                text: "Back Right:  " + backRightDir
+                font.pixelSize: 17
+                font.bold: true
+                x: frontRight.x
+            }
+
+            Image {
+                id: backRightImg
+                source: if (backRightDir == 0) {"hold"}
+                        else if (backRightDir == 1){"clockwise.png"}
+                        else {"anticlockwise.png"}
+                width: 20
+                height: 20
+            }
         }
 
-        Label {
-            text: "Back Left:    " + backLeftDir
-            font.pixelSize: 17
-            font.bold: true
+        Row{
+            spacing: 5
+            Label {
+                text: "Back Left:    " + backLeftDir
+                font.pixelSize: 17
+                font.bold: true
+            }
+
+            Image {
+                id: backLeftImg
+                source: if (backLeftDir == 0) {"hold"}
+                        else if (backLeftDir == 1){"clockwise.png"}
+                        else {"anticlockwise.png"}
+                width: 20
+                height: 20
+            }
         }
     }
 
@@ -174,7 +241,7 @@ Item {
         font.pixelSize: 17
         font.bold: true
         x: firstDial_xAxis + (spaceBetweenMotorsX * 0.5)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 2)
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 1.95)
         onCheckStateChanged:
         {
             if(!checkBoxMicro.checked)
@@ -183,6 +250,7 @@ Item {
                 microMotorDir = 0
                 rollerMotor = 0
                 rollerMotorDir = 0
+                microArm = 0
             }
         }
     }
@@ -194,7 +262,7 @@ Item {
         dialEnable: checkBoxMicro.checkState
         awayFromCenter: -5
         x: firstDial_xAxis
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 2.5)
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 2.4)
     }
 
     Motor { // roller motor
@@ -204,23 +272,58 @@ Item {
         dialEnable: checkBoxMicro.checkState
         awayFromCenter: -8
         x: firstDial_xAxis + spaceBetweenMotorsX
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 2.5)
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 2.4)
     }
 
-    Label { // micro motor direction
-        text: "Micro: " + microMotorDir
-        font.pixelSize: 17
-        font.bold: true
+    Row{ // micro motor direction
+        spacing: 5
         x: firstDial_xAxis + (spaceBetweenMotorsX * 0.13)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.25)
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.15)
+
+        Label { // micro motor direction
+            id:microMotorLbl
+            text: "Micro: " + microMotorDir
+            font.pixelSize: 17
+            font.bold: true
+        }
+
+        Image {
+            id: microMotorImg
+            source: if (microMotorDir == 0) {"hold"}
+                    else if (microMotorDir == 1){"clockwise.png"}
+                    else {"anticlockwise.png"}
+            width: 20
+            height: 20
+        }
     }
 
-    Label { // roller motor direction
-        text: "Roller: " + rollerMotorDir
+    Row{ // roller motor direction
+        spacing: 5
+        x: firstDial_xAxis + (spaceBetweenMotorsX * 1.13)
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.15)
+        Label { // roller motor direction
+            id:rollerMotorLbl
+            text: "Roller: " + rollerMotorDir
+            font.pixelSize: 17
+            font.bold: true
+        }
+
+        Image {
+            id: rollerMotorImg
+            source: if (rollerMotorDir == 0) {"hold"}
+                    else if (rollerMotorDir == 1){"clockwise.png"}
+                    else {"anticlockwise.png"}
+            width: 20
+            height: 20
+        }
+    }
+
+    Label { // micro arm
+        id:microArmLbl
+        text: "Arm: " + microArm
         font.pixelSize: 17
         font.bold: true
-        x: firstDial_xAxis + (spaceBetweenMotorsX * 1.13)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.25)
+        x: firstDial_xAxis + (spaceBetweenMotorsX * 0.69)
+        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.3)
     }
-
 }

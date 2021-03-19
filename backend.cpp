@@ -111,9 +111,11 @@ void BackEnd::call(JoystickEvent event)
             }
             else if (number == 1)
             { // forward back (surge degree of freedom)
-                if (direction == -1){motorArd[frontRight] = motorArd[frontLeft]
+                if (direction == -1){
+                    motorArd[frontRight] = motorArd[frontLeft]
                             =  motorArd[backRight] = motorArd[backLeft] = 0;}
-                else if (direction == 1){motorArd[frontRight] = motorArd[frontLeft]
+                else if (direction == 1){
+                    motorArd[frontRight] = motorArd[frontLeft]
                             =  motorArd[backRight] = motorArd[backLeft] = 1;}
 
                 for (counter = 0; counter <=3; counter++)
@@ -146,10 +148,6 @@ void BackEnd::call(JoystickEvent event)
                 motorDirections[backRightDir] = direction;
                 motorDirections[backLeftDir] = -1 * direction;
             }
-            else if(number == 5)
-            {
-                microMotorDirVar = direction;
-            }
         }
     }
 
@@ -180,6 +178,7 @@ void BackEnd::call(JoystickEvent event)
             emit frontEnd();
         }
     }
+
     for (counter = 0; counter <=12; counter++)
     {
         if(buttons[counter] != button[counter])
@@ -188,7 +187,10 @@ void BackEnd::call(JoystickEvent event)
             emit frontEnd();
         }
     }
-    //qDebug()<<motorArd[1];
+
+//    qDebug()<< motorArd[frontRight] << ", " << motorArd[frontLeft] <<
+//               ", " << motorArd[backRight] << ", " << motorArd[backLeft];
+
     std::vector<unsigned char> message;
     SHORT A ,*B;
     short x=1;
