@@ -1,6 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15
-
+//import QtMultimedia 5.15
 
 ApplicationWindow {
     property int timeSecs: 0
@@ -29,6 +29,12 @@ ApplicationWindow {
         Page4 {}
     }
 
+//    SoundEffect {
+//        id: playSound
+//        source: "pip.wav"
+//        volume: 1.0
+//    }
+
     Row{ // Timer
         spacing: 10
         x:450
@@ -36,28 +42,37 @@ ApplicationWindow {
 
         Timer {
             id:timer
-            triggeredOnStart: true
             repeat: true
             interval: 1000
+            triggeredOnStart : true
             onTriggered: {
-                if(timeSecs == 0) {
+                if(timeMins == 0 && timeSecs == 0) {
+                    timer.stop()
+                    startBtn.enabled = false
+                    pauseBtn.enabled = false
+                }
+                else if(timeSecs == 0) {
                     timeSecs = 59
                     timeMins -= 1
                 }
                 else {
                     timeSecs -= 1
+//                    playSound.play()
                 }
             }
         }
 
         Button {
+            id:startBtn
             text: "Start"
             onClicked:{
+                startBtn.text = "Continue"
                 timer.start()
             }
         }
 
         Button {
+            id:pauseBtn
             text: "Pause"
             onClicked:{
                 timer.stop()
@@ -65,11 +80,15 @@ ApplicationWindow {
         }
 
         Button {
+            id:resetBtn
             text: "Reset"
             onClicked:{
-                timer.stop()
+                startBtn.text = "Start"
+                startBtn.enabled = true
+                pauseBtn.enabled = true
                 timeSecs = 0
                 timeMins = 15
+                timer.stop()
             }
         }
 

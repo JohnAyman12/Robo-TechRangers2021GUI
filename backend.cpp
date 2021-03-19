@@ -75,7 +75,6 @@ void BackEnd::call(JoystickEvent event)
             {
                 direction = 1;
             }
-
             if (number == 0 or number == 1 or number == 4)
             {
                 for (counter = 0; counter <=3; counter++)
@@ -156,19 +155,13 @@ void BackEnd::call(JoystickEvent event)
 
     if(event.isButton())
     {
-        if (valueIn == 0){
-            button[number] = false;
-        }
-        else
-        {
-            button[number] = true;
-        }
         if(valueIn == 1 and number == 0)
         {
             pnu = !pnu;
         }
         button[number] = valueIn;
     }
+
     for (counter = 0; counter <=5; counter++)
     {
         if(motors[counter] != horizontalMotorsVar)
@@ -195,7 +188,7 @@ void BackEnd::call(JoystickEvent event)
             emit frontEnd();
         }
     }
-//qDebug()<<motorArd[1];
+    //qDebug()<<motorArd[1];
     std::vector<unsigned char> message;
     SHORT A ,*B;
     short x=1;
@@ -210,7 +203,7 @@ void BackEnd::call(JoystickEvent event)
     message.insert(message.end(), B[3].bytes, B[3].bytes + 2);
     message.insert(message.end(),A.bytes,A.bytes+2);
     A.num=x;
-     message.insert(message.end(),A.bytes,A.bytes+2);
+    message.insert(message.end(),A.bytes,A.bytes+2);
     socket->send(message.data(),message.size());
 }
 

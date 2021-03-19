@@ -38,7 +38,7 @@ Item {
         RecievedDataPart {
             id:recievedDataPart
             firstLable_xAxis: 820
-            firstLable_yAxis: 180
+            firstLable_yAxis: 280
             spaceBetweenLablesY: 30
         }
     }

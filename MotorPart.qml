@@ -5,16 +5,19 @@ import io.qt.examples.backend 1.0
 Item {
     property int horizontalMotor: backend.horizontalMotor
     property int verticalMotor: backend.verticalMotor
-//    property int microMotor: backend.microMotor
+    //    property int microMotor: backend.microMotor
     property int microMotor: 0
-    property int rollerMotor: backend.rollerMotor
+    //    property int rollerMotor: backend.rollerMotor
+    property int rollerMotor: 0
 
     property int frontRightDir: backend.frontRightMotorDir
     property int frontLeftDir: backend.frontLeftMotorDir
     property int backRightDir: backend.backRightMotorDir
     property int backLeftDir: backend.backLeftMotorDir
-    property int microMotorDir: backend.microMotorDir
-    property int rollerMotorDir: backend.rollerMotorDir
+    //    property int microMotorDir: backend.microMotorDir
+    property int microMotorDir: 0
+    //    property int rollerMotorDir: backend.rollerMotorDir
+    property int rollerMotorDir: 0
 
     property int firstDial_xAxis
     property int firstDial_yAxis
@@ -23,6 +26,21 @@ Item {
 
     BackEnd { // backend data
         id: backend
+    }
+
+    Image {
+        source:
+            if (frontRightDir == 1 && frontLeftDir == 1 && backRightDir == 1){"forward.png"}
+            else if (frontRightDir == -1 && frontLeftDir == -1 && backRightDir == -1){"back.png"}
+            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == 1){"right.png"}
+            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == -1){"left.png"}
+            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == -1){"clockwise.png"}
+            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == 1){"anticlockwise.png"}
+            else {"hold.png"}
+        width: 200
+        height: 200
+        x:firstDial_xAxis + 350
+        y:firstDial_yAxis
     }
 
     Shortcut {
@@ -49,11 +67,34 @@ Item {
         onActivated:{microMotor = 255; microMotorDir = -1}
     }
 
+    Shortcut {
+        id: shortcutRollerForward
+        sequence: "I"
+        context: Qt.ApplicationShortcut
+        enabled: checkBoxMicro.checked
+        onActivated:{rollerMotor = 255; rollerMotorDir = 1}
+    }
+
+    Shortcut {
+        id: shortcutRollerStop
+        sequence: "J"
+        context: Qt.ApplicationShortcut
+        enabled: checkBoxMicro.checked
+        onActivated:{rollerMotor = 0; rollerMotorDir = 0}
+    }
+
+    Shortcut {
+        id: shortcutRollerBack
+        sequence: "M"
+        context: Qt.ApplicationShortcut
+        enabled: checkBoxMicro.checked
+        onActivated:{rollerMotor = 255; rollerMotorDir = -1}
+    }
+
     Motor { // horizontal motors
         id: horizontalMotorsID
         lableText: "Horizontal Motors"
         motorValue: horizontalMotor
-        motorDirection: frontRightDir
         x: firstDial_xAxis
         y: firstDial_yAxis
     }
@@ -140,12 +181,14 @@ Item {
             {
                 microMotor = 0
                 microMotorDir = 0
+                rollerMotor = 0
+                rollerMotorDir = 0
             }
         }
     }
 
     Motor { // micro motor
-        id:microMotors
+        id:microMotorID
         lableText: "Micro Motor"
         motorValue: microMotor
         dialEnable: checkBoxMicro.checkState
@@ -155,7 +198,7 @@ Item {
     }
 
     Motor { // roller motor
-        id:bakaraMotor
+        id:rollerMotorID
         lableText: "Roller Motors"
         motorValue: rollerMotor
         dialEnable: checkBoxMicro.checkState

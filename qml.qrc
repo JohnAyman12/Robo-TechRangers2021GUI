@@ -16,6 +16,14 @@
         <file>Task1.qml</file>
         <file>Task2.qml</file>
         <file>Task3.qml</file>
+        <file>anticlockwise.png</file>
+        <file>back.png</file>
+        <file>clockwise.png</file>
+        <file>forward.png</file>
+        <file>hold.png</file>
+        <file>left.png</file>
+        <file>right.png</file>
     </qresource>
     <qresource prefix="/items"/>
+    <qresource prefix="/parts" lang="qml"/>
 </RCC>

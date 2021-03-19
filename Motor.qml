@@ -6,7 +6,6 @@ Item {
 
     property string lableText
     property int motorValue
-    property string motorDirection
     property int valueFieldWidth: 35
     property int dialMinimum: 0
     property int dialMaximum: 255
@@ -55,6 +54,7 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         width: motor.valueFieldWidth
         color: "black"
+        readOnly: true
         x: motor.xAll + valueNumber()
         y: motor.yAll + 30
     }

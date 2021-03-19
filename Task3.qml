@@ -6,6 +6,7 @@ import io.qt.examples.backend 1.0
 
 Item {
     property bool task3Visibilty: false
+    property double musselsNumber: 0
     property double filteredWater: 0
 
     visible: task3Visibilty
@@ -96,14 +97,14 @@ Item {
                 else if (checkState == 0) {pointsCounter -= 10}
             }
         }
-
+        //        Column {
         Row {
             spacing: 8
 
-
             Label {
-                text: "<i>mussels counted</i>"
-                font.pixelSize: 18
+                id: mainText
+                text: "<i>Mussels counted</i>"
+                font.pixelSize: 16
             }
 
             TextField {
@@ -115,62 +116,73 @@ Item {
             }
 
             Label {
-                text: "mussel bed <i>height</i>"
-                font.pixelSize: 18
+                text: "<i>Mussel bed height</i>"
+                font.pixelSize: mainText.font.pixelSize
             }
 
-             TextField {
-                 id:heightField
-                 y: -5
-                 inputMethodHints: Qt.ImhDigitsOnly
-                 horizontalAlignment: Text.AlignHCenter
-                 width: 50
-             }
+            TextField {
+                id:heightField
+                y: -5
+                inputMethodHints: Qt.ImhDigitsOnly
+                horizontalAlignment: Text.AlignHCenter
+                width: 50
+            }
 
-             Label {
-                 text: "mussel bed <i>width</i>"
-                 font.pixelSize: 18
-             }
+            Label {
+                text: "<i>Mussel bed width</i>"
+                font.pixelSize: mainText.font.pixelSize
+            }
 
-              TextField {
-                  id:widthField
-                  y: -5
-                  inputMethodHints: Qt.ImhDigitsOnly
-                  horizontalAlignment: Text.AlignHCenter
-                  width: 50
-              }
+            TextField {
+                id:widthField
+                y: -5
+                inputMethodHints: Qt.ImhDigitsOnly
+                horizontalAlignment: Text.AlignHCenter
+                width: 50
+            }
 
-              Label {
-                  text: "<i>filtration rate</i>"
-                  font.pixelSize: 18
-              }
+            Label {
+                text: "Mussels number " + musselsNumber
+                font.pixelSize: mainText.font.pixelSize
+                font.bold : true
+            }
+            //        }
+            //            Row {
+            //        spacing: 8
 
-               TextField {
-                   id:filtrationField
-                   y: -5
-                   inputMethodHints: Qt.ImhDigitsOnly
-                   horizontalAlignment: Text.AlignHCenter
-                   width: 50
-               }
+            Label {
+                text: "<i>Filtration rate</i>"
+                font.pixelSize: mainText.font.pixelSize
+            }
 
-               Button {
-                   y: -10
-                   text: "calculate"
-                   onClicked: {
-                       var mussle = mussleField.text
-                       var area = widthField.text * heightField.text
-                       area /= 0.25
-                       var filtration = filtrationField.text
-                       filteredWater =  area * mussle * filtration
-                   }
-               }
+            TextField {
+                id:filtrationField
+                y: -5
+                inputMethodHints: Qt.ImhDigitsOnly
+                horizontalAlignment: Text.AlignHCenter
+                width: 50
+            }
 
-               Label {
-                   text: "filtration rate " + filteredWater
-                   font.pixelSize: 18
-                   font.bold : true
-               }
+            Label {
+                text: "Filtration rate " + Math.round(filteredWater)
+                font.pixelSize: 18
+                font.bold : true
+            }
+
+            Button {
+                y: -10
+                text: "Number of mussels"
+                onClicked: {
+                    var mussle = mussleField.text
+                    var area = widthField.text * heightField.text
+                    var filtrationRate = filtrationField.text
+                    area /= 0.25
+                    musselsNumber =   area * mussle
+                    filteredWater = musselsNumber * filtrationRate
+                }
+            }
         }
+        //    }
 
         Label {
             text: "Eel restoration:"
