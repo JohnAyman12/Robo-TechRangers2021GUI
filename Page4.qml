@@ -4,6 +4,15 @@ import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 import QtMultimedia 5.5
 
+import Qt3D.Core 2.15
+import Qt3D.Render 2.15
+import Qt3D.Input 2.15
+import Qt3D.Logic 2.15
+import Qt3D.Extras 2.15
+import Qt3D.Animation 2.15
+import QtQuick.Scene2D 2.15
+import QtQuick.Scene3D 2.15
+
 Item {
     Page {
         id:aboutPage

@@ -12,33 +12,43 @@ Item {
         width: mainWindow.width
         height: mainWindow.height
 
-        header: Label {
+        header:
+            //            Image {
+            //            id: headerBackground
+            //            source: "/images/plane.jpg"
+            //            width: 1500
+            //            height: 50
+
+            Label {
             text: qsTr("Main page")
             font.pixelSize: Qt.application.font.pixelSize * 2
             padding: 10
+            //                color: "white"
         }
+        //        }
+
 
         BackEnd {
             id:backend
         }
 
         ButtonPart {
-            buttons_xAxis: 200
-            buttons_yAxis: 130
+            buttons_x: 835
+            buttons_y: 100
         }
 
         MotorPart {
             id:motorPart
-            firstDial_xAxis: 530
-            firstDial_yAxis: 45
-            spaceBetweenMotorsX: 150
-            spaceBetweenMotorsY: 150
+            mainROV_x: 515
+            mainROV_y: 50
+            microROV_x:180
+            microROV_y: 50
         }
 
         RecievedDataPart {
             id:recievedDataPart
-            firstLable_xAxis: 820
-            firstLable_yAxis: 280
+            firstLable_xAxis: 160
+            firstLable_yAxis: 290
             spaceBetweenLablesY: 30
         }
     }

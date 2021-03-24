@@ -5,6 +5,7 @@
 
 void joystickreader::read(){
     // Create an instance of Joystick
+//    Joystick joystick("/dev/input/by-id/usb-0810_Twin_USB_Gamepad-joystick");
     Joystick joystick("/dev/input/by-id/usb-0810_Twin_USB_Gamepad-joystick");
 //    Joystick joystick("/dev/input/js0");
 
@@ -12,7 +13,7 @@ void joystickreader::read(){
     if (!joystick.isFound())
     {
         qDebug() << "open failed.\n";
-        exit(1);
+//        exit(1);
     }
     while (joystick.isFound()) {
         // Restrict rate

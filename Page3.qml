@@ -22,8 +22,8 @@ Item {
         }
 
         ButtonPart {
-            buttons_xAxis: axisPart.fields_xAxis + 100
-            buttons_yAxis: axisPart.firstField_yAxis - 120
+            buttons_x: axisPart.fields_xAxis + 100
+            buttons_y: axisPart.firstField_yAxis - 120
         }
     }
 }

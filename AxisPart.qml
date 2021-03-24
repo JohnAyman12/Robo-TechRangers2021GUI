@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
+//import ":/items"
 
 Item {
 

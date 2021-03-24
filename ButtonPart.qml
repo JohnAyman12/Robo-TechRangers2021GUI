@@ -3,23 +3,32 @@ import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 
 Item {
-    property bool button0: backend.button0
-    property int buttons_xAxis
-    property int buttons_yAxis
+    property int buttons_x
+    property int buttons_y
 
     BackEnd {
         id: backend
     }
 
+    Rectangle{
+        x:buttons_x
+        y:buttons_y
+        color: "transparent"
+        width: 300
+        height: 290
+        border.color: "deeppink"
+        border.width: 2
+        radius: 10
+    }
+
     // Buttons
     Row{
-        x:buttons_xAxis
-        y:buttons_yAxis
-
+        x:buttons_x
+        y:buttons_y
         Column {
             SwitchDelegate {
                 id: button0ID
-                checked: button0
+                checked: backend.pnu0
                 text: qsTr("button 0")
             }
 

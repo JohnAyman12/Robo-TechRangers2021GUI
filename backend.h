@@ -1,18 +1,18 @@
 #ifndef BACKEND_H
 #define BACKEND_H
 
-#include<QQmlEngine>
-#include<QQmlProperty>
+#include <QQmlEngine>
+#include <QQmlProperty>
 #include <QQuickItem>
 #include <QQuickView>
 
 #include <QObject>
 #include <QString>
 #include <qqml.h>
-#include<QThread>
+#include <QThread>
 #include <QMap>
 #include "joystickreader.h"
-#include"myudp.h"
+#include "myudp.h"
 #include <QQuickView>
 
 using namespace std;
@@ -52,19 +52,28 @@ class BackEnd : public QObject
     Q_PROPERTY(bool button10 READ button10 NOTIFY frontEnd)
     Q_PROPERTY(bool button11 READ button11 NOTIFY frontEnd)
 
+    Q_PROPERTY(bool pnu0 READ pnu0 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu1 READ pnu1 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu2 READ pnu2 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu3 READ pnu3 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu4 READ pnu4 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu5 READ pnu5 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu6 READ pnu6 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu7 READ pnu7 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu8 READ pnu8 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu9 READ pnu9 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu10 READ pnu10 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu11 READ pnu11 NOTIFY frontEnd)
+
     // motors values properties
     Q_PROPERTY(int horizontalMotor READ horizontalMotors NOTIFY frontEnd)
     Q_PROPERTY(int verticalMotor READ verticalMotors NOTIFY frontEnd)
-    Q_PROPERTY(int microMotor READ microMotor NOTIFY frontEnd)
-    Q_PROPERTY(int rollerMotor READ rollerMotor NOTIFY frontEnd)
 
     // motors directions properties
     Q_PROPERTY(int frontRightMotorDir READ frontRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int frontLeftMotorDir READ frontLeftMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY frontEnd)
-    Q_PROPERTY(int microMotorDir READ microMotorDir NOTIFY frontEnd)
-    Q_PROPERTY(int rollerMotorDir READ rollerMotorDir NOTIFY frontEnd)
 
 public:
 
@@ -80,7 +89,7 @@ public:
     myUDP *socket;
 
     int number;  // axis or button number
-    double valueIn;  // axis or button value
+    int valueIn;  // axis or button value
 
     // axises variables and functions
 \
@@ -103,8 +112,19 @@ public:
     int valueT100;  // the output of mapping evaluation for T100 motors
 
     //buttons variables and functions
-    bool pnu = 0;
-    bool button[12]={false};
+    bool pnu[12] = {false};
+    bool pnu0();
+    bool pnu1();
+    bool pnu2();
+    bool pnu3();
+    bool pnu4();
+    bool pnu5();
+    bool pnu6();
+    bool pnu7();
+    bool pnu8();
+    bool pnu9();
+    bool pnu10();
+    bool pnu11();
     bool buttons[12];
     bool button0();
     bool button1();
@@ -118,6 +138,7 @@ public:
     bool button9();
     bool button10();
     bool button11();
+    bool button[12] = {false};
 
     // motors variables and functions
 
@@ -127,15 +148,9 @@ public:
     short motors[6];
     short horizontalMotorsVar=0;
     short verticalMotorsVar=0;
-    short microMotorVar;
-    short rollerMotorVar;
     int horizontalMotors();
     int verticalMotors();
-    int microMotor();
-    int rollerMotor();
 
-    short microMotorDirVar;
-    short rollerMotorDirVar;
     QMap<int, int> motorDirections;
     int frontRightMotorDir();
     int frontLeftMotorDir();
@@ -145,7 +160,7 @@ public:
     int rollerMotorDir();
 
     short directions[4]; // motors directions values in the display formate
-    short motorArd[4] = {1}; // motors directions values in a readable formate for arduino
+ //   short motorArd[4] = {1}; // motors directions values in a readable formate for arduino
 
 public slots:
     void call(JoystickEvent);

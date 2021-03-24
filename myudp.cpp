@@ -20,8 +20,8 @@ void myUDP::send(unsigned char* myData,int length)
     socket->writeDatagram(data,QHostAddress("192.168.1.7"),8888);
     unsigned char buffer[data.size()];
     std::copy(data.begin(),data.end(),buffer);
-//    SHORT*A=(SHORT*)buffer;
-//    qDebug()<<A[5].num;
+    SHORT*A=(SHORT*)buffer;
+//   qDebug()<<A[0].num<<" "<<A[1].num<<" "<<A[2].num;
 }
 
 void myUDP::processPendingDatagrams()

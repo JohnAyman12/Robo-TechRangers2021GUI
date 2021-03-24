@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>anticlockwise.png</file>
+        <file>back.png</file>
+        <file>background.png</file>
+        <file>clockwise.png</file>
+        <file>dial.png</file>
+        <file>forward.png</file>
+        <file>hold.png</file>
+        <file>left.png</file>
+        <file>right.png</file>
+    </qresource>
+</RCC>

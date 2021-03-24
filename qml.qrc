@@ -2,7 +2,6 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>Axis.qml</file>
         <file>Motor.qml</file>
         <file>AxisPart.qml</file>
         <file>ButtonPart.qml</file>
@@ -16,15 +15,20 @@
         <file>Task1.qml</file>
         <file>Task2.qml</file>
         <file>Task3.qml</file>
+        <file>Axis.qml</file>
+    </qresource>
+    <qresource prefix="/items"/>
+    <qresource prefix="/parts" lang="qml"/>
+    <qresource prefix="/images">
         <file>anticlockwise.png</file>
         <file>back.png</file>
+        <file>background.png</file>
         <file>clockwise.png</file>
+        <file>dial.png</file>
         <file>forward.png</file>
         <file>hold.png</file>
         <file>left.png</file>
         <file>right.png</file>
-        <file>background.png</file>
+        <file>plane.jpg</file>
     </qresource>
-    <qresource prefix="/items"/>
-    <qresource prefix="/parts" lang="qml"/>
 </RCC>

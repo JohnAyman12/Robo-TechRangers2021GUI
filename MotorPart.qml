@@ -20,39 +20,19 @@ Item {
     property int rollerMotorDir: 0
 
     property int microArm: 0
-    property int firstDial_xAxis
-    property int firstDial_yAxis
-    property int spaceBetweenMotorsX
-    property int spaceBetweenMotorsY
+
+    property int mainROV_x
+    property int mainROV_y
+    property int microROV_x
+    property int microROV_y
+    property int spaceBetweenMotorsX: 150
+    property int spaceBetweenMotorsY: 150
 
     BackEnd { // backend data
         id: backend
     }
 
-    Label {
-        id:mainRovDirectionLbl
-        text: "Main Rov Direction"
-        anchors.centerIn: mainRovDirectionImg
-        anchors.verticalCenterOffset: -120
-        font.pixelSize: 20
-        font.bold: true
-    }
-
-    Image {
-        id:mainRovDirectionImg
-        source:
-            if (frontRightDir == 1 && frontLeftDir == 1 && backRightDir == 1){"forward.png"}
-            else if (frontRightDir == -1 && frontLeftDir == -1 && backRightDir == -1){"back.png"}
-            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == 1){"right.png"}
-            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == -1){"left.png"}
-            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == -1){"clockwise.png"}
-            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == 1){"anticlockwise.png"}
-            else {"hold.png"}
-        width: 200
-        height: 200
-        x:firstDial_xAxis + 350
-        y:firstDial_yAxis
-    }
+    // controling shortcuts
 
     Shortcut {
         id: shortcutMicroForward
@@ -107,15 +87,32 @@ Item {
         sequence: "O"
         context: Qt.ApplicationShortcut
         enabled: checkBoxMicro.checked
-        onActivated:{microArm = !microArm}
+        onActivated:{
+            microArm = !microArm;
+            console.log(col.x + " , " + col.y)
+        }
+    }
+
+    // Main ROV
+
+    Rectangle{
+        id:rovBorder
+        x: mainROV_x
+        y: mainROV_y
+        width: 300
+        height: 520
+        color: "transparent"
+        border.color: "deeppink"
+        border.width: 2
+        radius: 10
     }
 
     Motor { // horizontal motors
         id: horizontalMotorsID
         lableText: "Horizontal Motors"
         motorValue: horizontalMotor
-        x: firstDial_xAxis
-        y: firstDial_yAxis
+        x: rovBorder.x + (rovBorder.width * 0.13)
+        y: rovBorder.y + 32
     }
 
     Motor { // vertical motor
@@ -126,13 +123,23 @@ Item {
         awayFromCenter: 8
         dialMinimum: 1000
         dialMaximum: 2000
-        x: firstDial_xAxis + spaceBetweenMotorsX
-        y: firstDial_yAxis
+        x: rovBorder.x + (rovBorder.width * 0.59)
+        y: horizontalMotorsID.y
+    }
+
+    Label {
+        id:horizontalMotorsDirLbl
+        text: "Horizontal Motors"
+        anchors.centerIn: horizontalMotorsDir
+        anchors.verticalCenterOffset: -68
+        font.pixelSize: 20
+        font.bold: true
     }
 
     Column { // horizontal motors directions
-        x: firstDial_xAxis + (spaceBetweenMotorsX * 0.45)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 0.8)
+        id:horizontalMotorsDir
+        anchors.centerIn: rovBorder
+        anchors.verticalCenterOffset: -40
         spacing: 8
 
         Row{
@@ -146,9 +153,9 @@ Item {
 
             Image {
                 id: frontRightImg
-                source: if (frontRightDir == 0) {"hold"}
-                        else if (frontRightDir == 1){"clockwise.png"}
-                        else {"anticlockwise.png"}
+                source: if (frontRightDir == 0) {"/images/hold.png"}
+                        else if (frontRightDir == 1){"/images/clockwise.png"}
+                        else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
             }
@@ -164,9 +171,9 @@ Item {
 
             Image {
                 id: frontLeftImg
-                source: if (frontLeftDir == 0) {"hold"}
-                        else if (frontLeftDir == 1){"clockwise.png"}
-                        else {"anticlockwise.png"}
+                source: if (frontLeftDir == 0) {"/images/hold.png"}
+                        else if (frontLeftDir == 1){"/images/clockwise.png"}
+                        else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
             }
@@ -183,9 +190,9 @@ Item {
 
             Image {
                 id: backRightImg
-                source: if (backRightDir == 0) {"hold"}
-                        else if (backRightDir == 1){"clockwise.png"}
-                        else {"anticlockwise.png"}
+                source: if (backRightDir == 0) {"/images/hold.png"}
+                        else if (backRightDir == 1){"/images/clockwise.png"}
+                        else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
             }
@@ -201,38 +208,27 @@ Item {
 
             Image {
                 id: backLeftImg
-                source: if (backLeftDir == 0) {"hold"}
-                        else if (backLeftDir == 1){"clockwise.png"}
-                        else {"anticlockwise.png"}
+                source: if (backLeftDir == 0) {"/images/hold.png"}
+                        else if (backLeftDir == 1){"/images/clockwise.png"}
+                        else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
             }
         }
     }
 
-    Column { // maximum speed spinbox
-        spacing: 5
-        x: firstDial_xAxis + (spaceBetweenMotorsX * 0.35)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 1.5)
+    //  MICRO ROV
 
-        Label {
-            id: maximumSpeedLable
-            text: "Maximum speed"
-            font.bold : true
-            font.pixelSize: 18
-        }
-
-        SpinBox {
-            editable: true
-            to:255
-            value: 255
-            stepSize: 15
-            x: maximumSpeedLable.x - 25
-            onValueChanged:
-            {
-                backend.getMaxSpeed(value)
-            }
-        }
+    Rectangle{
+        id:microBorder
+        x: microROV_x
+        y: microROV_y
+        color: "transparent"
+        width: 290
+        height: 230
+        border.color: "deeppink"
+        border.width: 2
+        radius: 10
     }
 
     CheckBox { // micro mood control
@@ -240,8 +236,8 @@ Item {
         text: "Micro"
         font.pixelSize: 17
         font.bold: true
-        x: firstDial_xAxis + (spaceBetweenMotorsX * 0.5)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 1.95)
+        x: microBorder.x + 100
+        y: microBorder.y
         onCheckStateChanged:
         {
             if(!checkBoxMicro.checked)
@@ -261,8 +257,8 @@ Item {
         motorValue: microMotor
         dialEnable: checkBoxMicro.checkState
         awayFromCenter: -5
-        x: firstDial_xAxis
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 2.4)
+        x: microBorder.x + 15
+        y: microBorder.y + 60
     }
 
     Motor { // roller motor
@@ -271,14 +267,14 @@ Item {
         motorValue: rollerMotor
         dialEnable: checkBoxMicro.checkState
         awayFromCenter: -8
-        x: firstDial_xAxis + spaceBetweenMotorsX
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 2.4)
+        x: microBorder.x + 165
+        y: microBorder.y + 60
     }
 
     Row{ // micro motor direction
         spacing: 5
-        x: firstDial_xAxis + (spaceBetweenMotorsX * 0.13)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.15)
+        x: microBorder.x + 34.5
+        y: microBorder.y + 172.5
 
         Label { // micro motor direction
             id:microMotorLbl
@@ -289,9 +285,9 @@ Item {
 
         Image {
             id: microMotorImg
-            source: if (microMotorDir == 0) {"hold"}
-                    else if (microMotorDir == 1){"clockwise.png"}
-                    else {"anticlockwise.png"}
+            source: if (microMotorDir == 0) {"/images/hold.png"}
+                    else if (microMotorDir == 1){"/images/clockwise.png"}
+                    else {"/images/anticlockwise.png"}
             width: 20
             height: 20
         }
@@ -299,8 +295,8 @@ Item {
 
     Row{ // roller motor direction
         spacing: 5
-        x: firstDial_xAxis + (spaceBetweenMotorsX * 1.13)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.15)
+        x: microBorder.x + 184.5
+        y: microBorder.y + 172.5
         Label { // roller motor direction
             id:rollerMotorLbl
             text: "Roller: " + rollerMotorDir
@@ -310,9 +306,9 @@ Item {
 
         Image {
             id: rollerMotorImg
-            source: if (rollerMotorDir == 0) {"hold"}
-                    else if (rollerMotorDir == 1){"clockwise.png"}
-                    else {"anticlockwise.png"}
+            source: if (rollerMotorDir == 0) {"/images/hold.png"}
+                    else if (rollerMotorDir == 1){"/images/clockwise.png"}
+                    else {"/images/anticlockwise.png"}
             width: 20
             height: 20
         }
@@ -323,7 +319,36 @@ Item {
         text: "Arm: " + microArm
         font.pixelSize: 17
         font.bold: true
-        x: firstDial_xAxis + (spaceBetweenMotorsX * 0.69)
-        y: firstDial_yAxis + (spaceBetweenMotorsY * 3.3)
+        x: microBorder.x + 118.5
+        y: microBorder.y + 195
+    }
+
+    // main ROV images
+
+    Label {
+        id:mainRovDirectionLbl
+        text: "Main Rov Direction"
+        anchors.centerIn: mainRovDirectionImg
+        anchors.verticalCenterOffset: -120
+        font.pixelSize: 20
+        font.bold: true
+    }
+
+    Image {
+        id:mainRovDirectionImg
+        source:
+            if (frontRightDir == 1 && frontLeftDir == 1 && backRightDir == 1){"/images/forward.png"}
+            else if (frontRightDir == -1 && frontLeftDir == -1 && backRightDir == -1){"/images/back.png"}
+            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == 1){"/images/right.png"}
+            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == -1){"/images/left.png"}
+            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == -1){"/images/clockwise.png"}
+            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == 1){"/images/anticlockwise.png"}
+            else {"images/hold.png"}
+        width: 200
+        height: 200
+        anchors.centerIn: rovBorder
+        anchors.verticalCenterOffset: 150
+        x: rovBorder.x + 46
+        y: rovBorder.y + 300
     }
 }
