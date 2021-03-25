@@ -13,20 +13,26 @@ Item {
         height: mainWindow.height
 
         header:
-            //            Image {
-            //            id: headerBackground
-            //            source: "/images/plane.jpg"
-            //            width: 1500
-            //            height: 50
+            Image {
+            id: headerBackground
+            source: "/images/black.jpg"
+            width: 1500
+            height: 50
 
             Label {
-            text: qsTr("Main page")
-            font.pixelSize: Qt.application.font.pixelSize * 2
-            padding: 10
-            //                color: "white"
+                text: qsTr("Main page")
+                font.pixelSize: Qt.application.font.pixelSize * 2
+                padding: 10
+                color: "white"
+            }
         }
-        //        }
 
+        Image {
+            id: background
+            source: "images/black.jpg"
+            width: 1500
+            height: 750
+        }
 
         BackEnd {
             id:backend

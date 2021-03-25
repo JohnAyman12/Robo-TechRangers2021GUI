@@ -13,7 +13,7 @@ Item {
         text: item.dataName
         font.bold: true
         font.pixelSize: 18
-        color: "black"
+        color: "white"
         x: item.xAll
         y: item.yAll
     }
@@ -30,7 +30,7 @@ Item {
         text: item.dataValue
         font.bold: true
         font.pixelSize: 18
-        color: "black"
+        color: "white"
         x: item.xAll + 280
         y: item.yAll
     }

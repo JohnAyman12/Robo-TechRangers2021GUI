@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 
+
 Item {
 
     BackEnd {
@@ -67,7 +68,8 @@ Item {
         yAll: dataBorder.y + (spaceBetweenLablesY * 5.4)
     }
 
-    Column { // maximum speed spinbox
+    Column {
+        id: column // maximum speed spinbox
         spacing: 5
         x: firstLable_xAxis + 87
         y: firstLable_yAxis + (spaceBetweenLablesY * 6.2)
@@ -75,6 +77,7 @@ Item {
         Label {
             id: maximumSpeedLable
             text: "Maximum speed"
+            color:"white"
             font.bold : true
             font.pixelSize: 18
         }
@@ -85,6 +88,7 @@ Item {
             value: 255
             stepSize: 15
             x: maximumSpeedLable.x - 25
+            font.bold: true
             onValueChanged:
             {
                 backend.getMaxSpeed(value)
@@ -92,3 +96,9 @@ Item {
         }
     }
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

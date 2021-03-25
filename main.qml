@@ -11,7 +11,13 @@ ApplicationWindow {
     height: 750
     visible: true
     title: qsTr("Robo-Tech Rangers 20/21")
-    color: "red"
+
+//    Image {
+//        id: background
+//        source: "images/black.jpg"
+//        width: 1500
+//        height: 750
+//    }
 
     Shortcut {
         sequence: "esc"
@@ -41,8 +47,8 @@ ApplicationWindow {
         x: 869
         y: 488
         color: "transparent"
-        width: 240
-        height: 80
+        width: 255
+        height: 95
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -55,9 +61,9 @@ ApplicationWindow {
         Label { // timer lable
             id: timerLabel
             text: "Remaining time "+ timeMins + " : " + timeSecs
+            color: "white"
             font.bold : true
             font.pixelSize: 20
-            //            color:"white"
         }
 
         Row{ // Timer
@@ -90,7 +96,7 @@ ApplicationWindow {
                 text: "Start"
                 onClicked:{
                     startBtn.text = "Continue"
-                    if(timerBorder.width == 240){timerBorder.width += 15}
+                    if(timerBorder.width == 255){timerBorder.width += 15}
                     timer.start()
                 }
             }
@@ -124,7 +130,13 @@ ApplicationWindow {
         currentIndex: swipeView.currentIndex
 
         TabButton {
-            text: qsTr("Main Page")
+            text: "<font color=\"white\">Main Page</font>"
+            Image {
+                id: tab1Background
+                source: "images/black.jpg"
+                width: 322.75
+                height: 48
+            }
             onClicked:{
                 if(timerBorder.x != 869)
                 {
@@ -135,7 +147,13 @@ ApplicationWindow {
         }
 
         TabButton {
-            text: qsTr("Mission Page")
+            text: qsTr("<font color=\"white\">Mission Page</font>")
+            Image {
+                id: tab2Background
+                source: "images/black.jpg"
+                width: 322.75
+                height: 48
+            }
             onClicked:{
                 if(timerBorder.x == 869)
                 {
@@ -146,7 +164,13 @@ ApplicationWindow {
         }
 
         TabButton {
-            text: qsTr("Connection Page")
+            text: qsTr("<font color=\"white\">Connection Page</font>")
+            Image {
+                id: tab3Background
+                source: "images/black.jpg"
+                width: 322.75
+                height: 48
+            }
             onClicked:{
                 if(timerBorder.x != 869)
                 {
@@ -157,7 +181,13 @@ ApplicationWindow {
         }
 
         TabButton {
-            text: qsTr("About us")
+            text: qsTr("<font color=\"white\">About us</font>")
+            Image {
+                id: tab4Background
+                source: "images/black.jpg"
+                width: 322.75
+                height: 48
+            }
             onClicked:{
                 if(timerBorder.x != 869)
                 {

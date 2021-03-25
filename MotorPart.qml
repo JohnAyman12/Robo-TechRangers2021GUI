@@ -25,6 +25,7 @@ Item {
     property int mainROV_y
     property int microROV_x
     property int microROV_y
+    property color textColor: "white"
     property int spaceBetweenMotorsX: 150
     property int spaceBetweenMotorsY: 150
 
@@ -130,6 +131,7 @@ Item {
     Label {
         id:horizontalMotorsDirLbl
         text: "Horizontal Motors"
+        color: textColor
         anchors.centerIn: horizontalMotorsDir
         anchors.verticalCenterOffset: -68
         font.pixelSize: 20
@@ -147,6 +149,7 @@ Item {
             Label {
                 id:frontRight
                 text: "Front Right: " + frontRightDir
+                color: textColor
                 font.pixelSize: 17
                 font.bold: true
             }
@@ -165,6 +168,7 @@ Item {
             spacing: 5
             Label {
                 text: "Front Left:   " + frontLeftDir
+                color: textColor
                 font.pixelSize: 17
                 font.bold: true
             }
@@ -179,10 +183,11 @@ Item {
             }
         }
 
-        Row {
+        Row{
             spacing: 5
             Label {
                 text: "Back Right:  " + backRightDir
+                color: textColor
                 font.pixelSize: 17
                 font.bold: true
                 x: frontRight.x
@@ -202,6 +207,7 @@ Item {
             spacing: 5
             Label {
                 text: "Back Left:    " + backLeftDir
+                color: textColor
                 font.pixelSize: 17
                 font.bold: true
             }
@@ -233,7 +239,7 @@ Item {
 
     CheckBox { // micro mood control
         id:checkBoxMicro
-        text: "Micro"
+        text: "<font color=\"white\">Micro<font>"
         font.pixelSize: 17
         font.bold: true
         x: microBorder.x + 100
@@ -279,6 +285,7 @@ Item {
         Label { // micro motor direction
             id:microMotorLbl
             text: "Micro: " + microMotorDir
+            color: textColor
             font.pixelSize: 17
             font.bold: true
         }
@@ -300,6 +307,7 @@ Item {
         Label { // roller motor direction
             id:rollerMotorLbl
             text: "Roller: " + rollerMotorDir
+            color: textColor
             font.pixelSize: 17
             font.bold: true
         }
@@ -317,6 +325,7 @@ Item {
     Label { // micro arm
         id:microArmLbl
         text: "Arm: " + microArm
+        color: textColor
         font.pixelSize: 17
         font.bold: true
         x: microBorder.x + 118.5
@@ -328,6 +337,7 @@ Item {
     Label {
         id:mainRovDirectionLbl
         text: "Main Rov Direction"
+        color: textColor
         anchors.centerIn: mainRovDirectionImg
         anchors.verticalCenterOffset: -120
         font.pixelSize: 20

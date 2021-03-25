@@ -6,6 +6,7 @@ import io.qt.examples.backend 1.0
 Item {
 
     property int pointsCounter: 0
+    property color textColor: "white"
 
     Page {
         id:missionPage
@@ -14,8 +15,16 @@ Item {
 
         header: Label {
             text: qsTr("Missoin page")
+            color: textColor
             font.pixelSize: Qt.application.font.pixelSize * 2
             padding: 10
+        }
+
+        Image {
+            id: background
+            source: "images/black.jpg"
+            width: 1500
+            height: 750
         }
 
         Label {
@@ -23,7 +32,7 @@ Item {
             text:"Total points: " + pointsCounter
             font.bold : true
             font.pixelSize: 20
-            color: "black"
+            color: textColor
             x:1070
             y:13
         }
@@ -34,7 +43,7 @@ Item {
             RadioButton {
                 id: task1CheckBox
                 checked: true
-                text: "Task 1"
+                text: "<font color=\"white\">Task 1</font>"
                 font.bold : true
                 font.pixelSize: 20
                 onCheckedChanged:
@@ -50,7 +59,7 @@ Item {
 
             RadioButton {
                 id: task2CheckBox
-                text: "Task 2"
+                text: "<font color=\"white\">Task 2</font>"
                 font.bold : true
                 font.pixelSize: 20
                 onCheckedChanged:
@@ -66,7 +75,7 @@ Item {
 
             RadioButton {
                 id: task3CheckBox
-                text: "Task 3"
+                text: "<font color=\"white\">Task 3</font>"
                 font.bold : true
                 font.pixelSize: 20
                 onCheckedChanged:

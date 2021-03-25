@@ -15,7 +15,7 @@ Item {
         text: "Task 3"
         font.bold : true
         font.pixelSize: 20
-        color: "black"
+        color: textColor
         x: 20
         y: 10
     }
@@ -38,7 +38,7 @@ Item {
             text: "Sediment sample:"
             font.bold : true
             font.pixelSize: 18
-            color: "black"
+            color: textColor
         }
 
         CheckBox {
@@ -75,7 +75,7 @@ Item {
             text: "Mussel bed:"
             font.bold : true
             font.pixelSize: 18
-            color: "black"
+            color: textColor
         }
 
         CheckBox {
@@ -105,11 +105,13 @@ Item {
                 id: mainText
                 text: "<i>Mussels counted</i>"
                 font.pixelSize: 16
+                color: textColor
             }
 
             TextField {
                 id:mussleField
                 y: -5
+                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 50
@@ -118,11 +120,13 @@ Item {
             Label {
                 text: "<i>Mussel bed height</i>"
                 font.pixelSize: mainText.font.pixelSize
+                color: textColor
             }
 
             TextField {
                 id:heightField
                 y: -5
+                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 50
@@ -130,12 +134,14 @@ Item {
 
             Label {
                 text: "<i>Mussel bed width</i>"
+                color: textColor
                 font.pixelSize: mainText.font.pixelSize
             }
 
             TextField {
                 id:widthField
                 y: -5
+                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 50
@@ -143,21 +149,21 @@ Item {
 
             Label {
                 text: "Mussels number " + musselsNumber
+                color: textColor
                 font.pixelSize: mainText.font.pixelSize
                 font.bold : true
             }
-            //        }
-            //            Row {
-            //        spacing: 8
 
             Label {
                 text: "<i>Filtration rate</i>"
+                color: textColor
                 font.pixelSize: mainText.font.pixelSize
             }
 
             TextField {
                 id:filtrationField
                 y: -5
+                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 50
@@ -165,6 +171,7 @@ Item {
 
             Label {
                 text: "Filtration rate " + Math.round(filteredWater)
+                color: textColor
                 font.pixelSize: 18
                 font.bold : true
             }
@@ -188,7 +195,7 @@ Item {
             text: "Eel restoration:"
             font.bold : true
             font.pixelSize: 18
-            color: "black"
+            color: textColor
         }
 
         CheckBox {

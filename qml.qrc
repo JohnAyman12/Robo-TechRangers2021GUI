@@ -17,8 +17,6 @@
         <file>Task3.qml</file>
         <file>Axis.qml</file>
     </qresource>
-    <qresource prefix="/items"/>
-    <qresource prefix="/parts" lang="qml"/>
     <qresource prefix="/images">
         <file>anticlockwise.png</file>
         <file>back.png</file>
@@ -30,5 +28,6 @@
         <file>left.png</file>
         <file>right.png</file>
         <file>plane.jpg</file>
+        <file>black.jpg</file>
     </qresource>
 </RCC>

@@ -13,11 +13,12 @@ Item {
 
     visible: task1Visibilty
 
+
     Label {
         text: "Task 1"
         font.bold : true
         font.pixelSize: 20
-        color: "black"
+        color: textColor
         x: 20
         y: 10
     }
@@ -30,11 +31,11 @@ Item {
             text: "Seabin:"
             font.bold : true
             font.pixelSize: 18
-            color: "black"
+            color: textColor
         }
 
         CheckBox {
-            text: "Disconnecting the old power connector to the recently installed Seabin"
+            text: "<font color=\"white\">Disconnecting the old power connector to the recently installed Seabin</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -44,7 +45,7 @@ Item {
         }
 
         CheckBox {
-            text: "Removing a previously installed Seabin’s mesh catch bag"
+            text: "<font color=\"white\">Removing a previously installed Seabin’s mesh catch bag</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -54,7 +55,7 @@ Item {
         }
 
         CheckBox {
-            text: "Installing a new mesh catch bag into the Seabin"
+            text: "<font color=\"white\">Installing a new mesh catch bag into the Seabin</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -64,7 +65,7 @@ Item {
         }
 
         CheckBox {
-            text: "Reconnecting a new power connector to the recently installed Seabin"
+            text: "<font color=\"white\">Reconnecting a new power connector to the recently installed Seabin</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -83,12 +84,13 @@ Item {
             text: "Remediation:"
             font.bold : true
             font.pixelSize: 18
-            color: "black"
+            color: textColor
         }
         Row{
             Label {
                 id: plasticDerbisCheckBox1
                 text: "Removing floating plastic debris from the surface"
+                color: textColor
                 font.pixelSize: 17
                 y: 18
             }
@@ -117,7 +119,7 @@ Item {
         }
 
         CheckBox {
-            text: "Pulling a pin to simulate cutting the ghost net free"
+            text: "<font color=\"white\">Pulling a pin to simulate cutting the ghost net free</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -127,7 +129,7 @@ Item {
         }
 
         CheckBox {
-            text: "Removing the ghost net from the water"
+            text: "<font color=\"white\">Removing the ghost net from the water</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -140,7 +142,8 @@ Item {
         Row{
             Label {
                 id: plasticDerbisCheckBox2
-                text: "Removing plastic debris from the bottom of the Mariana Trench"
+                text: "<font color=\"white\">Removing plastic debris from the bottom of the Mariana Trench<font>"
+                color: textColor
                 font.pixelSize: 17
                 y: 16
             }

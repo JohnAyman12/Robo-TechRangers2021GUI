@@ -18,7 +18,7 @@ Item {
         text: "Task 2"
         font.bold : true
         font.pixelSize: 20
-        color: "black"
+        color: textColor
         x: 20
         y: 10
     }
@@ -33,6 +33,7 @@ Item {
 
             Label {
                 text: "Flying a transect line over a coral reef and mapping points of interest"
+                color: textColor
                 font.pixelSize: 17
                 y: 14
             }
@@ -71,6 +72,7 @@ Item {
 
             Label {
                 text: "determine the health of a coral colony by comparing its current condition to past data"
+                color: textColor
                 font.pixelSize: 17
                 y: 14
             }
@@ -78,7 +80,7 @@ Item {
             CheckBox {
                 id:coralColonyAutonomously
                 font.pixelSize: 17
-                text: "Autonomously"
+                text: "<font color=\"white\">Autonomously</font>"
                 onCheckStateChanged:
                 {
                     if(coralColonyAutonomously.checkState === 0 && coralAutonomouslyComboBox1 !== 0)
@@ -119,7 +121,7 @@ Item {
             CheckBox{
                 id:coralColonyManually
                 font.pixelSize: 17
-                text: "Manually"
+                text: "<font color=\"white\">Manually</font>"
                 visible: !coralColonyAutonomously.checkState
                 onCheckStateChanged:
                 {
@@ -135,6 +137,7 @@ Item {
             Label {
                 id: coralFragmentsCheckBox1
                 text: "Removing coral fragments from the nursery structure"
+                color: textColor
                 font.pixelSize: 17
                 y: 16
             }
@@ -161,6 +164,7 @@ Item {
             Label {
                 id: coralFragmentsCheckBox2
                 text: "Outplanting coral fragments to designated locations on the reef"
+                color: textColor
                 font.pixelSize: 17
                 y: 16
             }
@@ -186,7 +190,8 @@ Item {
         Row{
             Label {
                 id: crownCheckBox2
-                text: "Outplanting coral fragments to designated locations on the reef"
+                text: "<font color=\"white\">Outplanting coral fragments to designated locations on the reef</font>"
+                color: textColor
                 font.pixelSize: 17
                 y: 16
             }
@@ -210,7 +215,7 @@ Item {
         }
 
         CheckBox {
-            text: "Collecting a sample of the sponge"
+            text: "<font color=\"white\">Collecting a sample of the sponge</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {
@@ -220,7 +225,7 @@ Item {
         }
 
         CheckBox {
-            text: "Returning the sample to the surface"
+            text: "<font color=\"white\">Returning the sample to the surface</font>"
             font.pixelSize: 17
             onCheckStateChanged:
             {

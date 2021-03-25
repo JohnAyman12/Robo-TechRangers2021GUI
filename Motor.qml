@@ -32,7 +32,7 @@ Item {
         text: motor.lableText
         font.bold : true
         font.pixelSize: 15
-        color: "black"
+        color: "white"
         x: motor.xAll - awayFromCenter
         y: motor.yAll - 18
     }
@@ -45,6 +45,7 @@ Item {
         value: motor.motorValue
         x: motor.xAll
         y: motor.yAll
+//        Component.onCompleted: dial.baseline.color = "red"
     }
 
 //    Image {
@@ -62,7 +63,7 @@ Item {
         font.pixelSize: 20
         horizontalAlignment: Text.AlignHCenter
         width: motor.valueFieldWidth
-        color: "black"
+        color: "white"
         readOnly: true
         x: motor.xAll + valueNumber()
         y: motor.yAll + 30
