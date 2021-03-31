@@ -9,11 +9,26 @@ Item {
         width: mainWindow.width
         height: mainWindow.height
 
-        header: Label {
-            text: qsTr("Connection page")
-            font.pixelSize: Qt.application.font.pixelSize * 2
-            padding: 10
+        header:
+            Image {
+            id: headerBackground
+            source: "/images/connectionTab.jpg"
+            width: 800
+            height: 50
+            Label {
+                text: qsTr("Connection page")
+                font.pixelSize: Qt.application.font.pixelSize * 2
+                padding: 10
+            }
         }
+
+        Image {
+            id: background
+            source: "images/black.jpg"
+            width: 1500
+            height: 750
+        }
+
         AxisPart {
             id: axisPart
             fields_xAxis: 500

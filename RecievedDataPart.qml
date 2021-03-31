@@ -89,9 +89,11 @@ Item {
             stepSize: 15
             x: maximumSpeedLable.x - 25
             font.bold: true
-            onValueChanged:
-            {
-                backend.getMaxSpeed(value)
+            onValueChanged: {backend.getMaxSpeed(value)}
+            background: Rectangle {
+                implicitWidth: 220
+                implicitHeight: 20
+                radius: 2
             }
         }
     }

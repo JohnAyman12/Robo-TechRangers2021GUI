@@ -7,17 +7,11 @@ ApplicationWindow {
     property int timeMins: 15
 
     id: mainWindow
-    width: 1500
+    width: 1200
     height: 750
+    //    height: 500
     visible: true
     title: qsTr("Robo-Tech Rangers 20/21")
-
-//    Image {
-//        id: background
-//        source: "images/black.jpg"
-//        width: 1500
-//        height: 750
-//    }
 
     Shortcut {
         sequence: "esc"
@@ -54,49 +48,66 @@ ApplicationWindow {
         radius: 10
     }
 
+    Timer {
+        id:timer
+        repeat: true
+        interval: 1000
+        triggeredOnStart : true
+        onTriggered: {
+            if(timeMins == 0 && timeSecs == 0) {
+                timer.stop()
+                startBtn.enabled = false
+                pauseBtn.enabled = false
+            }
+            else if(timeSecs == 0) {
+                timeSecs = 59
+                timeMins -= 1
+            }
+            else {
+                timeSecs -= 1
+                //                    playSound.play()
+            }
+        }
+    }
+
     Column{
-        spacing: 10
+        spacing: 5
         anchors.centerIn: timerBorder
 
-        Label { // timer lable
-            id: timerLabel
-            text: "Remaining time "+ timeMins + " : " + timeSecs
-            color: "white"
-            font.bold : true
-            font.pixelSize: 20
+        Row{ // timer lable anf icon
+            spacing: 5
+
+            Label {
+                id: timerLabel
+                text: "Remaining time "+ timeMins + " : " + timeSecs
+                color: "white"
+                font.bold : true
+                font.pixelSize: 20
+            }
+
+            Image {
+                id: name
+                source: "images/timer.png"
+                width: 30
+                height: 30
+            }
         }
 
         Row{ // Timer
+            id:timerButtons
             spacing: 10
-
-            Timer {
-                id:timer
-                repeat: true
-                interval: 1000
-                triggeredOnStart : true
-                onTriggered: {
-                    if(timeMins == 0 && timeSecs == 0) {
-                        timer.stop()
-                        startBtn.enabled = false
-                        pauseBtn.enabled = false
-                    }
-                    else if(timeSecs == 0) {
-                        timeSecs = 59
-                        timeMins -= 1
-                    }
-                    else {
-                        timeSecs -= 1
-                        //                    playSound.play()
-                    }
-                }
-            }
+            leftPadding: 10
 
             Button {
                 id:startBtn
                 text: "Start"
                 onClicked:{
                     startBtn.text = "Continue"
-                    if(timerBorder.width == 255){timerBorder.width += 15}
+                    if(timerBorder.width == 255)
+                    {
+                        timerBorder.width += 15
+                        timerButtons.leftPadding -= 4
+                    }
                     timer.start()
                 }
             }
@@ -114,7 +125,11 @@ ApplicationWindow {
                 text: "Reset"
                 onClicked:{
                     startBtn.text = "Start"
-                    if(timerBorder.width != 240){timerBorder.width -= 15}
+                    if(timerBorder.width != 255)
+                    {
+                        timerBorder.width -= 15
+                        timerButtons.leftPadding += 4
+                    }
                     startBtn.enabled = true
                     pauseBtn.enabled = true
                     timeSecs = 0
@@ -130,10 +145,10 @@ ApplicationWindow {
         currentIndex: swipeView.currentIndex
 
         TabButton {
-            text: "<font color=\"white\">Main Page</font>"
+            text: "<font color=\"white\">Main Page"
             Image {
                 id: tab1Background
-                source: "images/black.jpg"
+                source: "images/mainTab.jpg"
                 width: 322.75
                 height: 48
             }
@@ -147,10 +162,10 @@ ApplicationWindow {
         }
 
         TabButton {
-            text: qsTr("<font color=\"white\">Mission Page</font>")
+            text: qsTr("<font color=\"white\">Mission Page")
             Image {
                 id: tab2Background
-                source: "images/black.jpg"
+                source: "images/missionsTab.jpg"
                 width: 322.75
                 height: 48
             }
@@ -164,10 +179,10 @@ ApplicationWindow {
         }
 
         TabButton {
-            text: qsTr("<font color=\"white\">Connection Page</font>")
+            text: qsTr("<font color=\"white\">Connection Page")
             Image {
                 id: tab3Background
-                source: "images/black.jpg"
+                source: "images/connectionTab.jpg"
                 width: 322.75
                 height: 48
             }
@@ -181,7 +196,7 @@ ApplicationWindow {
         }
 
         TabButton {
-            text: qsTr("<font color=\"white\">About us</font>")
+            text: qsTr("<font color=\"white\">About us")
             Image {
                 id: tab4Background
                 source: "images/black.jpg"

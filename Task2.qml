@@ -57,12 +57,20 @@ Item {
         }
 
         CheckBox {
-            text: "Mapping points of interest on the reef"
+            text: "<font color=\"white\">Mapping points of interest on the reef"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 5}
                 else if (checkState == 0) {pointsCounter -= 5}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
 
@@ -80,7 +88,7 @@ Item {
             CheckBox {
                 id:coralColonyAutonomously
                 font.pixelSize: 17
-                text: "<font color=\"white\">Autonomously</font>"
+                text: "<font color=\"white\">Autonomously"
                 onCheckStateChanged:
                 {
                     if(coralColonyAutonomously.checkState === 0 && coralAutonomouslyComboBox1 !== 0)
@@ -94,6 +102,14 @@ Item {
                         coralColonyManually.checkState = 0
                         pointsCounter -= 10
                     }
+                }
+                background: Rectangle {
+                    x: 9
+                    y: 17
+                    width: 16
+                    height: 16
+                    radius: 2
+                    color: "white"
                 }
             }
 
@@ -121,7 +137,7 @@ Item {
             CheckBox{
                 id:coralColonyManually
                 font.pixelSize: 17
-                text: "<font color=\"white\">Manually</font>"
+                text: "<font color=\"white\">Manually"
                 visible: !coralColonyAutonomously.checkState
                 onCheckStateChanged:
                 {
@@ -130,10 +146,20 @@ Item {
                         else if (checkState == 0){pointsCounter -= 10}
                     }
                 }
+                background: Rectangle {
+                    x: 9
+                    y: 17
+                    width: 16
+                    height: 16
+                    radius: 2
+                    color: "white"
+                }
             }
         }
 
         Row{
+            spacing:5
+
             Label {
                 id: coralFragmentsCheckBox1
                 text: "Removing coral fragments from the nursery structure"
@@ -157,10 +183,18 @@ Item {
                     pointsCounter += finalValue
                     coralFragmentsSpinBox1Value = finalValue
                 }
+                background: Rectangle {
+                    width: 140
+                    height: 30
+                    y:9
+                    radius: 2
+                }
             }
         }
 
         Row{
+            spacing: 5
+
             Label {
                 id: coralFragmentsCheckBox2
                 text: "Outplanting coral fragments to designated locations on the reef"
@@ -184,13 +218,21 @@ Item {
                     pointsCounter += finalValue
                     coralFragmentsSpinBox2Value = finalValue
                 }
+                background: Rectangle {
+                    width: 140
+                    height: 30
+                    y:9
+                    radius: 2
+                }
             }
         }
 
         Row{
+            spacing: 5
+
             Label {
                 id: crownCheckBox2
-                text: "<font color=\"white\">Outplanting coral fragments to designated locations on the reef</font>"
+                text: "<font color=\"white\">Outplanting coral fragments to designated locations on the reef"
                 color: textColor
                 font.pixelSize: 17
                 y: 16
@@ -211,26 +253,48 @@ Item {
                     pointsCounter += finalValue
                     crownComboBox1 = finalValue
                 }
+                background: Rectangle {
+                    width: 140
+                    height: 30
+                    y:9
+                    radius: 2
+                }
             }
         }
 
         CheckBox {
-            text: "<font color=\"white\">Collecting a sample of the sponge</font>"
+            text: "<font color=\"white\">Collecting a sample of the sponge"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "<font color=\"white\">Returning the sample to the surface</font>"
+            text: "<font color=\"white\">Returning the sample to the surface"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 5}
                 else if (checkState == 0) {pointsCounter -= 5}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
 

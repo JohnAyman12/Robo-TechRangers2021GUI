@@ -25,12 +25,20 @@ Item {
         y: 40
 
         CheckBox {
-            text: "Creating a photomosaic of a subway car submerged to create an artificial reef"
+            text: "<font color=\"white\">Creating a photomosaic of a subway car submerged to create an artificial reef"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
 
@@ -42,32 +50,56 @@ Item {
         }
 
         CheckBox {
-            text: "Deploying a device into the pipe to collect a sediment sample"
+            text: "<font color=\"white\">Deploying a device into the pipe to collect a sediment sample"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 25}
                 else if (checkState == 0) {pointsCounter -= 25}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "Returning the sample to the surface"
+            text: "<font color=\"white\">Returning the sample to the surface"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "Determining the type of contaminant(s) present in the sediment sample"
+            text: "<font color=\"white\">Determining the type of contaminant(s) present in the sediment sample"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 5}
                 else if (checkState == 0) {pointsCounter -= 5}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
 
@@ -79,25 +111,41 @@ Item {
         }
 
         CheckBox {
-            text: "Deploying a quadrat and counting the number of mussels in the quadrat"
+            text: "<font color=\"white\">Deploying a quadrat and counting the number of mussels in the quadrat"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
 
         CheckBox {
-            text: "Estimating the number of mussels and the total amount of water filtered by the mussel bed"
+            text: "<font color=\"white\">Estimating the number of mussels and the total amount of water filtered by the mussel bed"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
-        //        Column {
+
         Row {
             spacing: 8
 
@@ -114,11 +162,17 @@ Item {
                 color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
-                width: 50
+                width: 60
+                placeholderText: "Mussel"
+                background: Rectangle {
+                    implicitWidth: 220
+                    implicitHeight: 20
+                    radius: 2
+                }
             }
 
             Label {
-                text: "<i>Mussel bed height</i>"
+                text: "<i>bed height</i>"
                 font.pixelSize: mainText.font.pixelSize
                 color: textColor
             }
@@ -129,11 +183,17 @@ Item {
                 color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
-                width: 50
+                width: 60
+                placeholderText: "Height"
+                background: Rectangle {
+                    implicitWidth: 220
+                    implicitHeight: 20
+                    radius: 2
+                }
             }
 
             Label {
-                text: "<i>Mussel bed width</i>"
+                text: "<i>bed width</i>"
                 color: textColor
                 font.pixelSize: mainText.font.pixelSize
             }
@@ -144,13 +204,19 @@ Item {
                 color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
-                width: 50
+                width: 60
+                placeholderText: "Width"
+                background: Rectangle {
+                    implicitWidth: 220
+                    implicitHeight: 20
+                    radius: 2
+                }
             }
 
             Label {
                 text: "Mussels number " + musselsNumber
                 color: textColor
-                font.pixelSize: mainText.font.pixelSize
+                font.pixelSize: 18
                 font.bold : true
             }
 
@@ -166,7 +232,13 @@ Item {
                 color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
-                width: 50
+                width: 60
+                placeholderText: "Rate"
+                background: Rectangle {
+                    implicitWidth: 220
+                    implicitHeight: 20
+                    radius: 2
+                }
             }
 
             Label {
@@ -178,7 +250,7 @@ Item {
 
             Button {
                 y: -10
-                text: "Number of mussels"
+                text: "Calculate"
                 onClicked: {
                     var mussle = mussleField.text
                     var area = widthField.text * heightField.text
@@ -189,7 +261,6 @@ Item {
                 }
             }
         }
-        //    }
 
         Label {
             text: "Eel restoration:"
@@ -199,22 +270,38 @@ Item {
         }
 
         CheckBox {
-            text: "Removing a trap full of eels from a designated area"
+            text: "<font color=\"white\">Removing a trap full of eels from a designated area"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "Placing an empty eel trap in a designated area"
+            text: "<font color=\"white\">Placing an empty eel trap in a designated area"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
     }

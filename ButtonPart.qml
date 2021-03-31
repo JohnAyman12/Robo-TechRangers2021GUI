@@ -12,6 +12,7 @@ Item {
     }
 
     Rectangle{
+        id: buttonsBorder
         x:buttons_x
         y:buttons_y
         color: "transparent"
@@ -22,30 +23,50 @@ Item {
         radius: 10
     }
 
+    Label{
+        id:armsLbl
+        text: "Arms & Cameras"
+        font.bold : true
+        font.pixelSize: 20
+        color: "white"
+        x:buttons_x + 5
+        y:buttons_y - 24
+    }
+
+    Image {
+        id: arm
+        x:armsLbl.x + 142
+        y:armsLbl.y - 46
+        source: "images/arm.png"
+        width: 70
+        height:arm.width
+    }
+
     // Buttons
     Row{
         x:buttons_x
         y:buttons_y
+
         Column {
+
             SwitchDelegate {
                 id: button0ID
                 checked: backend.pnu0
-                text: "<font color=\"white\">Button 0<font>"
+                text: "<font color=\"white\">Pilote<font>"
                 font.bold: true
-//                Component.onCompleted: this.color = 'white'
             }
 
             SwitchDelegate {
                 id: button1ID
-                checked: backend.button1
-                text: "<font color=\"white\">Button 1<font>"
+                checked: backend.pnu1
+                text: "<font color=\"white\">Image<font>"
                 font.bold: true
             }
 
             SwitchDelegate {
                 id: button2ID
                 checked: backend.button2
-                text: "<font color=\"white\">Button 2<font>"
+                text: "<font color=\"white\">button 2<font>"
                 font.bold: true
             }
 
@@ -65,8 +86,8 @@ Item {
 
             SwitchDelegate {
                 id: button5ID
-                checked: backend.button5
-                text: "<font color=\"white\">Button 5<font>"
+                checked: backend.pnu5
+                text: "<font color=\"white\">Pnumatic<font>"
                 font.bold: true
             }
         }

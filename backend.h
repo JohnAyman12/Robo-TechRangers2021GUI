@@ -75,6 +75,9 @@ class BackEnd : public QObject
     Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY frontEnd)
 
+    // sensors
+//    Q_PROPERTY(int tempreature READ tempreature NOTIFY frontEnd)
+
 public:
 
     typedef union{
@@ -93,9 +96,9 @@ public:
 
     // axises variables and functions
 \
-    int axis[6];
-    int pureAxis[6];
-    int axises[6];
+    int axis[6] = {0};
+    int pureAxis[6] = {0};
+    int axises[6] = {0};
     int axis0();
     int axis1();
     int axis2();
@@ -108,8 +111,8 @@ public:
     int pureAxis3();
     int pureAxis4();
     int pureAxis5();
-    int valuePilgeDC;  // the output of mapping evaluation for pilge motors
-    int valueT100;  // the output of mapping evaluation for T100 motors
+    int valuePilgeDC = 0;  // the output of mapping evaluation for pilge motors
+    int valueT100 = 1500;  // the output of mapping evaluation for T100 motors
 
     //buttons variables and functions
     bool pnu[12] = {false};
@@ -125,7 +128,7 @@ public:
     bool pnu9();
     bool pnu10();
     bool pnu11();
-    bool buttons[12];
+    bool buttons[12] = {false};
     bool button0();
     bool button1();
     bool button2();
@@ -146,8 +149,8 @@ public:
     int counter;
 
     short motors[6];
-    short horizontalMotorsVar=0;
-    short verticalMotorsVar=0;
+    short horizontalMotorsVar = 0;
+    short verticalMotorsVar = 0;
     int horizontalMotors();
     int verticalMotors();
 
@@ -159,8 +162,10 @@ public:
     int microMotorDir();
     int rollerMotorDir();
 
-    short directions[4]; // motors directions values in the display formate
- //   short motorArd[4] = {1}; // motors directions values in a readable formate for arduino
+    short directions[4] = {0}; // motors directions values in the display formate
+
+//    int sensor;
+//    int tempreature();
 
 public slots:
     void call(JoystickEvent);

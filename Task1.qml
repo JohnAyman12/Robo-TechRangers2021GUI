@@ -35,42 +35,74 @@ Item {
         }
 
         CheckBox {
-            text: "<font color=\"white\">Disconnecting the old power connector to the recently installed Seabin</font>"
+            text: "<font color=\"white\">Disconnecting the old power connector to the recently installed Seabin"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 5}
                 else if (checkState == 0) {pointsCounter -= 5}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "<font color=\"white\">Removing a previously installed Seabin’s mesh catch bag</font>"
+            text: "<font color=\"white\">Removing a previously installed Seabin’s mesh catch bag"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "<font color=\"white\">Installing a new mesh catch bag into the Seabin</font>"
+            text: "<font color=\"white\">Installing a new mesh catch bag into the Seabin"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "<font color=\"white\">Reconnecting a new power connector to the recently installed Seabin</font>"
+            text: "<font color=\"white\">Reconnecting a new power connector to the recently installed Seabin"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 20}
                 else if (checkState == 0) {pointsCounter -= 20}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
     }
@@ -87,6 +119,8 @@ Item {
             color: textColor
         }
         Row{
+            spacing: 5
+
             Label {
                 id: plasticDerbisCheckBox1
                 text: "Removing floating plastic debris from the surface"
@@ -113,33 +147,56 @@ Item {
                     {finalValue = 15}
                     pointsCounter += finalValue
                     plasticDerbis1Value = finalValue
-
+                }
+                background: Rectangle {
+                    width: 140
+                    height: 30
+                    y:7
+                    radius: 2
                 }
             }
         }
 
         CheckBox {
-            text: "<font color=\"white\">Pulling a pin to simulate cutting the ghost net free</font>"
+            text: "<font color=\"white\">Pulling a pin to simulate cutting the ghost net free"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
             }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
         }
 
         CheckBox {
-            text: "<font color=\"white\">Removing the ghost net from the water</font>"
+            text: "<font color=\"white\">Removing the ghost net from the water"
             font.pixelSize: 17
             onCheckStateChanged:
             {
                 if (checkState != 0) {pointsCounter += 10}
                 else if (checkState == 0) {pointsCounter -= 10}
+            }
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
             }
         }
 
 
         Row{
+            spacing: 5
+
             Label {
                 id: plasticDerbisCheckBox2
                 text: "<font color=\"white\">Removing plastic debris from the bottom of the Mariana Trench<font>"
@@ -162,6 +219,12 @@ Item {
                     else if(curretValue === 2){finalValue = 10}
                     pointsCounter += finalValue
                     plasticDerbis2Value = finalValue
+                }
+                background: Rectangle {
+                    width: 140
+                    height: 30
+                    y:9
+                    radius: 2
                 }
             }
         }

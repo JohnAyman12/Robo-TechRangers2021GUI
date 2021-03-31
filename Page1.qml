@@ -4,9 +4,6 @@ import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 
 Item {
-
-    property int current: 55
-
     Page {
         id:mainPage
         width: mainWindow.width
@@ -15,8 +12,8 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "/images/black.jpg"
-            width: 1500
+            source: "/images/mainTab.jpg"
+            width: 800
             height: 50
 
             Label {

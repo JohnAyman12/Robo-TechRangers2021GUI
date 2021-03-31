@@ -13,6 +13,7 @@ Item {
         width: 80
         horizontalAlignment: Text.AlignHCenter
         readOnly : true
+        color: "white"
         x:axis.xAll
         y:axis.yAll
     }
@@ -21,7 +22,7 @@ Item {
         text: axis.lableText
         font.bold : true
         font.pixelSize: 15
-        color: "black"
+        color: "white"
         x:axis.xAll - 45
         y:axis.yAll + 12
     }

@@ -6,8 +6,7 @@
 void joystickreader::read(){
     // Create an instance of Joystick
 //    Joystick joystick("/dev/input/by-id/usb-0810_Twin_USB_Gamepad-joystick");
-    Joystick joystick("/dev/input/by-id/usb-0810_Twin_USB_Gamepad-joystick");
-//    Joystick joystick("/dev/input/js0");
+    Joystick joystick("/dev/input/js0");
 
     // Ensure that it was found and that we can use it
     if (!joystick.isFound())

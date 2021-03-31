@@ -156,8 +156,8 @@ Item {
 
             Image {
                 id: frontRightImg
-                source: if (frontRightDir == 0) {"/images/hold.png"}
-                        else if (frontRightDir == 1){"/images/clockwise.png"}
+                source: if (frontRightDir == 0) {"images/hold.png"}
+                        else if (frontRightDir == 1){"images/clockwise.png"}
                         else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
@@ -254,6 +254,14 @@ Item {
                 rollerMotorDir = 0
                 microArm = 0
             }
+        }
+        background: Rectangle {
+            x: 9
+            y: 17
+            width: 16
+            height: 16
+            radius: 2
+            color: "white"
         }
     }
 

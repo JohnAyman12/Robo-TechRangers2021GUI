@@ -10,6 +10,7 @@ class myUDP:public QObject
 {
     Q_OBJECT
 public:
+    int temp;
     explicit myUDP(QObject *parent = 0);
 
     void send(unsigned char*,int);

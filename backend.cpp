@@ -15,7 +15,7 @@
 #define backLeftDir 9
 
 int m_speed = 255;
-short motorArd[4] = {1};
+bool motorArd[4] = {1};
 
 BackEnd::BackEnd(QObject *parent) :
     QObject(parent)
@@ -45,14 +45,13 @@ void BackEnd::call(JoystickEvent event)
 
     if(event.isAxis())
     {
-        valuePilgeDC = abs(valueIn) * m_speed / 32767;
-        valueT100 = 1000 + (((-valueIn + 32767) * 500) / 32767);
-        axis[number] = valuePilgeDC;
         pureAxis[number] = valueIn;
-        if (number == 2)
-        {
-            axis[number] = valueT100;
-        }
+//        qDebug()<< "axis0" << pureAxis[0];
+//        qDebug()<< "axis1" << pureAxis[1];
+//        qDebug()<< "axis2" << pureAxis[2];
+//        qDebug()<< "axis3" << pureAxis[3];
+//        qDebug()<< "axis4" << pureAxis[4];
+//        qDebug()<< "axis5" << pureAxis[5] << Qt::endl << Qt::endl;
         if (valueIn == 0)
         {
             for (counter = 0; counter <=3; counter++)
@@ -64,33 +63,35 @@ void BackEnd::call(JoystickEvent event)
         }
         else
         {
-            if (valueIn > 0)
+            if (pureAxis[2] != 0)
             {
-                direction = -1;
+//                qDebug()<<" in the vertical body";
+                valueT100 = 1000 + (((-valueIn + 32767) * 500) / 32767);
+                valuePilgeDC = 0;
+                verticalMotorsVar = valueT100;
             }
             else
             {
-                direction = 1;
-            }
-
-            int horizontalMotors[3] = {axis[0], axis[1], axis[4]};
-
-            if (number == 0 or number == 1 or number == 4)
-            {
-                for (counter = 0; counter <3; counter++)
-                {
-                    if(horizontalMotors[counter] > horizontalMotors[counter - 1])
+                if (valueIn > 0){direction = -1;}
+                else {direction = 1;}
+                valuePilgeDC = abs(valueIn) * m_speed / 32767;
+                horizontalMotorsVar = valuePilgeDC;
+                if (abs(pureAxis[1]) > abs(pureAxis[0]))
+                { // forward back (surge degree of freedom)
+                    if (direction == -1){
+                        motorArd[frontRight] = motorArd[frontLeft]
+                                =  motorArd[backRight] = motorArd[backLeft] = 0;}
+                    else if (direction == 1){
+                        motorArd[frontRight] = motorArd[frontLeft]
+                                =  motorArd[backRight] = motorArd[backLeft] = 1;}
+                    for (counter = 0; counter <=3; counter++)
                     {
-                        horizontalMotorsVar = horizontalMotors[counter];
+                        motorDirections[counter + 6] = direction;
                     }
                 }
-            }
-
-            qDebug()<< horizontalMotors[0] << " " << horizontalMotors[1]
-                                           << " " << horizontalMotors[2]
-                                           << Qt::endl << horizontalMotorsVar;
-                if (number == 0)
+                else if (abs(pureAxis[1]) < abs(pureAxis[0]))
                 {// right left (sway degree of freedom)
+//                    qDebug()<< pureAxis[1];
                     if (direction == -1)
                     {
                         motorArd[frontRight] = motorArd[backLeft] = 1;
@@ -107,22 +108,7 @@ void BackEnd::call(JoystickEvent event)
                     motorDirections[backRightDir] =  -1 * direction;
                     motorDirections[backLeftDir] = direction;
                 }
-                else if (number == 1)
-                { // forward back (surge degree of freedom)
-                    if (direction == -1){
-                        motorArd[frontRight] = motorArd[frontLeft]
-                                =  motorArd[backRight] = motorArd[backLeft] = 0;}
-                    else if (direction == 1){
-                        motorArd[frontRight] = motorArd[frontLeft]
-                                =  motorArd[backRight] = motorArd[backLeft] = 1;}
-
-                    for (counter = 0; counter <=3; counter++)
-                    {
-                        motorDirections[counter + 6] = direction;
-
-                    }
-                }
-                else if(number == 4)
+                else if((abs(pureAxis[4]) > abs(pureAxis[0])) and (abs(pureAxis[4])) > abs(pureAxis[1]))
                 { // clockwise anticlockwise (sway degree of freedom)
                     if (direction == -1){
                         motorArd[frontRight] = motorArd[backRight] = 1;
@@ -138,23 +124,21 @@ void BackEnd::call(JoystickEvent event)
                     motorDirections[backRightDir] = direction;
                     motorDirections[backLeftDir] = -1 * direction;
                 }
-
-            else if (number == 2)
-            { // up down (heave degree of freedom)
-                verticalMotorsVar = axis[2];
             }
         }
     }
 
     if(event.isButton())
     {
-        if(valueIn == 1 and number == 0)
+        if(valueIn == 1 and (number == 0 or number == 1 or number == 5))
         {
-            pnu[0] = !pnu[0];
+            pnu[number] = !pnu[number];
         }
 
         button[number] = valueIn;
     }
+
+//    sensor = 100;
 
     for (counter = 0; counter <=5; counter++)
     {
@@ -184,27 +168,18 @@ void BackEnd::call(JoystickEvent event)
         }
     }
 
-    //    qDebug()<< motorArd[frontRight] << ", " << motorArd[frontLeft] <<
-    //             ", " << motorArd[backRight] << ", " << motorArd[backLeft];
-
     std::vector<unsigned char> message;
-    SHORT A ,*B;
-    //    short x=1;
-    //int y[7]={1};
-    //short *z=(short*)y;
-    message.push_back(pnu[0]);
-    A.num=horizontalMotorsVar;
-    B=(SHORT*)motorArd;
-    message.insert(message.end(), A.bytes, A.bytes + 2);
-    A.num=verticalMotorsVar;
-    message.insert(message.end(),A.bytes,A.bytes+2);
-    /*  message.insert(message.end(), B[0].bytes, B[0].bytes + 2);
-    message.insert(message.end(), B[1].bytes, B[1].bytes + 2);
-    message.insert(message.end(), B[2].bytes, B[2].bytes + 2);
-    message.insert(message.end(), B[3].bytes, B[3].bytes + 2);
+    SHORT A;
+    A.num = verticalMotorsVar;
 
-    A.num=x;
-    message.insert(message.end(),A.bytes,A.bytes+2);*/
+//    message.insert(message.end(),A.bytes,A.bytes+2);
+//    message.push_back((char)horizontalMotorsVar);
+//    message.push_back(motorArd[0]);
+//    message.push_back(motorArd[1]);
+//    message.push_back(motorArd[2]);
+//    message.push_back(motorArd[3]);
+    message.push_back(pnu[0]);
+
     socket->send(message.data(),message.size());
 }
 
@@ -299,3 +274,7 @@ int BackEnd::frontLeftMotorDir(){return motorDirections[frontLeftDir];}
 int BackEnd::backRightMotorDir(){return motorDirections[backRightDir];}
 
 int BackEnd::backLeftMotorDir(){return motorDirections[backLeftDir];}
+
+//sensors
+
+//int BackEnd::tempreature(){return sensor;}
