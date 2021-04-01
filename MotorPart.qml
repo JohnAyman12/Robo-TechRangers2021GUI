@@ -108,6 +108,25 @@ Item {
         radius: 10
     }
 
+    Label{
+        id: mainLbl
+        text: "Main\nROV"
+        font.bold : true
+        font.pixelSize: 20
+        color: "white"
+        x:mainROV_x + 5
+        y:mainROV_y - 48
+    }
+
+    Image {
+        id: mainImg
+        x: mainLbl.x + 45
+        y: mainLbl.y - 22
+        source: "images/main.png"
+        width: 70
+        height: mainImg.width
+    }
+
     Motor { // horizontal motors
         id: horizontalMotorsID
         lableText: "Horizontal Motors"
@@ -235,6 +254,25 @@ Item {
         border.color: "deeppink"
         border.width: 2
         radius: 10
+    }
+
+    Label{
+        id: microLbl
+        text: "Micro\nROV"
+        font.bold : true
+        font.pixelSize: 20
+        color: "white"
+        x: microROV_x + 5
+        y: microROV_y - 48
+    }
+
+    Image {
+        id: microImg
+        x: microLbl.x + 25
+        y: microLbl.y - 48
+        source: "images/micro.png"
+        width: 130
+        height: microImg.width
     }
 
     CheckBox { // micro mood control

@@ -4,8 +4,6 @@ import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 
 Item {
-
-    property int pointsCounter: 0
     property color textColor: "white"
 
     Page {
@@ -16,7 +14,7 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "images/missionsTab.jpg"
+            source: "images/black.jpg"
             width: 800
             height: 50
             Label {
@@ -24,6 +22,16 @@ Item {
                 color: textColor
                 font.pixelSize: Qt.application.font.pixelSize * 2
                 padding: 10
+            }
+
+            Label {
+                id: timerLabel
+                text: "Remaining time\n          "+ timeMins + " : " + timeSecs
+                color: "white"
+                font.bold : true
+                font.pixelSize: 20
+                x: 1120
+                y: 10
             }
         }
 

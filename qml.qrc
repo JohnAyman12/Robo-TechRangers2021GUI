@@ -16,28 +16,26 @@
         <file>Task2.qml</file>
         <file>Task3.qml</file>
         <file>Axis.qml</file>
+        <file>ArmPart.qml</file>
+        <file>TimerPart.qml</file>
     </qresource>
     <qresource prefix="/images">
-        <file>background.png</file>
-        <file>dial.png</file>
         <file>hold.png</file>
         <file>left.png</file>
         <file>right.png</file>
-        <file>plane.jpg</file>
         <file>black.jpg</file>
-        <file>anticlockwise.png</file>
-        <file>clockwise.png</file>
         <file>back.png</file>
         <file>forward.png</file>
         <file>main.png</file>
         <file>micro.png</file>
-        <file>recieved.png</file>
         <file>timer.png</file>
         <file>arm.png</file>
-        <file>connectionTab.jpg</file>
-        <file>mainTab.jpg</file>
-        <file>missionsTab.jpg</file>
-        <file>yellow.png</file>
-        <file>purple.png</file>
+        <file>connection.jpeg</file>
+        <file>pinkDial.png</file>
+        <file>axis.png</file>
+        <file>cenncetionButton.jpeg</file>
+        <file>buttons.png</file>
+        <file>sensors.png</file>
+        <file>main.jpeg</file>
     </qresource>
 </RCC>

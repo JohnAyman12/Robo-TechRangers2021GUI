@@ -11,7 +11,7 @@ void joystickreader::read(){
     // Ensure that it was found and that we can use it
     if (!joystick.isFound())
     {
-        qDebug() << "open failed.\n";
+//        qDebug() << "open failed.\n";
 //        exit(1);
     }
     while (joystick.isFound()) {

@@ -12,13 +12,33 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "/images/connectionTab.jpg"
-            width: 800
-            height: 50
+            source: "/images/connection.jpeg"
+            height: 60
             Label {
                 text: qsTr("Connection page")
                 font.pixelSize: Qt.application.font.pixelSize * 2
                 padding: 10
+                color:"white"
+            }
+
+            Label {
+                id: timerLabel
+                text: "Remaining time\n          "+ timeMins + " : " + timeSecs
+                color: "white"
+                font.bold : true
+                font.pixelSize: 20
+                x: 1120
+                y: 10
+            }
+
+            Label {
+                id: points
+                text:"Total points\n           " + pointsCounter
+                font.bold : true
+                font.pixelSize: 20
+                color: "white"
+                x: 980
+                y: 10
             }
         }
 
@@ -31,14 +51,14 @@ Item {
 
         AxisPart {
             id: axisPart
-            fields_xAxis: 500
-            firstField_yAxis: 140
+            fields_xAxis: 700
+            firstField_yAxis: 100
             spaceBetweenAxises: 50
         }
 
         ButtonPart {
-            buttons_x: axisPart.fields_xAxis + 100
-            buttons_y: axisPart.firstField_yAxis - 120
+            buttons_x: 200
+            buttons_y: 100
         }
     }
 }

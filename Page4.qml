@@ -19,10 +19,18 @@ Item {
         width: mainWindow.width
         height: mainWindow.height
 
-        header: Label {
-            text: qsTr("About us")
-            font.pixelSize: Qt.application.font.pixelSize * 2
-            padding: 10
+        header:
+            Image {
+            id: headerBackground
+            source: "images/black.jpg"
+            width: 800
+            height: 50
+            Label {
+                text: qsTr("About us")
+                font.pixelSize: Qt.application.font.pixelSize * 2
+                padding: 10
+                color: "white"
+            }
         }
 
         Image {

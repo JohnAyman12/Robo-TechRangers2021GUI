@@ -12,15 +12,23 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "/images/mainTab.jpg"
-            width: 800
-            height: 50
-
+            source: "/images/main.jpeg"
+            height: 60
             Label {
                 text: qsTr("Main page")
                 font.pixelSize: Qt.application.font.pixelSize * 2
                 padding: 10
                 color: "white"
+            }
+
+            Label {
+                id: points
+                text:"Total points\n           " + pointsCounter
+                font.bold : true
+                font.pixelSize: 20
+                color: "white"
+                x: 1150
+                y: 10
             }
         }
 
@@ -35,24 +43,36 @@ Item {
             id:backend
         }
 
-        ButtonPart {
-            buttons_x: 835
-            buttons_y: 100
-        }
-
         MotorPart {
             id:motorPart
-            mainROV_x: 515
-            mainROV_y: 50
-            microROV_x:180
-            microROV_y: 50
+            mainROV_x: 450
+            mainROV_y: 60
+            microROV_x:120
+            microROV_y: 60
+        }
+
+        ArmPart {
+            buttons_x: 885
+            buttons_y: 386
+
+
+//            buttons_x: 120
         }
 
         RecievedDataPart {
             id:recievedDataPart
-            firstLable_xAxis: 160
-            firstLable_yAxis: 290
+            firstLable_xAxis: 790
+            firstLable_yAxis: 60
             spaceBetweenLablesY: 30
+        }
+
+        TimerPart {
+            borderX: 130
+            borderY: 410
+
+
+//            borderX: 918
+//            borderY: 483
         }
     }
 }

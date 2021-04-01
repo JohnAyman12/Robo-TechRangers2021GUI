@@ -48,14 +48,15 @@ Item {
 //        Component.onCompleted: dial.baseline.color = "red"
     }
 
-//    Image {
-//        id: dialImg
-//        source: "images/dial.png"
-//        width: 113
-//        height: 113
-//        x: motor.xAll - 6.5
-//        y: motor.yAll - 6
-//    }
+    Image {
+        id: dialImg
+        source: "images/pinkDial.png"
+        width: 102
+        height: dialImg.width
+        x: motor.xAll - 1.5
+        y: motor.yAll - 12
+        visible: dialEnable
+    }
 
     TextField { // motor value
         id: motorInput

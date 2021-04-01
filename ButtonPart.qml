@@ -24,22 +24,22 @@ Item {
     }
 
     Label{
-        id:armsLbl
-        text: "Arms & Cameras"
+        id: btnLbl
+        text: "Buttons"
         font.bold : true
         font.pixelSize: 20
         color: "white"
         x:buttons_x + 5
-        y:buttons_y - 24
+        y:buttons_y - 26
     }
 
     Image {
-        id: arm
-        x:armsLbl.x + 142
-        y:armsLbl.y - 46
-        source: "images/arm.png"
-        width: 70
-        height:arm.width
+        id: button
+        x: btnLbl.x + 80
+        y: btnLbl.y - 22
+        source: "images/buttons.png"
+        width: 50
+        height:button.width
     }
 
     // Buttons
@@ -52,14 +52,14 @@ Item {
             SwitchDelegate {
                 id: button0ID
                 checked: backend.pnu0
-                text: "<font color=\"white\">Pilote<font>"
+                text: "<font color=\"white\">Button 0<font>"
                 font.bold: true
             }
 
             SwitchDelegate {
                 id: button1ID
                 checked: backend.pnu1
-                text: "<font color=\"white\">Image<font>"
+                text: "<font color=\"white\">Button 1<font>"
                 font.bold: true
             }
 
@@ -87,7 +87,7 @@ Item {
             SwitchDelegate {
                 id: button5ID
                 checked: backend.pnu5
-                text: "<font color=\"white\">Pnumatic<font>"
+                text: "<font color=\"white\">Button 5<font>"
                 font.bold: true
             }
         }

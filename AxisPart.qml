@@ -21,6 +21,37 @@ Item {
     property int spaceBetweenAxises
 
 
+    Rectangle{
+        id: axisBorder
+        x:fields_xAxis - 58
+        y:firstField_yAxis
+        color: "transparent"
+        width: 150
+        height: 290
+        border.color: "deeppink"
+        border.width: 2
+        radius: 10
+    }
+
+    Label{
+        id: axisLbl
+        text: "Axises"
+        font.bold : true
+        font.pixelSize: 20
+        color: "white"
+        x: axisBorder.x + 5
+        y: axisBorder.y - 26
+    }
+
+    Image {
+        id: axis
+        x: axisLbl.x + 65
+        y: axisLbl.y - 25
+        source: "images/axis.png"
+        width: 50
+        height:axis.width
+    }
+
     Axis {
         lableText: "axis 0"
         xAll: fields_xAxis

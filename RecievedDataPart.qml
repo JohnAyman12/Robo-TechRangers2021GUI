@@ -19,60 +19,76 @@ Item {
         x: firstLable_xAxis
         y: firstLable_yAxis
         color: "transparent"
-        width: 333
-        height: 270
+        width: 383
+        height: 248
         border.color: "deeppink"
         border.width: 2
         radius: 10
     }
 
+    Label{
+        id: sensorsLbl
+        text: "Sensors"
+        font.bold : true
+        font.pixelSize: 20
+        color: "white"
+        x: firstLable_xAxis + 5
+        y: firstLable_yAxis - 30
+    }
+
+    Image {
+        id: sensorsImg
+        x: sensorsLbl.x + 70
+        y: sensorsLbl.y - 33
+        source: "images/sensors.png"
+        width: 75
+        height: sensorsImg.width
+    }
+
     RecievedData {
-        dataName: "Data 0"
-        dataValue: 40
+        dataName: "Tempreature"
+        dataValue: 20
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 0.4)
     }
 
     RecievedData {
-        dataName: "Data 1"
-        dataValue: 80
+        dataName: "Humidity"
+        dataValue: 0
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 1.4)
+        dataNameX: 17
     }
 
     RecievedData {
-        dataName: "Data 2"
-        dataValue: 120
+        dataName: "X-axis"
+        dataValue: 90
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 2.4)
+        dataNameX: 27
     }
 
     RecievedData {
-        dataName: "Data 3"
-        dataValue: 160
+        dataName: "Y-axis"
+        dataValue: 0
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 3.4)
+        dataNameX: 27
     }
 
     RecievedData {
-        dataName: "Data 4"
-        dataValue: 200
+        dataName: "Z-axis"
+        dataValue: 0
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 4.4)
-    }
-
-    RecievedData {
-        dataName: "Data 5"
-        dataValue: 240
-        xAll: dataBorder.x + 10
-        yAll: dataBorder.y + (spaceBetweenLablesY * 5.4)
+        dataNameX: 27
     }
 
     Column {
         id: column // maximum speed spinbox
         spacing: 5
-        x: firstLable_xAxis + 87
-        y: firstLable_yAxis + (spaceBetweenLablesY * 6.2)
+        x: firstLable_xAxis + 112
+        y: firstLable_yAxis + (spaceBetweenLablesY * 5.2)
 
         Label {
             id: maximumSpeedLable

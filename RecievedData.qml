@@ -8,13 +8,14 @@ Item {
     property int dataValue
     property int xAll
     property int yAll
+    property int dataNameX : 0
 
     Label {// data name
         text: item.dataName
         font.bold: true
         font.pixelSize: 18
         color: "white"
-        x: item.xAll
+        x: item.xAll + dataNameX
         y: item.yAll
     }
 
@@ -22,7 +23,7 @@ Item {
         from: 0
         to: 255
         value: item.dataValue
-        x: item.xAll + 70
+        x: item.xAll + /*70*/120
         y: item.yAll + 10
     }
 
@@ -31,7 +32,7 @@ Item {
         font.bold: true
         font.pixelSize: 18
         color: "white"
-        x: item.xAll + 280
+        x: item.xAll + 330
         y: item.yAll
     }
 
