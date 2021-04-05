@@ -29,16 +29,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x:buttons_x + 5
+        x:buttons_x + 58
         y:buttons_y - 26
     }
 
     Image {
         id: button
-        x: btnLbl.x + 80
-        y: btnLbl.y - 22
-        source: "images/buttons.png"
-        width: 50
+        x: btnLbl.x - 130
+        y: btnLbl.y - 116
+        source: "images/button.png"
+        width: 200
         height:button.width
     }
 
@@ -51,14 +51,14 @@ Item {
 
             SwitchDelegate {
                 id: button0ID
-                checked: backend.pnu0
+                checked: backend.button0
                 text: "<font color=\"white\">Button 0<font>"
                 font.bold: true
             }
 
             SwitchDelegate {
                 id: button1ID
-                checked: backend.pnu1
+                checked: backend.button1
                 text: "<font color=\"white\">Button 1<font>"
                 font.bold: true
             }
@@ -86,7 +86,7 @@ Item {
 
             SwitchDelegate {
                 id: button5ID
-                checked: backend.pnu5
+                checked: backend.button5
                 text: "<font color=\"white\">Button 5<font>"
                 font.bold: true
             }

@@ -17,13 +17,13 @@ void myUDP::send(unsigned char* myData,int length)
     //qDebug()<< myData[0] << " " << myData[1];
     QByteArray data;
     data.append((const char*)myData,length);
-        qDebug()<< data[0] /*<< " " << data[1]*/;
+//        qDebug()<< data[0] << " ".  << data[1]y;
     socket->writeDatagram(data,QHostAddress("192.168.0.7"),8888);
     unsigned char buffer[data.size()];
     std::copy(data.begin(),data.end(),buffer);
-//    SHORT *A=(SHORT*)buffer;
-//    qDebug()<<A[0].num << " , " << buffer[2]<< " , " << buffer[3]<< " , " << buffer[4]<< " , "
-//                          << buffer[5]<< " , " << buffer[6] << " , " << buffer[7];
+    SHORT *A=(SHORT*)buffer;
+    qDebug()<<A[0].num << " , " << buffer[2]<< " , " << buffer[3]<< " , " << buffer[4]<< " , "
+                          << buffer[5]<< " , " << buffer[6] << " , " << buffer[7];
 }
 
 void myUDP::processPendingDatagrams()

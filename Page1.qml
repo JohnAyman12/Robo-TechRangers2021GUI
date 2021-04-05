@@ -4,6 +4,8 @@ import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 
 Item {
+    property bool flyTransect: false
+
     Page {
         id:mainPage
         width: mainWindow.width
@@ -52,11 +54,8 @@ Item {
         }
 
         ArmPart {
-            buttons_x: 885
             buttons_y: 386
-
-
-//            buttons_x: 120
+            buttons_x: 120
         }
 
         RecievedDataPart {
@@ -66,13 +65,36 @@ Item {
             spaceBetweenLablesY: 30
         }
 
+        CheckBox {
+            id:flyTransectCheckbox
+            x: 977
+            y: 368
+            text: "<font color=\"white\"><b>Fly transact mood"
+            font.pixelSize: 17
+            onCheckStateChanged:{flyTransect = flyTransectCheckbox.checkState}
+            background: Rectangle {
+                x: 9
+                y: 17
+                width: 16
+                height: 16
+                radius: 2
+                color: "white"
+            }
+            Rectangle {
+                x: -4
+                y: 10
+                width: 200
+                height: 30
+                color: "transparent"
+                border.color: "deeppink"
+                border.width: 2
+                radius: 10
+            }
+        }
+
         TimerPart {
-            borderX: 130
-            borderY: 410
-
-
-//            borderX: 918
-//            borderY: 483
+            borderX: 918
+            borderY: 483
         }
     }
 }

@@ -24,7 +24,7 @@
 
 Joystick::Joystick()
 {
-  openPath("/dev/input/js0");
+  openPath("/dev/input/js4");
 }
 
 Joystick::Joystick(int joystickNumber)

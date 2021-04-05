@@ -172,13 +172,13 @@ void BackEnd::call(JoystickEvent event)
     SHORT A;
     A.num = verticalMotorsVar;
 
-//    message.insert(message.end(),A.bytes,A.bytes+2);
-//    message.push_back((char)horizontalMotorsVar);
-//    message.push_back(motorArd[0]);
-//    message.push_back(motorArd[1]);
-//    message.push_back(motorArd[2]);
-//    message.push_back(motorArd[3]);
-    message.push_back(pnu[0]);
+    message.insert(message.end(),A.bytes,A.bytes+2); // index  0 & 1
+    message.push_back((char)horizontalMotorsVar); // index 2
+    message.push_back(motorArd[0]); // index 3
+    message.push_back(motorArd[1]); // index 4
+    message.push_back(motorArd[2]); // index 5
+    message.push_back(motorArd[3]); // index 6
+    message.push_back(pnu[0]); // index 7
 
     socket->send(message.data(),message.size());
 }

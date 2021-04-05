@@ -29,16 +29,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x:buttons_x + 5
-        y:buttons_y - 48
+        x:buttons_x + 60
+        y:buttons_y - 46
     }
 
     Image {
         id: arm
-        x:armsLbl.x + 70
-        y:armsLbl.y - 22
+        x:armsLbl.x - 60
+        y:armsLbl.y - 15
         source: "images/arm.png"
-        width: 70
+        width: 60
         height:arm.width
     }
 
@@ -65,14 +65,16 @@ Item {
 
             SwitchDelegate {
                 id: button5ID
-                checked: backend.pnu5
+                checked: (backend.pnu5 && !flyTransect)
+                enabled: !flyTransect
                 text: "<font color=\"white\">Pnumatic Arm<font>"
                 font.bold: true
             }
 
             SwitchDelegate {
                 id: button6ID
-                checked: backend.button6
+                checked: (backend.button6 && !flyTransect)
+                enabled: !flyTransect
                 text: "<font color=\"white\">DC Arm<font>"
                 font.bold: true
             }

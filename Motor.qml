@@ -60,7 +60,7 @@ Item {
 
     TextField { // motor value
         id: motorInput
-        text: motor.motorValue
+        text: dialEnable? motor.motorValue : 0
         font.pixelSize: 20
         horizontalAlignment: Text.AlignHCenter
         width: motor.valueFieldWidth
@@ -68,6 +68,7 @@ Item {
         readOnly: true
         x: motor.xAll + valueNumber()
         y: motor.yAll + 30
+        enabled: dialEnable
     }
 }
 /*##^##

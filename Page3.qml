@@ -49,16 +49,21 @@ Item {
             height: 750
         }
 
+        ButtonPart {
+            buttons_x: 150
+            buttons_y: 150
+        }
+
         AxisPart {
             id: axisPart
-            fields_xAxis: 700
-            firstField_yAxis: 100
+            fields_xAxis: 680
+            firstField_yAxis: 150
             spaceBetweenAxises: 50
         }
 
-        ButtonPart {
-            buttons_x: 200
-            buttons_y: 100
+        PIDvalues {
+            borderX: 935
+            borderY: 150
         }
     }
 }

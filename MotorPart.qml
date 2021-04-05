@@ -39,7 +39,7 @@ Item {
         id: shortcutMicroForward
         sequence: "R"
         context: Qt.ApplicationShortcut
-        enabled: checkBoxMicro.checked
+        enabled:  (checkBoxMicro.checkState && !flyTransect)
         onActivated:{microMotor = 255; microMotorDir = 1}
     }
 
@@ -47,7 +47,7 @@ Item {
         id: shortcutMicroStop
         sequence: "F"
         context: Qt.ApplicationShortcut
-        enabled: checkBoxMicro.checked
+        enabled:  (checkBoxMicro.checkState && !flyTransect)
         onActivated:{microMotor = 0; microMotorDir = 0}
     }
 
@@ -55,7 +55,7 @@ Item {
         id: shortcutMicroBack
         sequence: "C"
         context: Qt.ApplicationShortcut
-        enabled: checkBoxMicro.checked
+        enabled:  (checkBoxMicro.checkState && !flyTransect)
         onActivated:{microMotor = 255; microMotorDir = -1}
     }
 
@@ -63,7 +63,7 @@ Item {
         id: shortcutRollerForward
         sequence: "I"
         context: Qt.ApplicationShortcut
-        enabled: checkBoxMicro.checked
+        enabled:  (checkBoxMicro.checkState && !flyTransect)
         onActivated:{rollerMotor = 255; rollerMotorDir = 1}
     }
 
@@ -71,7 +71,7 @@ Item {
         id: shortcutRollerStop
         sequence: "J"
         context: Qt.ApplicationShortcut
-        enabled: checkBoxMicro.checked
+        enabled:  (checkBoxMicro.checkState && !flyTransect)
         onActivated:{rollerMotor = 0; rollerMotorDir = 0}
     }
 
@@ -79,7 +79,7 @@ Item {
         id: shortcutRollerBack
         sequence: "M"
         context: Qt.ApplicationShortcut
-        enabled: checkBoxMicro.checked
+        enabled:  (checkBoxMicro.checkState && !flyTransect)
         onActivated:{rollerMotor = 255; rollerMotorDir = -1}
     }
 
@@ -87,7 +87,7 @@ Item {
         id: shortcutMicroArm
         sequence: "O"
         context: Qt.ApplicationShortcut
-        enabled: checkBoxMicro.checked
+        enabled:  (checkBoxMicro.checkState && !flyTransect)
         onActivated:{
             microArm = !microArm;
             console.log(col.x + " , " + col.y)
@@ -110,18 +110,18 @@ Item {
 
     Label{
         id: mainLbl
-        text: "Main\nROV"
+        text: "Main ROV"
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x:mainROV_x + 5
-        y:mainROV_y - 48
+        x:mainROV_x + 68
+        y:mainROV_y - 24
     }
 
     Image {
         id: mainImg
-        x: mainLbl.x + 45
-        y: mainLbl.y - 22
+        x: mainLbl.x - 70
+        y: mainLbl.y - 40
         source: "images/main.png"
         width: 70
         height: mainImg.width
@@ -131,6 +131,7 @@ Item {
         id: horizontalMotorsID
         lableText: "Horizontal Motors"
         motorValue: horizontalMotor
+        dialEnable:  !flyTransect
         x: rovBorder.x + (rovBorder.width * 0.13)
         y: rovBorder.y + 32
     }
@@ -140,6 +141,7 @@ Item {
         lableText: "Vertical Motors"
         valueFieldWidth: 50
         motorValue: verticalMotor
+        dialEnable:  !flyTransect
         awayFromCenter: 8
         dialMinimum: 1000
         dialMaximum: 2000
@@ -258,18 +260,18 @@ Item {
 
     Label{
         id: microLbl
-        text: "Micro\nROV"
+        text: "Micro ROV"
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x: microROV_x + 5
-        y: microROV_y - 48
+        x: microROV_x + 75
+        y: microROV_y - 24
     }
 
     Image {
         id: microImg
-        x: microLbl.x + 25
-        y: microLbl.y - 48
+        x: microLbl.x - 100
+        y: microLbl.y - 66
         source: "images/micro.png"
         width: 130
         height: microImg.width
@@ -280,6 +282,7 @@ Item {
         text: "<font color=\"white\">Micro<font>"
         font.pixelSize: 17
         font.bold: true
+        enabled: !flyTransect
         x: microBorder.x + 100
         y: microBorder.y
         onCheckStateChanged:
@@ -307,7 +310,7 @@ Item {
         id:microMotorID
         lableText: "Micro Motor"
         motorValue: microMotor
-        dialEnable: checkBoxMicro.checkState
+        dialEnable: (checkBoxMicro.checkState && !flyTransect)
         awayFromCenter: -5
         x: microBorder.x + 15
         y: microBorder.y + 60
@@ -317,7 +320,7 @@ Item {
         id:rollerMotorID
         lableText: "Roller Motors"
         motorValue: rollerMotor
-        dialEnable: checkBoxMicro.checkState
+        dialEnable: (checkBoxMicro.checkState && !flyTransect)
         awayFromCenter: -8
         x: microBorder.x + 165
         y: microBorder.y + 60

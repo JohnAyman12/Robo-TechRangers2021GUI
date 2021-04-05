@@ -39,7 +39,7 @@ ApplicationWindow {
             text: "<font color=\"white\">Main Page"
             Image {
                 id: tab1Background
-                source: "images/black.jpg"
+                source: "images/mainButton.jpeg"
                 width: 322.75
                 height: 48
             }
@@ -49,7 +49,7 @@ ApplicationWindow {
             text: qsTr("<font color=\"white\">Mission Page")
             Image {
                 id: tab2Background
-                source: "images/black.jpg"
+                source: "images/missionButton.jpeg"
                 width: 322.75
                 height: 48
             }
@@ -69,7 +69,7 @@ ApplicationWindow {
             text: qsTr("<font color=\"white\">About us")
             Image {
                 id: tab4Background
-                source: "images/black.jpg"
+                source: "images/aboutButton.jpeg"
                 width: 322.75
                 height: 48
             }

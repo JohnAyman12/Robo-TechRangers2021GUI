@@ -52,16 +52,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x: borderX + 5
-        y: borderY - 30
+        x: borderX + 34
+        y: borderY - 24
     }
 
     Image {
         id: timerImg
-        x: timerLbl.x + 60
-        y: timerLbl.y
+        x: timerLbl.x - 34
+        y: timerLbl.y - 11
         source: "images/timer.png"
-        width: 28
+        width: 35
         height: timerImg.width
     }
 

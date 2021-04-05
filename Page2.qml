@@ -14,9 +14,9 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "images/black.jpg"
+            source: "images/mission.jpeg"
             width: 800
-            height: 50
+            height: 60
             Label {
                 text: qsTr("Missoin page")
                 color: textColor

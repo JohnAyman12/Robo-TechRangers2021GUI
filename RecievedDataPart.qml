@@ -32,16 +32,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x: firstLable_xAxis + 5
-        y: firstLable_yAxis - 30
+        x: firstLable_xAxis + 56
+        y: firstLable_yAxis - 24
     }
 
     Image {
         id: sensorsImg
-        x: sensorsLbl.x + 70
-        y: sensorsLbl.y - 33
-        source: "images/sensors.png"
-        width: 75
+        x: sensorsLbl.x - 48
+        y: sensorsLbl.y - 25
+        source: "images/sensors.jpeg"
+        width: 45
         height: sensorsImg.width
     }
 
@@ -105,6 +105,7 @@ Item {
             stepSize: 15
             x: maximumSpeedLable.x - 25
             font.bold: true
+            enabled: !flyTransect
             onValueChanged: {backend.getMaxSpeed(value)}
             background: Rectangle {
                 implicitWidth: 220

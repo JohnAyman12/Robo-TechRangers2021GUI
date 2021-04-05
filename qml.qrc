@@ -18,6 +18,8 @@
         <file>Axis.qml</file>
         <file>ArmPart.qml</file>
         <file>TimerPart.qml</file>
+        <file>PIDvalues.qml</file>
+        <file>DoubleSpinBox.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>hold.png</file>
@@ -28,14 +30,22 @@
         <file>forward.png</file>
         <file>main.png</file>
         <file>micro.png</file>
-        <file>timer.png</file>
         <file>arm.png</file>
         <file>connection.jpeg</file>
         <file>pinkDial.png</file>
-        <file>axis.png</file>
-        <file>cenncetionButton.jpeg</file>
-        <file>buttons.png</file>
-        <file>sensors.png</file>
         <file>main.jpeg</file>
+        <file>ourROV.jpg</file>
+        <file>axis.png</file>
+        <file>mission.jpeg</file>
+        <file>logo.png</file>
+        <file>button.png</file>
+        <file>missionButton.jpeg</file>
+        <file>PID.png</file>
+        <file>timer.png</file>
+        <file>mainButton.jpeg</file>
+        <file>cenncetionButton.jpeg</file>
+        <file>sensors.jpeg</file>
+        <file>about.jpeg</file>
+        <file>aboutButton.jpeg</file>
     </qresource>
 </RCC>
