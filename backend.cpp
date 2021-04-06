@@ -16,6 +16,8 @@
 
 int m_speed = 255;
 bool motorArd[4] = {1};
+bool button[12] = {false};
+short verticalMotorsVar = 0;
 
 BackEnd::BackEnd(QObject *parent) :
     QObject(parent)
@@ -45,13 +47,10 @@ void BackEnd::call(JoystickEvent event)
 
     if(event.isAxis())
     {
+        valueT100 = 1100 + (((-valueIn + 32767) * 400) / 32767);
+        valuePilgeDC = abs(valueIn) * m_speed / 32767;
         pureAxis[number] = valueIn;
-//        qDebug()<< "axis0" << pureAxis[0];
-//        qDebug()<< "axis1" << pureAxis[1];
-//        qDebug()<< "axis2" << pureAxis[2];
-//        qDebug()<< "axis3" << pureAxis[3];
-//        qDebug()<< "axis4" << pureAxis[4];
-//        qDebug()<< "axis5" << pureAxis[5] << Qt::endl << Qt::endl;
+
         if (valueIn == 0)
         {
             for (counter = 0; counter <=3; counter++)
@@ -63,67 +62,57 @@ void BackEnd::call(JoystickEvent event)
         }
         else
         {
-            if (pureAxis[2] != 0)
+            if (valueIn > 0){direction = -1;}
+            else {direction = 1;}
+            if (number == 2) // up down (heave degree of freedom)
             {
-//                qDebug()<<" in the vertical body";
-                valueT100 = 1000 + (((-valueIn + 32767) * 500) / 32767);
-                valuePilgeDC = 0;
                 verticalMotorsVar = valueT100;
             }
-            else
+            else if (number == 1) // forward back (surge degree of freedom)
             {
-                if (valueIn > 0){direction = -1;}
-                else {direction = 1;}
-                valuePilgeDC = abs(valueIn) * m_speed / 32767;
+                if (direction == -1){
+                    motorArd[frontRight] = motorArd[frontLeft]
+                            =  motorArd[backRight] = motorArd[backLeft] = 0;}
+                else if (direction == 1){
+                    motorArd[frontRight] = motorArd[frontLeft]
+                            =  motorArd[backRight] = motorArd[backLeft] = 1;}
                 horizontalMotorsVar = valuePilgeDC;
-                if (abs(pureAxis[1]) > abs(pureAxis[0]))
-                { // forward back (surge degree of freedom)
-                    if (direction == -1){
-                        motorArd[frontRight] = motorArd[frontLeft]
-                                =  motorArd[backRight] = motorArd[backLeft] = 0;}
-                    else if (direction == 1){
-                        motorArd[frontRight] = motorArd[frontLeft]
-                                =  motorArd[backRight] = motorArd[backLeft] = 1;}
-                    for (counter = 0; counter <=3; counter++)
-                    {
-                        motorDirections[counter + 6] = direction;
-                    }
+                for (counter = 0; counter <=3; counter++)
+                {
+                    motorDirections[counter + 6] = direction;
                 }
-                else if (abs(pureAxis[1]) < abs(pureAxis[0]))
-                {// right left (sway degree of freedom)
-//                    qDebug()<< pureAxis[1];
-                    if (direction == -1)
-                    {
-                        motorArd[frontRight] = motorArd[backLeft] = 1;
-                        motorArd[backRight] = motorArd[frontLeft] = 0;
-                    }
-                    else if (direction == 1)
-                    {
-                        motorArd[frontRight] = motorArd[backLeft] = 0;
-                        motorArd[backRight] = motorArd[frontLeft] = 1;
-                    }
-
-                    motorDirections[frontRightDir] = direction;
-                    motorDirections[frontLeftDir] = -1 * direction;
-                    motorDirections[backRightDir] =  -1 * direction;
-                    motorDirections[backLeftDir] = direction;
+            }
+            else if (number == 0)// right left (sway degree of freedom)
+            {
+                if (direction == -1){
+                    motorArd[frontRight] = motorArd[backLeft] = 1;
+                    motorArd[backRight] = motorArd[frontLeft] = 0;
                 }
-                else if((abs(pureAxis[4]) > abs(pureAxis[0])) and (abs(pureAxis[4])) > abs(pureAxis[1]))
-                { // clockwise anticlockwise (sway degree of freedom)
-                    if (direction == -1){
-                        motorArd[frontRight] = motorArd[backRight] = 1;
-                        motorArd[frontLeft] = motorArd[backLeft] = 0;
-                    }
-                    else if (direction == 1)
-                    {
-                        motorArd[frontRight] = motorArd[backRight] = 0;
-                        motorArd[frontLeft] = motorArd[backLeft] = 1;
-                    }
-                    motorDirections[frontRightDir] = direction;
-                    motorDirections[frontLeftDir] = -1 * direction;
-                    motorDirections[backRightDir] = direction;
-                    motorDirections[backLeftDir] = -1 * direction;
+                else if (direction == 1){
+                    motorArd[frontRight] = motorArd[backLeft] = 0;
+                    motorArd[backRight] = motorArd[frontLeft] = 1;
                 }
+                horizontalMotorsVar = valuePilgeDC;
+                motorDirections[frontRightDir] = direction;
+                motorDirections[frontLeftDir] = -1 * direction;
+                motorDirections[backRightDir] =  -1 * direction;
+                motorDirections[backLeftDir] = direction;
+            }
+            else if(number == 4) // clockwise anticlockwise (sway degree of freedom)
+            {
+                if (direction == -1){
+                    motorArd[frontRight] = motorArd[backRight] = 1;
+                    motorArd[frontLeft] = motorArd[backLeft] = 0;
+                }
+                else if (direction == 1){
+                    motorArd[frontRight] = motorArd[backRight] = 0;
+                    motorArd[frontLeft] = motorArd[backLeft] = 1;
+                }
+                horizontalMotorsVar = valuePilgeDC;
+                motorDirections[frontRightDir] = direction;
+                motorDirections[frontLeftDir] = -1 * direction;
+                motorDirections[backRightDir] = direction;
+                motorDirections[backLeftDir] = -1 * direction;
             }
         }
     }
@@ -138,7 +127,7 @@ void BackEnd::call(JoystickEvent event)
         button[number] = valueIn;
     }
 
-//    sensor = 100;
+    //    sensor = 100;
 
     for (counter = 0; counter <=5; counter++)
     {

@@ -143,8 +143,9 @@ Item {
         motorValue: verticalMotor
         dialEnable:  !flyTransect
         awayFromCenter: 8
-        dialMinimum: 1000
-        dialMaximum: 2000
+        dialMinimum: 1100
+        dialMaximum: 1900
+        imgSource: "images/pinkDialT100.png"
         x: rovBorder.x + (rovBorder.width * 0.59)
         y: horizontalMotorsID.y
     }
@@ -178,7 +179,7 @@ Item {
             Image {
                 id: frontRightImg
                 source: if (frontRightDir == 0) {"images/hold.png"}
-                        else if (frontRightDir == 1){"images/clockwise.png"}
+                        else if (frontRightDir == 1){"images/clockwise.jpeg"}
                         else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
@@ -196,8 +197,8 @@ Item {
 
             Image {
                 id: frontLeftImg
-                source: if (frontLeftDir == 0) {"/images/hold.png"}
-                        else if (frontLeftDir == 1){"/images/clockwise.png"}
+                source: if (frontLeftDir == 0) {"images/hold.png"}
+                        else if (frontLeftDir == 1){"images/clockwise.jpeg"}
                         else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
@@ -216,8 +217,8 @@ Item {
 
             Image {
                 id: backRightImg
-                source: if (backRightDir == 0) {"/images/hold.png"}
-                        else if (backRightDir == 1){"/images/clockwise.png"}
+                source: if (backRightDir == 0) {"images/hold.png"}
+                        else if (backRightDir == 1){"images/clockwise.jpeg"}
                         else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
@@ -235,8 +236,8 @@ Item {
 
             Image {
                 id: backLeftImg
-                source: if (backLeftDir == 0) {"/images/hold.png"}
-                        else if (backLeftDir == 1){"/images/clockwise.png"}
+                source: if (backLeftDir == 0) {"images/hold.png"}
+                        else if (backLeftDir == 1){"images/clockwise.jpeg"}
                         else {"images/anticlockwise.png"}
                 width: 20
                 height: 20
@@ -341,11 +342,11 @@ Item {
 
         Image {
             id: microMotorImg
-            source: if (microMotorDir == 0) {"/images/hold.png"}
-                    else if (microMotorDir == 1){"/images/clockwise.png"}
-                    else {"/images/anticlockwise.png"}
-            width: 20
-            height: 20
+            source: if (microMotorDir == 0) {"images/hold.png"}
+                    else if (microMotorDir == 1){"images/clockwise.jpeg"}
+                    else {"images/anticlockwise.png"}
+            width: 25
+            height: 25
         }
     }
 
@@ -363,9 +364,9 @@ Item {
 
         Image {
             id: rollerMotorImg
-            source: if (rollerMotorDir == 0) {"/images/hold.png"}
-                    else if (rollerMotorDir == 1){"/images/clockwise.png"}
-                    else {"/images/anticlockwise.png"}
+            source: if (rollerMotorDir == 0) {"images/hold.png"}
+                    else if (rollerMotorDir == 1){"images/clockwise.jpeg"}
+                    else {"images/anticlockwise.png"}
             width: 20
             height: 20
         }
@@ -396,12 +397,12 @@ Item {
     Image {
         id:mainRovDirectionImg
         source:
-            if (frontRightDir == 1 && frontLeftDir == 1 && backRightDir == 1){"/images/forward.png"}
-            else if (frontRightDir == -1 && frontLeftDir == -1 && backRightDir == -1){"/images/back.png"}
-            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == 1){"/images/right.png"}
-            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == -1){"/images/left.png"}
-            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == -1){"/images/clockwise.png"}
-            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == 1){"/images/anticlockwise.png"}
+            if (frontRightDir == 1 && frontLeftDir == 1 && backRightDir == 1){"images/forward.png"}
+            else if (frontRightDir == -1 && frontLeftDir == -1 && backRightDir == -1){"images/back.png"}
+            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == 1){"images/right.png"}
+            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == -1){"images/left.png"}
+            else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == -1){"images/clockwise.jpeg"}
+            else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == 1){"images/anticlockwise.png"}
             else {"images/hold.png"}
         width: 200
         height: 200

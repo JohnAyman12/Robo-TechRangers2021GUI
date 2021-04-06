@@ -141,7 +141,6 @@ public:
     bool button9();
     bool button10();
     bool button11();
-    bool button[12] = {false};
 
     // motors variables and functions
 
@@ -150,7 +149,6 @@ public:
 
     short motors[6];
     short horizontalMotorsVar = 0;
-    short verticalMotorsVar = 0;
     int horizontalMotors();
     int verticalMotors();
 

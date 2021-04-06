@@ -14,7 +14,7 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "/images/main.jpeg"
+            source: "images/about.jpeg"
             height: 60
             Label {
                 text: qsTr("Main page")

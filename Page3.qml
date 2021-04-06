@@ -12,7 +12,7 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "/images/connection.jpeg"
+            source: "images/about.jpeg"
             height: 60
             Label {
                 text: qsTr("Connection page")

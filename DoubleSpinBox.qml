@@ -16,6 +16,7 @@ Item {
         value: realValue*factor
         to : realTo*factor
         from : realFrom*factor
+        editable: true
         validator: DoubleValidator {
             bottom: Math.min(spinbox.from, spinbox.to)*spinbox.factor
             top:  Math.max(spinbox.from, spinbox.to)*spinbox.factor

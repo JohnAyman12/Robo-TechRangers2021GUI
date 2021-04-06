@@ -14,7 +14,7 @@ Item {
         header:
             Image {
             id: headerBackground
-            source: "images/mission.jpeg"
+            source: "images/about.jpeg"
             width: 800
             height: 60
             Label {

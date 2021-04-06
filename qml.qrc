@@ -32,7 +32,6 @@
         <file>micro.png</file>
         <file>arm.png</file>
         <file>connection.jpeg</file>
-        <file>pinkDial.png</file>
         <file>main.jpeg</file>
         <file>ourROV.jpg</file>
         <file>axis.png</file>
@@ -47,5 +46,9 @@
         <file>sensors.jpeg</file>
         <file>about.jpeg</file>
         <file>aboutButton.jpeg</file>
+        <file>pinkDialDC.png</file>
+        <file>pinkDialT100.png</file>
+        <file>clockwise.jpeg</file>
+        <file>anticlockwise.png</file>
     </qresource>
 </RCC>

@@ -11,6 +11,7 @@ Item {
     property int dialMaximum: 255
     property int awayFromCenter: 20
     property bool dialEnable: true
+    property string imgSource: "images/pinkDialDC.png"
     property int xAll
     property int yAll
 
@@ -50,7 +51,7 @@ Item {
 
     Image {
         id: dialImg
-        source: "images/pinkDial.png"
+        source: imgSource
         width: 102
         height: dialImg.width
         x: motor.xAll - 1.5

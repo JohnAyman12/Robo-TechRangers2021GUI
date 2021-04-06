@@ -20,18 +20,18 @@ Item {
 
     Label{
         id: lblPID
-        text: "PID\nFactors"
+        text: "PID Factors"
         font.bold : true
         font.pixelSize: 20
         color: "white"
         x: borderX + 52
-        y: borderY - 50
+        y: borderY - 24
     }
 
     Image {
         id: imgPID
         x: lblPID.x - 56
-        y: lblPID.y - 15
+        y: lblPID.y - 38
         source: "images/PID.png"
         width: 60
         height: imgPID.width + 10
@@ -57,7 +57,7 @@ Item {
                 x: 78
                 y: -10
                 realValue: 0.2
-                realStepSize: 0.3
+                realStepSize: 0.1
             }
         }
 
@@ -66,7 +66,7 @@ Item {
 
             Label {
                 id: constI
-                text: "P-const"
+                text: "I-const"
                 font.pixelSize: 18
                 font.bold: true
                 color: "white"
@@ -76,7 +76,7 @@ Item {
                 x: 78
                 y: -10
                 realValue: 0.2
-                realStepSize: 0.3
+                realStepSize: 0.1
             }
         }
 
@@ -85,7 +85,7 @@ Item {
 
             Label {
                 id: constD
-                text: "P-const"
+                text: "D-const"
                 font.pixelSize: 18
                 font.bold: true
                 color: "white"
@@ -95,7 +95,7 @@ Item {
                 x: 78
                 y: -10
                 realValue: 0.2
-                realStepSize: 0.3
+                realStepSize: 0.1
             }
         }
     }
