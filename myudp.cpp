@@ -14,21 +14,20 @@ typedef union{
 
 void myUDP::send(unsigned char* myData,int length)
 {
-    //qDebug()<< myData[0] << " " << myData[1];
     QByteArray data;
     data.append((const char*)myData,length);
-//        qDebug()<< data[0] << " ".  << data[1]y;
     socket->writeDatagram(data,QHostAddress("192.168.0.7"),8888);
     unsigned char buffer[data.size()];
     std::copy(data.begin(),data.end(),buffer);
     SHORT *A=(SHORT*)buffer;
-    qDebug()<<A[0].num << " , " << buffer[2]<< " , " << buffer[3]<< " , " << buffer[4]<< " , "
-                          << buffer[5]<< " , " << buffer[6] << " , " << buffer[7];
+    qDebug()<<A[0].num;
+    QString sentData = "";
+    for(int i = 2; i < data.size(); i++){sentData += QString::number((int)buffer[i]) + " :: ";}
+    qDebug()<< sentData;
 }
 
 void myUDP::processPendingDatagrams()
 {
-    //    u_int16_t senderport;
     QHostAddress sender;
     quint16 senderport;
     while (socket->hasPendingDatagrams()){
@@ -39,9 +38,9 @@ void myUDP::processPendingDatagrams()
         std::copy(buffer1.begin(), buffer1.end(), buffer.begin());
         QString sensors = "";
         for(int i = 0; i < buffer.size(); i++){sensors+= QString::number((int)buffer[i]) + " :: ";}
-//        qDebug()<< "recieved" << sensors;
+        //        qDebug()<< "recieved" << sensors;
         temp = (int)buffer[0];
-//        qDebug()<< "temp: " << temp;
+        //        qDebug()<< "temp: " << temp;
     }
 }
 

@@ -45,16 +45,20 @@ Item {
             id:backend
         }
 
-        MotorPart {
-            id:motorPart
+        MainRov {
+            id: mainPart
             mainROV_x: 450
             mainROV_y: 60
+        }
+
+        MicroRov {
+            id: microPart
             microROV_x:120
             microROV_y: 60
         }
 
         ArmPart {
-            buttons_y: 386
+            buttons_y: 350
             buttons_x: 120
         }
 
@@ -71,7 +75,10 @@ Item {
             y: 368
             text: "<font color=\"white\"><b>Fly transact mood"
             font.pixelSize: 17
-            onCheckStateChanged:{flyTransect = flyTransectCheckbox.checkState}
+            onCheckStateChanged:{
+                flyTransect = flyTransectCheckbox.checkState;
+                backend.getFlyTransactState(flyTransect);
+            }
             background: Rectangle {
                 x: 9
                 y: 17

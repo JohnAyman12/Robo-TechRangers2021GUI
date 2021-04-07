@@ -17,7 +17,7 @@ Item {
         y:buttons_y
         color: "transparent"
         width: 205
-        height: 192
+        height: 230
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -29,50 +29,57 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x:buttons_x + 60
+        x:buttons_x + 55
         y:buttons_y - 46
     }
 
     Image {
         id: arm
-        x:armsLbl.x - 60
-        y:armsLbl.y - 15
+        x:armsLbl.x - 55
+        y:armsLbl.y - 9
         source: "images/arm.png"
-        width: 60
+        width: 55
         height:arm.width
     }
 
     // Buttons
     Row{
         x:buttons_x
-        y:buttons_y
+        y:buttons_y - 5
 
         Column {
 
             SwitchDelegate {
-                id: button0ID
+                id: frontCamer
                 checked: backend.pnu0
                 text: "<font color=\"white\">Front Camera<font>"
                 font.bold: true
             }
 
             SwitchDelegate {
-                id: button1ID
+                id: bottomCamera
                 checked: backend.pnu1
                 text: "<font color=\"white\">Bottom Camera<font>"
                 font.bold: true
             }
 
             SwitchDelegate {
-                id: button5ID
-                checked: (backend.pnu5 && !flyTransect)
-                enabled: !flyTransect
-                text: "<font color=\"white\">Pnumatic Arm<font>"
+                id: microCamera
+                checked: backend.pnu2
+                text: "<font color=\"white\">Micro Camera<font>"
                 font.bold: true
             }
 
             SwitchDelegate {
-                id: button6ID
+                id: penumaticArm
+                checked: (backend.pnu5 && !flyTransect)
+                enabled: !flyTransect
+                text: "<font color=\"white\">Pneumatic Arm<font>"
+                font.bold: true
+            }
+
+            SwitchDelegate {
+                id: dcArm
                 checked: (backend.button6 && !flyTransect)
                 enabled: !flyTransect
                 text: "<font color=\"white\">DC Arm<font>"

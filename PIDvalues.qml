@@ -54,10 +54,13 @@ Item {
             }
 
             DoubleSpinBox{
+                id: constPSpinbox
                 x: 78
                 y: -10
+                factor: "p"
                 realValue: 0.2
                 realStepSize: 0.1
+                Component.onCompleted: BackEnd.get_P_facrot(constPSpinbox.realValue)
             }
         }
 
@@ -75,8 +78,10 @@ Item {
             DoubleSpinBox{
                 x: 78
                 y: -10
+                factor: "i"
                 realValue: 0.2
                 realStepSize: 0.1
+                Component.onCompleted: BackEnd.get_I_facrot(constPSpinbox.realValue)
             }
         }
 
@@ -94,8 +99,10 @@ Item {
             DoubleSpinBox{
                 x: 78
                 y: -10
+                factor: "d"
                 realValue: 0.2
                 realStepSize: 0.1
+                Component.onCompleted: BackEnd.get_D_facrot(constPSpinbox.realValue)
             }
         }
     }

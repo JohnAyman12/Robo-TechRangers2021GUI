@@ -8,6 +8,7 @@ Item {
     property real realFrom: 0.0
     property real realTo: 10.0
     property real realStepSize: 1.0
+    property string factor
 
     SpinBox{
         property real factor: Math.pow(10, decimals)
@@ -32,6 +33,5 @@ Item {
             height: 30
             radius: 2
         }
-
     }
 }

@@ -168,10 +168,19 @@ public:
 public slots:
     void call(JoystickEvent);
     void getMaxSpeed(int);
+    void getMicro(int, int);
+    void getMicroArm(int, int);
+    void getRoller(int, int );
+    void getFlyTransactState(bool);
+    void get_P_facrot(float);
+    void get_I_facrot(float);
+    void get_D_facrot(float);
+    void prepareData();
 
 signals:
     void frontEnd();
     void readjoy();
+    void sendData();
 
 };
 

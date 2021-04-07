@@ -5,7 +5,7 @@
         <file>Motor.qml</file>
         <file>AxisPart.qml</file>
         <file>ButtonPart.qml</file>
-        <file>MotorPart.qml</file>
+        <file>MainRov.qml</file>
         <file>Page1.qml</file>
         <file>Page2.qml</file>
         <file>Page3.qml</file>
@@ -20,6 +20,8 @@
         <file>TimerPart.qml</file>
         <file>PIDvalues.qml</file>
         <file>DoubleSpinBox.qml</file>
+        <file>PilgeMotors.qml</file>
+        <file>MicroRov.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>hold.png</file>
@@ -31,11 +33,8 @@
         <file>main.png</file>
         <file>micro.png</file>
         <file>arm.png</file>
-        <file>connection.jpeg</file>
-        <file>main.jpeg</file>
         <file>ourROV.jpg</file>
         <file>axis.png</file>
-        <file>mission.jpeg</file>
         <file>logo.png</file>
         <file>button.png</file>
         <file>missionButton.jpeg</file>
