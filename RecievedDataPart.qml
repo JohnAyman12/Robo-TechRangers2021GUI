@@ -20,7 +20,7 @@ Item {
         y: firstLable_yAxis
         color: "transparent"
         width: 383
-        height: 248
+        height: 168
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -32,16 +32,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x: firstLable_xAxis + 56
+        x: firstLable_xAxis + 38
         y: firstLable_yAxis - 24
     }
 
     Image {
         id: sensorsImg
-        x: sensorsLbl.x - 48
-        y: sensorsLbl.y - 25
+        x: sensorsLbl.x - 34
+        y: sensorsLbl.y - 10
         source: "images/sensors.jpeg"
-        width: 45
+        width: 32
         height: sensorsImg.width
     }
 
@@ -82,37 +82,6 @@ Item {
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 4.4)
         dataNameX: 27
-    }
-
-    Column {
-        id: column // maximum speed spinbox
-        spacing: 5
-        x: firstLable_xAxis + 112
-        y: firstLable_yAxis + (spaceBetweenLablesY * 5.2)
-
-        Label {
-            id: maximumSpeedLable
-            text: "Maximum speed"
-            color:"white"
-            font.bold : true
-            font.pixelSize: 18
-        }
-
-        SpinBox {
-            editable: true
-            to:255
-            value: 255
-            stepSize: 15
-            x: maximumSpeedLable.x - 25
-            font.bold: true
-            enabled: !flyTransect
-            onValueChanged: {backend.getMaxSpeed(value)}
-            background: Rectangle {
-                implicitWidth: 220
-                implicitHeight: 20
-                radius: 2
-            }
-        }
     }
 }
 

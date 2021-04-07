@@ -15,6 +15,16 @@ public:
 
     void send(unsigned char*,int);
 
+    typedef union{
+        char bytes[2];
+        short num;
+    }SHORT;
+
+//    typedef union{
+//        char bytes[4];
+//        float num;
+//    }FLOAT;
+
 signals:
 
 public slots:

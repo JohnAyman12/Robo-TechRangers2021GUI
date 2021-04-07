@@ -25,65 +25,71 @@ Item {
 
     Label{
         id:armsLbl
-        text: "Arms &\nCameras"
+        text: "Arms & Cameras"
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x:buttons_x + 55
-        y:buttons_y - 46
+        x:buttons_x + 40
+        y:buttons_y - 24
     }
 
     Image {
         id: arm
-        x:armsLbl.x - 55
-        y:armsLbl.y - 9
+        x:armsLbl.x - 42
+        y:armsLbl.y - 25
         source: "images/arm.png"
-        width: 55
+        width: 46
         height:arm.width
     }
 
-    // Buttons
-    Row{
+    Column {
         x:buttons_x
         y:buttons_y - 5
 
-        Column {
+        SwitchDelegate {
+            id: frontCamer
+            checked: backend.pnu0
+            text: "<font color=\"white\">Front Camera<font>"
+            font.bold: true
+        }
 
-            SwitchDelegate {
-                id: frontCamer
-                checked: backend.pnu0
-                text: "<font color=\"white\">Front Camera<font>"
+        SwitchDelegate {
+            id: bottomCamera
+            checked: backend.pnu1
+            text: "<font color=\"white\">Bottom Camera<font>"
+            font.bold: true
+        }
+
+        SwitchDelegate {
+            id: microCamera
+            checked: backend.pnu2
+            text: "<font color=\"white\">Micro Camera<font>"
+            font.bold: true
+        }
+
+        SwitchDelegate {
+            id: penumaticArm
+            checked: (backend.pnu5 && !flyTransect)
+            enabled: !flyTransect
+            text: "<font color=\"white\">Pneumatic Arm<font>"
+            font.bold: true
+        }
+
+        Row{
+            spacing: 5
+            leftPadding: 18
+
+            Label {
+                text: "DC Arm:     "
+                color: "white"
+                font.pixelSize: 17
                 font.bold: true
             }
 
-            SwitchDelegate {
-                id: bottomCamera
-                checked: backend.pnu1
-                text: "<font color=\"white\">Bottom Camera<font>"
-                font.bold: true
-            }
-
-            SwitchDelegate {
-                id: microCamera
-                checked: backend.pnu2
-                text: "<font color=\"white\">Micro Camera<font>"
-                font.bold: true
-            }
-
-            SwitchDelegate {
-                id: penumaticArm
-                checked: (backend.pnu5 && !flyTransect)
-                enabled: !flyTransect
-                text: "<font color=\"white\">Pneumatic Arm<font>"
-                font.bold: true
-            }
-
-            SwitchDelegate {
-                id: dcArm
-                checked: (backend.button6 && !flyTransect)
-                enabled: !flyTransect
-                text: "<font color=\"white\">DC Arm<font>"
-                font.bold: true
+            Image {
+                source: "images/hold.png"
+                width: 25
+                height: 25
             }
         }
     }

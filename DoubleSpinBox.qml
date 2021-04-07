@@ -1,5 +1,5 @@
 import QtQuick 2.0
-
+import io.qt.examples.backend 1.0
 import QtQuick.Controls 2.1
 
 Item {
@@ -8,7 +8,12 @@ Item {
     property real realFrom: 0.0
     property real realTo: 10.0
     property real realStepSize: 1.0
-    property string factor
+
+    BackEnd {
+        id: backend
+    }
+
+    property string currecntFactor
 
     SpinBox{
         property real factor: Math.pow(10, decimals)
@@ -32,6 +37,24 @@ Item {
             width: 125
             height: 30
             radius: 2
+        }
+
+        onValueChanged:
+        {
+            if (currecntFactor === "p")
+            {
+                backend.get_P_facrot(value*factor/100)
+            }
+
+            if (currecntFactor === "i")
+            {
+                backend.get_I_facrot(value*factor/100)
+            }
+
+            if (currecntFactor === "d")
+            {
+                backend.get_D_facrot(value*factor/100)
+            }
         }
     }
 }

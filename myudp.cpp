@@ -7,10 +7,6 @@ myUDP::myUDP(QObject *parent) :
     socket->bind(QHostAddress::Any,8888);
     connect(socket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));
 }
-typedef union{
-    char bytes[2];
-    short num;
-}SHORT;
 
 void myUDP::send(unsigned char* myData,int length)
 {
@@ -19,11 +15,15 @@ void myUDP::send(unsigned char* myData,int length)
     socket->writeDatagram(data,QHostAddress("192.168.0.7"),8888);
     unsigned char buffer[data.size()];
     std::copy(data.begin(),data.end(),buffer);
-    SHORT *A=(SHORT*)buffer;
-    qDebug()<<A[0].num;
-    QString sentData = "";
-    for(int i = 2; i < data.size(); i++){sentData += QString::number((int)buffer[i]) + " :: ";}
-    qDebug()<< sentData;
+    SHORT *V = (SHORT*)buffer;
+    //    FLOAT *PID = (FLOAT*)buffer;
+    QString sentData;
+    sentData +=  QString::number((int)V[0].num);
+//    sentData += " :: " + QString::number((int)PID[2].num);
+//    sentData += " :: " + QString::number((int)PID[6].num);
+//    sentData += " :: " + QString::number((int)PID[10].num);
+    for (int i = 2; i < data.size(); i++){sentData += " :: " + QString::number((int)buffer[i]);}
+    qDebug()<< "Sent:" << sentData;
 }
 
 void myUDP::processPendingDatagrams()

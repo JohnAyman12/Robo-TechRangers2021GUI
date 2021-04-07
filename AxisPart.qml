@@ -39,16 +39,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x: axisBorder.x + 58
-        y: axisBorder.y - 26
+        x: axisBorder.x + 42
+        y: axisBorder.y - 24
     }
 
     Image {
         id: axis
-        x: axisLbl.x - 52
-        y: axisLbl.y - 26
+        x: axisLbl.x - 38
+        y: axisLbl.y - 14
         source: "images/axis.png"
-        width: 50
+        width: 35
         height:axis.width
     }
 

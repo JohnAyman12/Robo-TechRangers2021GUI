@@ -6,6 +6,11 @@ Item {
     property int borderX
     property int borderY
 
+    BackEnd {
+        id: backend
+    }
+
+
     Rectangle{
         id: timerBorder
         x: borderX
@@ -24,16 +29,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x: borderX + 52
+        x: borderX + 42
         y: borderY - 24
     }
 
     Image {
         id: imgPID
-        x: lblPID.x - 56
-        y: lblPID.y - 38
+        x: lblPID.x - 43
+        y: lblPID.y - 26
         source: "images/PID.png"
-        width: 60
+        width: 45
         height: imgPID.width + 10
     }
 
@@ -57,10 +62,10 @@ Item {
                 id: constPSpinbox
                 x: 78
                 y: -10
-                factor: "p"
+                currecntFactor: "p"
                 realValue: 0.2
                 realStepSize: 0.1
-                Component.onCompleted: BackEnd.get_P_facrot(constPSpinbox.realValue)
+                Component.onCompleted: backend.get_P_facrot(constPSpinbox.realValue)
             }
         }
 
@@ -78,10 +83,10 @@ Item {
             DoubleSpinBox{
                 x: 78
                 y: -10
-                factor: "i"
+                currecntFactor: "i"
                 realValue: 0.2
                 realStepSize: 0.1
-                Component.onCompleted: BackEnd.get_I_facrot(constPSpinbox.realValue)
+                Component.onCompleted: backend.get_I_facrot(constPSpinbox.realValue)
             }
         }
 
@@ -99,10 +104,10 @@ Item {
             DoubleSpinBox{
                 x: 78
                 y: -10
-                factor: "d"
+                currecntFactor: "d"
                 realValue: 0.2
                 realStepSize: 0.1
-                Component.onCompleted: BackEnd.get_D_facrot(constPSpinbox.realValue)
+                Component.onCompleted: backend.get_D_facrot(constPSpinbox.realValue)
             }
         }
     }

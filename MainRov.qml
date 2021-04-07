@@ -26,7 +26,7 @@ Item {
         x: mainROV_x
         y: mainROV_y
         width: 300
-        height: 520
+        height: 488
         color: "transparent"
         border.color: "deeppink"
         border.width: 2
@@ -39,40 +39,42 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x:mainROV_x + 68
+        x:mainROV_x + 50
         y:mainROV_y - 24
     }
 
     Image {
         id: mainImg
-        x: mainLbl.x - 70
-        y: mainLbl.y - 40
+        x: mainLbl.x - 54
+        y: mainLbl.y - 27
         source: "images/main.png"
-        width: 70
+        width: 55
         height: mainImg.width
     }
 
     Motor { // horizontal motors
         id: horizontalMotorsID
-        lableText: "Horizontal Motors"
-        motorValue: horizontalMotor
-        dialEnable:  !flyTransect
-        x: rovBorder.x + (rovBorder.width * 0.13)
-        y: rovBorder.y + 32
+        name: "Horizontal Motors"
+        value: horizontalMotor
+        motorEnable:  !flyTransect
+        xAll: rovBorder.x + 30
+        yAll: rovBorder.y + 32
+        motorDirectionVisible: false
     }
 
     Motor { // vertical motor
         id:verticalMotors
-        lableText: "Vertical Motors"
-        valueFieldWidth: 50
-        motorValue: verticalMotor
-        dialEnable:  !flyTransect
-        awayFromCenter: 8
-        dialMinimum: 1100
-        dialMaximum: 1900
-        imgSource: "images/pinkDialT100.png"
-        x: rovBorder.x + (rovBorder.width * 0.59)
-        y: horizontalMotorsID.y
+        name: "Vertical Motors"
+        value: verticalMotor
+        motorEnable:  !flyTransect
+        xAll: rovBorder.x + 174
+        yAll: horizontalMotorsID.yAll
+
+        motorDirectionVisible: false
+        motorSpeedFieldWidth: 50
+        motorMinimum: 1100
+        motorMaxmum: 1900
+        motorIamgeSource: "images/pinkDialT100.png"
     }
 
     Label {
@@ -80,7 +82,7 @@ Item {
         text: "Horizontal Motors"
         color: textColor
         anchors.centerIn: rovBorder
-        anchors.verticalCenterOffset: -115
+        anchors.verticalCenterOffset: -98
         font.pixelSize: 20
         font.bold: true
     }
@@ -127,8 +129,8 @@ Item {
         id:mainRovDirectionLbl
         text: "Main Rov Direction"
         color: textColor
-        anchors.centerIn: mainRovDirectionImg
-        anchors.verticalCenterOffset: -115
+        anchors.centerIn: rovBorder
+        anchors.verticalCenterOffset: 50
         font.pixelSize: 20
         font.bold: true
     }
@@ -143,9 +145,9 @@ Item {
             else if (frontRightDir == -1 && frontLeftDir == 1 && backRightDir == -1){"images/clockwise.jpeg"}
             else if (frontRightDir == 1 && frontLeftDir == -1 && backRightDir == 1){"images/anticlockwise.png"}
             else {"images/hold.png"}
-        width: 200
-        height: 200
-        x: rovBorder.x + 46
-        y: rovBorder.y + 306
+        width: 165
+        height: 165
+        anchors.centerIn: mainRovDirectionLbl
+        anchors.verticalCenterOffset: 100
     }
 }

@@ -225,29 +225,35 @@ void BackEnd::get_D_facrot(float D){D_const = D; emit sendData();}
 void BackEnd::prepareData()
 {
     std::vector<unsigned char> message;
-    SHORT A;
-    A.num = verticalMotorsVar;
+    SHORT V;
+    V.num = verticalMotorsVar;
+//    FLOAT P;
+//    P.num = P_const;
+//    FLOAT I;
+//    I.num = P_const;
+//    FLOAT D;
+//    D.num = P_const;
 
-    message.insert(message.end(),A.bytes,A.bytes+2); // index  0 & 1
-    message.push_back((char)horizontalMotorsVar); // index 2
-    message.push_back(motorArd[0]); // index 3
-    message.push_back(motorArd[1]); // index 4
-    message.push_back(motorArd[2]); // index 5
-    message.push_back(motorArd[3]); // index 6
-    message.push_back(pnu[0]); // index 7 --> front camera flash
-    message.push_back(pnu[1]); // index 8 --> bottom camera flash
-    message.push_back(pnu[2]); // index 9 --> micro camera flash
-    message.push_back(pnu[5]); // index 10 --> pneumatic arm
-    message.push_back(microValue); // index 11 --> micro motor value
-    message.push_back(microDirection); // index 12 --> micro motor direction
-    message.push_back(microArmValue); // index 13 --> micro arm value
-    message.push_back(microArmDirection); // index 14 --> micro arm direction
-    message.push_back(rollerValue); // index 15 --> roller motor value
-    message.push_back(rollerDirection); // index 16 --> roller motor direction
-    message.push_back(flyTransactState); // index 17 --> fly transact mood control (a.k.a pid mood)
-    message.push_back(P_const); // index 18 --> P factor in PID equation
-    message.push_back(I_const); // index 19 --> I factor in PID equation
-    message.push_back(D_const); // index 20 --> D factor in PID equation
+    message.insert(message.end(), V.bytes, V.bytes+2); // index  0 & 1
+//    message.insert(message.end(), P.bytes, P.bytes + 4); // index  2 & 3 & 4 & 5 --> P factor in PID equation
+//    message.insert(message.end(), I.bytes, I.bytes + 4); // index  6 & 7 & 8 & 9 --> I factor in PID equation
+//    message.insert(message.end(), D.bytes, D.bytes + 4); // index  10 & 11 & 12 & 13 --> D factor in PID equation
+    message.push_back((char)horizontalMotorsVar); // index 14
+    message.push_back(motorArd[0]); // index 15
+    message.push_back(motorArd[1]); // index 16
+    message.push_back(motorArd[2]); // index 17
+    message.push_back(motorArd[3]); // index 18
+    message.push_back(pnu[0]); // index 19 --> front camera flash
+    message.push_back(pnu[1]); // index 20 --> bottom camera flash
+    message.push_back(pnu[2]); // index 21 --> micro camera flash
+    message.push_back(pnu[5]); // index 22 --> pneumatic arm
+    message.push_back(microValue); // index 23 --> micro motor value
+    message.push_back(microDirection); // index 24 --> micro motor direction
+    message.push_back(microArmValue); // index 25 --> micro arm value
+    message.push_back(microArmDirection); // index 26 --> micro arm direction
+    message.push_back(rollerValue); // index 27 --> roller motor value
+    message.push_back(rollerDirection); // index 28 --> roller motor direction
+    message.push_back(flyTransactState); // index 29 --> fly transact mood control (a.k.a pid mood)
     socket->send(message.data(),message.size());
 }
 // axises

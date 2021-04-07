@@ -29,16 +29,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x:buttons_x + 58
-        y:buttons_y - 26
+        x:buttons_x + 42
+        y:buttons_y - 24
     }
 
     Image {
         id: button
-        x: btnLbl.x - 130
-        y: btnLbl.y - 116
+        x: btnLbl.x - 98
+        y: btnLbl.y - 82
         source: "images/button.png"
-        width: 200
+        width: 150
         height:button.width
     }
 

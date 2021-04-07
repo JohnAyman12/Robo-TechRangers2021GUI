@@ -41,7 +41,7 @@
         <file>PID.png</file>
         <file>timer.png</file>
         <file>mainButton.jpeg</file>
-        <file>cenncetionButton.jpeg</file>
+        <file>cennectionButton.jpeg</file>
         <file>sensors.jpeg</file>
         <file>about.jpeg</file>
         <file>aboutButton.jpeg</file>
@@ -49,5 +49,8 @@
         <file>pinkDialT100.png</file>
         <file>clockwise.jpeg</file>
         <file>anticlockwise.png</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>pip.wav</file>
     </qresource>
 </RCC>

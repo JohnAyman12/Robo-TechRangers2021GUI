@@ -85,6 +85,11 @@ public:
         short num;
     }SHORT;
 
+//    typedef union{
+//        char bytes[4];
+//        float num;
+//    }FLOAT;
+
     joystickreader *reader;
     explicit BackEnd(QObject *parent = nullptr);
     QThread thread;

@@ -109,7 +109,7 @@ Item {
         y: microROV_y
         color: "transparent"
         width: 290
-        height: 230
+        height: 356
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -121,16 +121,16 @@ Item {
         font.bold : true
         font.pixelSize: 20
         color: "white"
-        x: microROV_x + 75
+        x: microROV_x + 58
         y: microROV_y - 24
     }
 
     Image {
         id: microImg
-        x: microLbl.x - 100
-        y: microLbl.y - 66
+        x: microLbl.x - 86
+        y: microLbl.y - 52
         source: "images/micro.png"
-        width: 130
+        width: 112
         height: microImg.width
     }
 
@@ -141,7 +141,7 @@ Item {
         font.bold: true
         enabled: !flyTransect
         x: microBorder.x + 100
-        y: microBorder.y
+        y: microBorder.y - 5
         onCheckStateChanged:
         {
             if(!checkBoxMicro.checked)
@@ -166,51 +166,37 @@ Item {
 
     Motor { // micro motor
         id:microMotorID
-        lableText: "Micro Motor"
-        motorValue: microMotor
-        dialEnable: (checkBoxMicro.checkState && !flyTransect)
-        awayFromCenter: -5
-        x: microBorder.x + 15
-        y: microBorder.y + 60
+        name: "Micro Motor"
+        value: microMotor
+        motorEnable: (checkBoxMicro.checkState && !flyTransect)
+        directionIamgeSource: if (microMotorDir == 0) {"images/hold.png"}
+                              else if (microMotorDir == 1){"images/clockwise.jpeg"}
+                              else {"images/anticlockwise.png"}
+        xAll: microBorder.x + 15
+        yAll: microBorder.y + 60
     }
 
     Motor { // roller motor
         id:rollerMotorID
-        lableText: "Roller Motor"
-        motorValue: rollerMotor
-        dialEnable: (checkBoxMicro.checkState && !flyTransect)
-        awayFromCenter: -8
-        x: microBorder.x + 165
-        y: microBorder.y + 60
+        name: "Roller Motor"
+        value: rollerMotor
+        motorEnable: (checkBoxMicro.checkState && !flyTransect)
+        directionIamgeSource: if (rollerMotorDir == 0) {"images/hold.png"}
+                              else if (rollerMotorDir == 1){"images/clockwise.jpeg"}
+                              else {"images/anticlockwise.png"}
+        xAll: microBorder.x + 165
+        yAll: microBorder.y + 60
     }
 
-    PilgeMotors {
-        id: microDir
-        itemX: microBorder.x + 20
-        itemY: microBorder.y + 172.5
-        lableText: "Micro: " + microMotorDir
-        imgSource: if (microMotorDir == 0) {"images/hold.png"}
-                   else if (microMotorDir == 1){"images/clockwise.jpeg"}
-                   else {"images/anticlockwise.png"}
-    }
-
-    PilgeMotors {
-        id:rollerDir
-        itemX: microBorder.x + 170
-        itemY: microBorder.y + 172.5
-        lableText: "Roller: " + rollerMotorDir
-        imgSource: if (rollerMotorDir == 0) {"images/hold.png"}
-                   else if (rollerMotorDir == 1){"images/clockwise.jpeg"}
-                   else {"images/anticlockwise.png"}
-    }
-
-    PilgeMotors {
-        id:microArmLbl
-        itemX: microBorder.x + 28
-        itemY: microBorder.y + 200
-        lableText: "<u>Arm:</u> <i>value: " + microArm + " Direction: " + microArmDir
-        imgSource: if (rollerMotorDir == 0) {"images/hold.png"}
-                   else if (rollerMotorDir == 1){"images/clockwise.jpeg"}
-                   else {"images/anticlockwise.png"}
+    Motor { // roller motor
+        id:microArmMotorID
+        name: "Micro Arm Motor"
+        value: microArm
+        motorEnable: (checkBoxMicro.checkState && !flyTransect)
+        directionIamgeSource: if (rollerMotorDir == 0) {"images/hold.png"}
+                              else if (rollerMotorDir == 1){"images/clockwise.jpeg"}
+                              else {"images/anticlockwise.png"}
+        xAll: microBorder.x + 94
+        yAll: microBorder.y + 220
     }
 }

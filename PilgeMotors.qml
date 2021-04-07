@@ -15,7 +15,7 @@ Item {
 
         Label {
             text: lableText
-            color: textColor
+            color: "white"
             font.pixelSize: 17
             font.bold: true
         }

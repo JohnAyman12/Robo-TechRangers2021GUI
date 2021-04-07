@@ -4,21 +4,23 @@ import QtQuick.Controls 2.15
 Item {
     id:motor
 
-    property string lableText
-    property int motorValue
-    property int valueFieldWidth: 35
-    property int dialMinimum: 0
-    property int dialMaximum: 255
-    property int awayFromCenter: 20
-    property bool dialEnable: true
-    property string imgSource: "images/pinkDialDC.png"
+    property string name
+    property int value
+    property int motorSpeedFieldWidth: 35
+    property int motorMinimum: 0
+    property int motorMaxmum: 255
+    property bool motorEnable: true
+    property bool motorDirectionVisible: true
+    property string motorIamgeSource: "images/pinkDialDC.png"
+    property string directionIamgeSource
+
     property int xAll
     property int yAll
 
     function valueNumber()
     {
         var place
-        if(motorValue <256)
+        if(value <256)
         {
             place = 32
         }
@@ -30,20 +32,20 @@ Item {
     }
 
     Label { // motor name
-        text: motor.lableText
+        text: motor.name
         font.bold : true
         font.pixelSize: 15
         color: "white"
-        x: motor.xAll - awayFromCenter
-        y: motor.yAll - 18
+        anchors.centerIn: dial
+        anchors.verticalCenterOffset: -65
     }
 
     Dial {
         id:dial
-        enabled: dialEnable
-        from: motor.dialMinimum
-        to: motor.dialMaximum
-        value: motor.motorValue
+        enabled: motorEnable
+        from: motor.motorMinimum
+        to: motor.motorMaxmum
+        value: motor.value
         x: motor.xAll
         y: motor.yAll
 //        Component.onCompleted: dial.baseline.color = "red"
@@ -51,25 +53,44 @@ Item {
 
     Image {
         id: dialImg
-        source: imgSource
+        source: motorIamgeSource
         width: 102
         height: dialImg.width
-        x: motor.xAll - 1.5
-        y: motor.yAll - 12
-        visible: dialEnable
+        anchors.centerIn: dial
+        anchors.verticalCenterOffset: -11
+        visible: motorEnable
     }
 
     TextField { // motor value
         id: motorInput
-        text: dialEnable? motor.motorValue : 0
+        text: motorEnable? motor.value : 0
         font.pixelSize: 20
         horizontalAlignment: Text.AlignHCenter
-        width: motor.valueFieldWidth
+        width: motor.motorSpeedFieldWidth
         color: "white"
         readOnly: true
-        x: motor.xAll + valueNumber()
-        y: motor.yAll + 30
-        enabled: dialEnable
+        anchors.centerIn: dial
+        enabled: motorEnable
+    }
+
+    Row{
+        spacing: 5
+        anchors.centerIn: dial
+        anchors.verticalCenterOffset: 65
+        visible: motorDirectionVisible
+
+        Label {
+            text: "Direction"
+            color: textColor
+            font.pixelSize: 17
+            font.bold: true
+        }
+
+        Image {
+            source: directionIamgeSource
+            width: 20
+            height: 20
+        }
     }
 }
 /*##^##

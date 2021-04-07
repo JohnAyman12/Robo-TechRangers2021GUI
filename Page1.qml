@@ -45,34 +45,78 @@ Item {
             id:backend
         }
 
-        MainRov {
-            id: mainPart
-            mainROV_x: 450
-            mainROV_y: 60
-        }
 
         MicroRov {
             id: microPart
             microROV_x:120
-            microROV_y: 60
+            microROV_y: 73
         }
 
-        ArmPart {
-            buttons_y: 350
-            buttons_x: 120
+        Rectangle{
+            id: maxSpeedBorder
+            x: 120
+            y: 466
+            color: "transparent"
+            width: 264
+            height: 95
+            border.color: "deeppink"
+            border.width: 2
+            radius: 10
+        }
+
+        Column {
+            id: column // maximum speed spinbox
+            spacing: 5
+            x: maxSpeedBorder.x + 48
+            y: maxSpeedBorder.y + 7
+
+            Label {
+                id: maximumSpeedLable
+                text: "Maximum speed"
+                color:"white"
+                font.bold : true
+                font.pixelSize: 18
+            }
+
+            SpinBox {
+                editable: true
+                to:255
+                value: 255
+                stepSize: 15
+                x: maximumSpeedLable.x - 25
+                font.bold: true
+                enabled: !flyTransect
+                onValueChanged: {backend.getMaxSpeed(value)}
+                background: Rectangle {
+                    implicitWidth: 220
+                    implicitHeight: 20
+                    radius: 2
+                }
+            }
+        }
+
+        MainRov {
+            id: mainPart
+            mainROV_x: 450
+            mainROV_y: 73
         }
 
         RecievedDataPart {
             id:recievedDataPart
             firstLable_xAxis: 790
-            firstLable_yAxis: 60
+            firstLable_yAxis: 73
             spaceBetweenLablesY: 30
+        }
+
+        TimerPart {
+            borderX: 768
+            borderY: 349
         }
 
         CheckBox {
             id:flyTransectCheckbox
             x: 977
-            y: 368
+            y: 239
             text: "<font color=\"white\"><b>Fly transact mood"
             font.pixelSize: 17
             onCheckStateChanged:{
@@ -99,9 +143,9 @@ Item {
             }
         }
 
-        TimerPart {
-            borderX: 918
-            borderY: 483
+        ArmPart {
+            buttons_x: 965
+            buttons_y: 331
         }
     }
 }
