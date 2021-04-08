@@ -27,13 +27,13 @@ Item {
             else if(timeSecs == 0) {
                 timeSecs = 59
                 timeMins -= 1
-                playSound.play()
+                if (soundState.checkState)
+                {
+                    playSound.play()
+                }
             }
             else {
                 timeSecs -= 1
-                if(timeMins == 0){
-                    playSound.play()
-                }
             }
         }
     }
@@ -44,7 +44,7 @@ Item {
         y: borderY
         color: "transparent"
         width: 179.5
-        height: 212
+        height: 230
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -81,7 +81,7 @@ Item {
 
     Button {
         anchors.centerIn: timerBorder
-        anchors.verticalCenterOffset: -30
+        anchors.verticalCenterOffset: -37
         id:startBtn
         text: "Start"
         onClicked:{
@@ -91,9 +91,9 @@ Item {
     }
 
     Column{
-        spacing: 5
+        spacing: 2
         anchors.centerIn: timerBorder
-        anchors.verticalCenterOffset: 50
+        anchors.verticalCenterOffset: 38
 
         Button {
             id:pauseBtn
@@ -115,6 +115,22 @@ Item {
                 timeMins = 15
                 timer.stop()
             }
+        }
+    }
+
+    CheckBox {
+        id:soundState
+        anchors.centerIn: timerBorder
+        anchors.verticalCenterOffset: 100
+        text: "<font color=\"white\"><b>Sound"
+        font.pixelSize: 17
+        background: Rectangle {
+            x: 9
+            y: 17
+            width: 16
+            height: 16
+            radius: 2
+            color: "white"
         }
     }
 }

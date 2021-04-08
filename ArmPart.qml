@@ -6,6 +6,8 @@ Item {
     property int buttons_x
     property int buttons_y
     property color textColor
+    property int armDC: backend.DC_arm
+    property int armDirDC: backend.DC_armDir
 
     BackEnd {
         id: backend
@@ -73,6 +75,7 @@ Item {
             enabled: !flyTransect
             text: "<font color=\"white\">Pneumatic Arm<font>"
             font.bold: true
+            onCheckedChanged: {console.log(armDC)}
         }
 
         Row{
@@ -80,14 +83,16 @@ Item {
             leftPadding: 18
 
             Label {
-                text: "DC Arm:     "
+                text: "DC Arm: "
                 color: "white"
-                font.pixelSize: 17
+                font.pixelSize: 15
                 font.bold: true
             }
 
             Image {
-                source: "images/hold.png"
+                source: if (armDC == 0) {"images/hold.png"}
+                        else if (armDirDC == 0){"images/clockwise.jpeg"}
+                        else if (armDirDC == 1){"images/anticlockwise.png"}
                 width: 25
                 height: 25
             }

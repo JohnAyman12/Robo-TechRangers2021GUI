@@ -43,6 +43,7 @@ BackEnd::BackEnd(QObject *parent) :
     connect(this, SIGNAL(readjoy()), reader, SLOT(read()));
     connect(reader, SIGNAL(send(JoystickEvent)), this, SLOT(call(JoystickEvent)));
     connect(this, SIGNAL(sendData()), this, SLOT(prepareData()));
+    connect(socket, SIGNAL(gotSensors(std::vector<int>)), this, SLOT(sensors(std::vector<int>)));
     emit readjoy();
 }
 
@@ -132,19 +133,34 @@ void BackEnd::call(JoystickEvent event)
 
         if(event.isButton())
         {
-            if(valueIn == 1 and number == 5)
+            // Pneumatic arm
+            if (valueIn == 1 and number == 5)
             {
                 pnu[number] = !pnu[number];
             }
+            // DC arm
+            if (valueIn == 1 and number == 4)
+            {
+                DC_armValue = 255; DC_armDirection = 0;
+            }
+            else if (valueIn == 1 and number == 6)
+            {
+                DC_armValue = 255; DC_armDirection = 1;
+            }
+            else if (valueIn == 0 and (number == 4 or number == 6))
+            {
+                DC_armValue = 0;
+            }
         }
+        emit frontEnd();
     }
     else
     {
         for (counter = 0; counter <=3; counter++)
         {
-            horizontalMotorsVar = 0;
             motorDirections[counter + 6] = 0;
         }
+        horizontalMotorsVar = 0;
         verticalMotorsVar = 1500;
     }
 
@@ -154,35 +170,7 @@ void BackEnd::call(JoystickEvent event)
         {
             pnu[number] = !pnu[number];
         }
-
         button[number] = valueIn;
-    }
-    for (counter = 0; counter <=5; counter++)
-    {
-        if(motors[counter] != horizontalMotorsVar)
-        {
-            motors[counter] = horizontalMotorsVar;
-            emit frontEnd();
-        }
-        if(axises[counter] != axis[counter])
-        {
-            axises[counter] = axis[counter];
-            emit frontEnd();
-        }
-        if(directions[counter] != motorDirections[counter + 6] and counter > 4)
-        {
-            directions[counter] = motorDirections[counter+ 6];
-            emit frontEnd();
-        }
-    }
-
-    for (counter = 0; counter <=12; counter++)
-    {
-        if(buttons[counter] != button[counter])
-        {
-            buttons[counter] = button[counter];
-            emit frontEnd();
-        }
     }
 
     emit sendData();
@@ -222,22 +210,29 @@ void BackEnd::get_I_facrot(float I){I_const = I; emit sendData();}
 
 void BackEnd::get_D_facrot(float D){D_const = D; emit sendData();}
 
+void BackEnd::sensors(std::vector<int> sensors)
+{
+    tempreatureValue = sensors[0];
+    qDebug()<< tempreatureValue;
+    emit frontEnd();
+}
+
 void BackEnd::prepareData()
 {
     std::vector<unsigned char> message;
     SHORT V;
     V.num = verticalMotorsVar;
-//    FLOAT P;
-//    P.num = P_const;
-//    FLOAT I;
-//    I.num = P_const;
-//    FLOAT D;
-//    D.num = P_const;
+    FLOAT P;
+    P.num = P_const;
+    FLOAT I;
+    I.num = I_const;
+    FLOAT D;
+    D.num = D_const;
 
-    message.insert(message.end(), V.bytes, V.bytes+2); // index  0 & 1
-//    message.insert(message.end(), P.bytes, P.bytes + 4); // index  2 & 3 & 4 & 5 --> P factor in PID equation
-//    message.insert(message.end(), I.bytes, I.bytes + 4); // index  6 & 7 & 8 & 9 --> I factor in PID equation
-//    message.insert(message.end(), D.bytes, D.bytes + 4); // index  10 & 11 & 12 & 13 --> D factor in PID equation
+    message.insert(message.end(), P.bytes, P.bytes + 4); // index 0:3 in QByteArray & 0 in FLOAT union (P in PID)
+    message.insert(message.end(), I.bytes, I.bytes + 4); // index 4:7 in QByteArray & 1 in FLOAT union (I in PID)
+    message.insert(message.end(), D.bytes, D.bytes + 4); // index 8:11 in QByteArray & 2 in FLOAT union (D in PID)
+    message.insert(message.end(), V.bytes, V.bytes+2); // index 12,13 in QByteArray & 7 in SHORT union
     message.push_back((char)horizontalMotorsVar); // index 14
     message.push_back(motorArd[0]); // index 15
     message.push_back(motorArd[1]); // index 16
@@ -247,13 +242,15 @@ void BackEnd::prepareData()
     message.push_back(pnu[1]); // index 20 --> bottom camera flash
     message.push_back(pnu[2]); // index 21 --> micro camera flash
     message.push_back(pnu[5]); // index 22 --> pneumatic arm
-    message.push_back(microValue); // index 23 --> micro motor value
-    message.push_back(microDirection); // index 24 --> micro motor direction
-    message.push_back(microArmValue); // index 25 --> micro arm value
-    message.push_back(microArmDirection); // index 26 --> micro arm direction
-    message.push_back(rollerValue); // index 27 --> roller motor value
-    message.push_back(rollerDirection); // index 28 --> roller motor direction
-    message.push_back(flyTransactState); // index 29 --> fly transact mood control (a.k.a pid mood)
+    message.push_back(DC_armValue); // index 23 --> DC arm value
+    message.push_back(DC_armDirection); // index 24 --> DC arm direction
+    message.push_back(microValue); // index 25 --> micro motor value
+    message.push_back(microDirection); // index 26 --> micro motor direction
+    message.push_back(microArmValue); // index 27 --> micro arm value
+    message.push_back(microArmDirection); // index 28 --> micro arm direction
+    message.push_back(rollerValue); // index 29 --> roller motor value
+    message.push_back(rollerDirection); // index 30 --> roller motor direction
+    message.push_back(flyTransactState); // index 31 --> fly transact mood control (a.k.a pid mood)
     socket->send(message.data(),message.size());
 }
 // axises
@@ -346,6 +343,11 @@ int BackEnd::backRightMotorDir(){return motorDirections[backRightDir];}
 
 int BackEnd::backLeftMotorDir(){return motorDirections[backLeftDir];}
 
+// DC arm
+int BackEnd::DC_arm(){return DC_armValue; qDebug()<< DC_armValue;}
+
+bool BackEnd::DC_armDir(){return DC_armDirection; qDebug()<< DC_armDirection;}
+
 //sensors
 
-//int BackEnd::tempreature(){return sensor;}
+int BackEnd::tempreature(){return tempreatureValue;}

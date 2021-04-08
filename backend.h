@@ -75,6 +75,13 @@ class BackEnd : public QObject
     Q_PROPERTY(int backRightMotorDir READ backRightMotorDir NOTIFY frontEnd)
     Q_PROPERTY(int backLeftMotorDir READ backLeftMotorDir NOTIFY frontEnd)
 
+    // DC_Arm
+    Q_PROPERTY(int DC_arm READ DC_arm NOTIFY frontEnd)
+    Q_PROPERTY(bool DC_armDir READ DC_armDir NOTIFY frontEnd)
+
+    //sesnors
+    Q_PROPERTY(int tempreature READ tempreature NOTIFY frontEnd)
+
     // sensors
 //    Q_PROPERTY(int tempreature READ tempreature NOTIFY frontEnd)
 
@@ -85,10 +92,10 @@ public:
         short num;
     }SHORT;
 
-//    typedef union{
-//        char bytes[4];
-//        float num;
-//    }FLOAT;
+    typedef union{
+        char bytes[4];
+        float num;
+    }FLOAT;
 
     joystickreader *reader;
     explicit BackEnd(QObject *parent = nullptr);
@@ -167,20 +174,26 @@ public:
 
     short directions[4] = {0}; // motors directions values in the display formate
 
-//    int sensor;
-//    int tempreature();
+    int DC_armValue = 0;
+    bool DC_armDirection = 0;
+    int DC_arm();
+    bool DC_armDir();
+
+    int tempreatureValue = 20;
+    int tempreature();
 
 public slots:
     void call(JoystickEvent);
     void getMaxSpeed(int);
     void getMicro(int, int);
     void getMicroArm(int, int);
-    void getRoller(int, int );
+    void getRoller(int, int);
     void getFlyTransactState(bool);
     void get_P_facrot(float);
     void get_I_facrot(float);
     void get_D_facrot(float);
     void prepareData();
+    void sensors(std::vector<int>);
 
 signals:
     void frontEnd();

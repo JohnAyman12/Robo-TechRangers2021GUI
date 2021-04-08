@@ -16,13 +16,13 @@ void myUDP::send(unsigned char* myData,int length)
     unsigned char buffer[data.size()];
     std::copy(data.begin(),data.end(),buffer);
     SHORT *V = (SHORT*)buffer;
-    //    FLOAT *PID = (FLOAT*)buffer;
+    FLOAT *PID = (FLOAT*)buffer;
     QString sentData;
-    sentData +=  QString::number((int)V[0].num);
-//    sentData += " :: " + QString::number((int)PID[2].num);
-//    sentData += " :: " + QString::number((int)PID[6].num);
-//    sentData += " :: " + QString::number((int)PID[10].num);
-    for (int i = 2; i < data.size(); i++){sentData += " :: " + QString::number((int)buffer[i]);}
+    sentData += QString::number((float)PID[0].num);
+    sentData += " :: " + QString::number((float)PID[1].num);
+    sentData += " :: " + QString::number((float)PID[2].num);
+    sentData += " :: " + QString::number((int)V[6].num);
+    for (int i = 14; i < data.size(); i++){sentData += " :: " + QString::number((int)buffer[i]);}
     qDebug()<< "Sent:" << sentData;
 }
 
@@ -37,10 +37,12 @@ void myUDP::processPendingDatagrams()
         std::vector<unsigned char> buffer(buffer1.size());
         std::copy(buffer1.begin(), buffer1.end(), buffer.begin());
         QString sensors = "";
-        for(int i = 0; i < buffer.size(); i++){sensors+= QString::number((int)buffer[i]) + " :: ";}
-        //        qDebug()<< "recieved" << sensors;
-        temp = (int)buffer[0];
-        //        qDebug()<< "temp: " << temp;
+        int bufferSize = buffer.size();
+        for(int i = 0; i < bufferSize; i++){sensors+= QString::number((int)buffer[i]) + " :: ";}
+        qDebug()<< "recieved" << sensors;
+        std::vector<int> sensorsValues;
+        sensorsValues[0] = 20;
+        emit gotSensors(sensorsValues);
     }
 }
 

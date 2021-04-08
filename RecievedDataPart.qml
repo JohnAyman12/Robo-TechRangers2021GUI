@@ -47,7 +47,7 @@ Item {
 
     RecievedData {
         dataName: "Tempreature"
-        dataValue: 20
+        dataValue: backend.tempreature
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 0.4)
     }

@@ -10,7 +10,6 @@ class myUDP:public QObject
 {
     Q_OBJECT
 public:
-    int temp;
     explicit myUDP(QObject *parent = 0);
 
     void send(unsigned char*,int);
@@ -20,12 +19,13 @@ public:
         short num;
     }SHORT;
 
-//    typedef union{
-//        char bytes[4];
-//        float num;
-//    }FLOAT;
+    typedef union{
+        char bytes[4];
+        float num;
+    }FLOAT;
 
 signals:
+    void gotSensors(std::vector<int>);
 
 public slots:
     void processPendingDatagrams();

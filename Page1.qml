@@ -110,7 +110,7 @@ Item {
 
         TimerPart {
             borderX: 768
-            borderY: 349
+            borderY: 331
         }
 
         CheckBox {

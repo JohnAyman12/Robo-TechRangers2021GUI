@@ -4,7 +4,7 @@ import QtQuick.Controls 2.15
 
 ApplicationWindow {
     property int timeSecs: 0
-    property int timeMins: 2
+    property int timeMins: 15
     property int pointsCounter: 0
 
     id: mainWindow
