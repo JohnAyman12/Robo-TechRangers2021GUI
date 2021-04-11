@@ -108,11 +108,6 @@ Item {
             spaceBetweenLablesY: 30
         }
 
-        TimerPart {
-            borderX: 768
-            borderY: 331
-        }
-
         CheckBox {
             id:flyTransectCheckbox
             x: 977
@@ -144,8 +139,13 @@ Item {
         }
 
         ArmPart {
-            buttons_x: 965
+            buttons_x: 768
             buttons_y: 331
+        }
+
+        TimerPart {
+            borderX: 993
+            borderY: 331
         }
     }
 }

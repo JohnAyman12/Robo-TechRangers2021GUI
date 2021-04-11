@@ -36,6 +36,8 @@ class BackEnd : public QObject
     Q_PROPERTY(int pureAxis3 READ pureAxis3 NOTIFY frontEnd)
     Q_PROPERTY(int pureAxis4 READ pureAxis4 NOTIFY frontEnd)
     Q_PROPERTY(int pureAxis5 READ pureAxis5 NOTIFY frontEnd)
+    Q_PROPERTY(int pureAxis6 READ pureAxis6 NOTIFY frontEnd)
+    Q_PROPERTY(int pureAxis7 READ pureAxis7 NOTIFY frontEnd)
 
     // buttons properties
 
@@ -51,6 +53,7 @@ class BackEnd : public QObject
     Q_PROPERTY(bool button9 READ button9 NOTIFY frontEnd)
     Q_PROPERTY(bool button10 READ button10 NOTIFY frontEnd)
     Q_PROPERTY(bool button11 READ button11 NOTIFY frontEnd)
+    Q_PROPERTY(bool button12 READ button12 NOTIFY frontEnd)
 
     Q_PROPERTY(bool pnu0 READ pnu0 NOTIFY frontEnd)
     Q_PROPERTY(bool pnu1 READ pnu1 NOTIFY frontEnd)
@@ -108,26 +111,30 @@ public:
 
     // axises variables and functions
 \
-    int axis[6] = {0};
-    int pureAxis[6] = {0};
-    int axises[6] = {0};
+    int axis[8] = {0};
+    int pureAxis[8] = {0};
+    int axises[8] = {0};
     int axis0();
     int axis1();
     int axis2();
     int axis3();
     int axis4();
     int axis5();
+    int axis6();
+    int axis7();
     int pureAxis0();
     int pureAxis1();
     int pureAxis2();
     int pureAxis3();
     int pureAxis4();
     int pureAxis5();
+    int pureAxis6();
+    int pureAxis7();
     int valuePilgeDC = 0;  // the output of mapping evaluation for pilge motors
     int valueT100 = 1500;  // the output of mapping evaluation for T100 motors
 
     //buttons variables and functions
-    bool pnu[12] = {false};
+    bool pnu[13] = {false};
     bool pnu0();
     bool pnu1();
     bool pnu2();
@@ -140,7 +147,8 @@ public:
     bool pnu9();
     bool pnu10();
     bool pnu11();
-    bool buttons[12] = {false};
+    bool pnu12();
+    bool buttons[13] = {false};
     bool button0();
     bool button1();
     bool button2();
@@ -153,6 +161,7 @@ public:
     bool button9();
     bool button10();
     bool button11();
+    bool button12();
 
     // motors variables and functions
 

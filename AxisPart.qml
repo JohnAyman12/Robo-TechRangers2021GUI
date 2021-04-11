@@ -16,6 +16,8 @@ Item {
     property int axis3: backend.pureAxis3
     property int axis4: backend.pureAxis4
     property int axis5: backend.pureAxis5
+    property int axis6: backend.pureAxis6
+    property int axis7: backend.pureAxis7
     property int fields_xAxis
     property int firstField_yAxis
     property int spaceBetweenAxises
@@ -27,7 +29,7 @@ Item {
         y:firstField_yAxis
         color: "transparent"
         width: 150
-        height: 290
+        height: 386
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -92,6 +94,20 @@ Item {
         xAll: fields_xAxis
         yAll: firstField_yAxis + (spaceBetweenAxises * 5)
         axisValue: axis5
+    }
+
+    Axis {
+        lableText: "axis 6"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenAxises * 6)
+        axisValue: axis6
+    }
+
+    Axis {
+        lableText: "axis 7"
+        xAll: fields_xAxis
+        yAll: firstField_yAxis + (spaceBetweenAxises * 7)
+        axisValue: axis7
     }
 }
 

@@ -50,7 +50,7 @@ Item {
 
         SwitchDelegate {
             id: frontCamer
-            checked: backend.pnu0
+            checked: backend.pnu2
             text: "<font color=\"white\">Front Camera<font>"
             font.bold: true
         }
@@ -64,7 +64,7 @@ Item {
 
         SwitchDelegate {
             id: microCamera
-            checked: backend.pnu2
+            checked: backend.pnu0
             text: "<font color=\"white\">Micro Camera<font>"
             font.bold: true
         }

@@ -10,7 +10,7 @@ Item {
 
     Audio {
         id: playSound
-        source: "sounds/pip.wav"
+        source: "/sounds/pip.wav"
     }
 
     Timer {

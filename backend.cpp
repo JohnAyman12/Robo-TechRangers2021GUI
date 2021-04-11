@@ -78,11 +78,11 @@ void BackEnd::call(JoystickEvent event)
             {
                 if (valueIn > 0){direction = -1;}
                 else {direction = 1;}
-                if (number == 2) // up down (heave degree of freedom)
+                if (number == 4) // up down (heave degree of freedom)
                 {
                     verticalMotorsVar = valueT100;
                 }
-                else if (number == 1) // forward back (surge degree of freedom)
+                if(abs(pureAxis[1]) > abs(pureAxis[0]))//forward back(surge degree of freedom)
                 {
                     if (direction == -1){
                         motorArd[frontRight] = motorArd[frontLeft]
@@ -96,7 +96,7 @@ void BackEnd::call(JoystickEvent event)
                         motorDirections[counter + 6] = direction;
                     }
                 }
-                else if (number == 0)// right left (sway degree of freedom)
+                else if(abs(pureAxis[0]) > abs(pureAxis[1]))//right left (sway degree of freedom)
                 {
                     if (direction == -1){
                         motorArd[frontRight] = motorArd[backLeft] = 1;
@@ -112,7 +112,7 @@ void BackEnd::call(JoystickEvent event)
                     motorDirections[backRightDir] =  -1 * direction;
                     motorDirections[backLeftDir] = direction;
                 }
-                else if(number == 4) // clockwise anticlockwise (sway degree of freedom)
+                else if(number == 6) // clockwise anticlockwise (sway degree of freedom)
                 {
                     if (direction == -1){
                         motorArd[frontRight] = motorArd[backRight] = 1;
@@ -267,6 +267,10 @@ int BackEnd::axis4(){return axis[4];}
 
 int BackEnd::axis5(){return axis[5];}
 
+int BackEnd::axis6(){return axis[6];}
+
+int BackEnd::axis7(){return axis[7];}
+
 int BackEnd::pureAxis0(){return pureAxis[0];}
 
 int BackEnd::pureAxis1(){return pureAxis[1];}
@@ -278,6 +282,10 @@ int BackEnd::pureAxis3(){return pureAxis[3];}
 int BackEnd::pureAxis4(){return pureAxis[4];}
 
 int BackEnd::pureAxis5(){return pureAxis[5];}
+
+int BackEnd::pureAxis6(){return pureAxis[6];}
+
+int BackEnd::pureAxis7(){return pureAxis[7];}
 
 // buttons
 
@@ -305,6 +313,8 @@ bool BackEnd::pnu10(){return pnu[10];}
 
 bool BackEnd::pnu11(){return pnu[11];}
 
+bool BackEnd::pnu12(){return pnu[12];}
+
 bool BackEnd::button0(){return button[0];}
 
 bool BackEnd::button1(){return button[1];}
@@ -328,6 +338,8 @@ bool BackEnd::button9(){return button[9];}
 bool BackEnd::button10(){return button[10];}
 
 bool BackEnd::button11(){return button[11];}
+
+bool BackEnd::button12(){return button[12];}
 
 //motors
 

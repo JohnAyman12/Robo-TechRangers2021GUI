@@ -16,8 +16,8 @@ Item {
         x:buttons_x
         y:buttons_y
         color: "transparent"
-        width: 300
-        height: 290
+        width: 312
+        height: 334
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -131,6 +131,14 @@ Item {
                 id: button11ID
                 checked: backend.button11
                 text: "<font color=\"white\">Button 11<font>"
+                font.bold: true
+            }
+
+            SwitchDelegate {
+                id: button12ID
+                x: -1 * ((buttonsBorder.width / 2) - (button12ID.width / 2))
+                checked: backend.button12
+                text: "<font color=\"white\">Button 12<font>"
                 font.bold: true
             }
         }

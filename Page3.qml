@@ -51,19 +51,19 @@ Item {
 
         ButtonPart {
             buttons_x: 150
-            buttons_y: 150
+            buttons_y: 110
         }
 
         AxisPart {
             id: axisPart
-            fields_xAxis: 680
-            firstField_yAxis: 150
+            fields_xAxis: 685
+            firstField_yAxis: 110
             spaceBetweenAxises: 50
         }
 
         PIDvalues {
             borderX: 935
-            borderY: 150
+            borderY: 110
         }
     }
 }
