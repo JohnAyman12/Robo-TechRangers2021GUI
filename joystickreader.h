@@ -10,7 +10,7 @@ class joystickreader:public QObject
 public slots:
     void read();
 signals:
-    void send(JoystickEvent event);
+    void eventDetected(JoystickEvent event);
 };
 
 #endif // JOYSTICKREADER_H

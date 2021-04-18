@@ -15,8 +15,11 @@
 #define backLeftDir 9
 
 bool motorArd[4] = {1};
-bool button[12] = {false};
-short verticalMotorsVar = 0;
+bool button[13] = {false};
+short verticalMotorsVar1 = 0;
+short verticalMotorsVar2 = 0;
+
+// back right will be reversed
 
 // variables related to the front end
 int maxSpeed = 255;
@@ -35,16 +38,19 @@ BackEnd::BackEnd(QObject *parent) :
     QObject(parent)
 {
     qRegisterMetaType<JoystickEvent>("JoystickEvent");
-    // pthread_t thread;
     reader=new joystickreader();
     reader->moveToThread(&thread);
     thread.start();
     socket = new myUDP();
+    // connects the backend & the joystickreader
     connect(this, SIGNAL(readjoy()), reader, SLOT(read()));
-    connect(reader, SIGNAL(send(JoystickEvent)), this, SLOT(call(JoystickEvent)));
+    // to get data from joystick
+    connect(reader, SIGNAL(eventDetected(JoystickEvent)), this, SLOT(call(JoystickEvent)));
+    // to send data to the arduino
     connect(this, SIGNAL(sendData()), this, SLOT(prepareData()));
-    connect(socket, SIGNAL(gotSensors(std::vector<int>)), this, SLOT(sensors(std::vector<int>)));
-    emit readjoy();
+    // to get data from the arduino
+    connect(this, SIGNAL(getSensors()), socket, SLOT(processPendingDatagrams()));
+    emit readjoy(); // to get in the infinity loop of the UI
 }
 
 void BackEnd::call(JoystickEvent event)
@@ -61,73 +67,78 @@ void BackEnd::call(JoystickEvent event)
     if (!flyTransactState){
         if(event.isAxis())
         {
-            valueT100 = 1100 + (((-valueIn + 32767) * 400) / 32767);
-            valuePilgeDC = abs(valueIn) * maxSpeed / 32767;
             pureAxis[number] = valueIn;
-
-            if (valueIn == 0)
+            horizontalMotorsVar = 0;
+            for (counter = 0; counter <=3; counter++)
             {
+                motorDirections[counter + 6] = 0;
+            }
+            if (pureAxis[4] == 0)
+            {
+                verticalMotorsVar1 = verticalMotorsVar2 = 1500;
+            }
+            if (abs(pureAxis[4]) > abs(pureAxis[0]) and
+                    abs(pureAxis[4]) > abs(pureAxis[1]) and abs(pureAxis[4]) > 10000)
+                // up down (heave degree of freedom)
+            {
+                verticalMotorsVar1 = 1100 + (((-pureAxis[4] + 32767) * 400) / 32767);
+                verticalMotorsVar2 = 1100 + (((pureAxis[4] + 32767) * 400) / 32767);
+            }
+            else if(abs(pureAxis[1]) > abs(pureAxis[0]) and abs(pureAxis[1]) > 10000)
+                //forward back(surge degree of freedom)
+            {
+                valuePilgeDC = abs(pureAxis[1]) * maxSpeed / 32767;
+                pureAxis[1] > 0 ? direction = -1 : direction = 1;
+                if (direction == -1){
+                    motorArd[backRight] = 1;
+                    motorArd[frontLeft] =  motorArd[frontRight] = motorArd[backLeft] = 0;}
+                else if (direction == 1){
+                    motorArd[backRight] = 0;
+                    motorArd[frontLeft] =  motorArd[frontRight] = motorArd[backLeft] = 1;}
+                horizontalMotorsVar = valuePilgeDC;
                 for (counter = 0; counter <=3; counter++)
                 {
-                    horizontalMotorsVar = 0;
-                    motorDirections[counter + 6] = 0;
+                    motorDirections[counter + 6] = direction;
                 }
-                verticalMotorsVar = 1500;
             }
-            else
+            else if(abs(pureAxis[0]) > abs(pureAxis[1]) and abs(pureAxis[0]) > 10000)
+                //right left (sway degree of freedom)
             {
-                if (valueIn > 0){direction = -1;}
-                else {direction = 1;}
-                if (number == 4) // up down (heave degree of freedom)
-                {
-                    verticalMotorsVar = valueT100;
+                valuePilgeDC = abs(pureAxis[0]) * maxSpeed / 32767;
+                pureAxis[0] > 0 ? direction = -1 : direction = 1;
+                if (direction == -1){
+                    motorArd[frontRight] = motorArd[backLeft] = motorArd[backRight] =  1;
+                    motorArd[frontLeft] = 0;
                 }
-                if(abs(pureAxis[1]) > abs(pureAxis[0]))//forward back(surge degree of freedom)
-                {
-                    if (direction == -1){
-                        motorArd[frontRight] = motorArd[frontLeft]
-                                =  motorArd[backRight] = motorArd[backLeft] = 0;}
-                    else if (direction == 1){
-                        motorArd[frontRight] = motorArd[frontLeft]
-                                =  motorArd[backRight] = motorArd[backLeft] = 1;}
-                    horizontalMotorsVar = valuePilgeDC;
-                    for (counter = 0; counter <=3; counter++)
-                    {
-                        motorDirections[counter + 6] = direction;
-                    }
+                else if (direction == 1){
+                    motorArd[frontRight] = motorArd[backLeft] = motorArd[backRight] = 0;
+                    motorArd[frontLeft] = 1;
                 }
-                else if(abs(pureAxis[0]) > abs(pureAxis[1]))//right left (sway degree of freedom)
-                {
-                    if (direction == -1){
-                        motorArd[frontRight] = motorArd[backLeft] = 1;
-                        motorArd[backRight] = motorArd[frontLeft] = 0;
-                    }
-                    else if (direction == 1){
-                        motorArd[frontRight] = motorArd[backLeft] = 0;
-                        motorArd[backRight] = motorArd[frontLeft] = 1;
-                    }
-                    horizontalMotorsVar = valuePilgeDC;
-                    motorDirections[frontRightDir] = direction;
-                    motorDirections[frontLeftDir] = -1 * direction;
-                    motorDirections[backRightDir] =  -1 * direction;
-                    motorDirections[backLeftDir] = direction;
+                horizontalMotorsVar = valuePilgeDC;
+                motorDirections[frontRightDir] = direction;
+                motorDirections[frontLeftDir] = -1 * direction;
+                motorDirections[backRightDir] =  -1 * direction;
+                motorDirections[backLeftDir] = direction;
+            }
+            else if(abs(pureAxis[6]) > abs(pureAxis[0]) and
+                    abs(pureAxis[6]) > abs(pureAxis[1]) and abs(pureAxis[6]) > 10000)
+                // clockwise anticlockwise (sway degree of freedom)
+            {
+                valuePilgeDC = abs(pureAxis[6]) * maxSpeed / 32767;
+                pureAxis[6] > 0 ? direction = -1 : direction = 1;
+                if (direction == -1){
+                    motorArd[frontRight] = 1;
+                    motorArd[frontLeft] = motorArd[backLeft] = motorArd[backRight] = 0;
                 }
-                else if(number == 6) // clockwise anticlockwise (sway degree of freedom)
-                {
-                    if (direction == -1){
-                        motorArd[frontRight] = motorArd[backRight] = 1;
-                        motorArd[frontLeft] = motorArd[backLeft] = 0;
-                    }
-                    else if (direction == 1){
-                        motorArd[frontRight] = motorArd[backRight] = 0;
-                        motorArd[frontLeft] = motorArd[backLeft] = 1;
-                    }
-                    horizontalMotorsVar = valuePilgeDC;
-                    motorDirections[frontRightDir] = direction;
-                    motorDirections[frontLeftDir] = -1 * direction;
-                    motorDirections[backRightDir] = direction;
-                    motorDirections[backLeftDir] = -1 * direction;
+                else if (direction == 1){
+                    motorArd[frontRight] = 0;
+                    motorArd[frontLeft] = motorArd[backLeft] = motorArd[backRight] = 1;
                 }
+                horizontalMotorsVar = valuePilgeDC;
+                motorDirections[frontRightDir] = direction;
+                motorDirections[frontLeftDir] = -1 * direction;
+                motorDirections[backRightDir] = direction;
+                motorDirections[backLeftDir] = -1 * direction;
             }
         }
 
@@ -161,7 +172,8 @@ void BackEnd::call(JoystickEvent event)
             motorDirections[counter + 6] = 0;
         }
         horizontalMotorsVar = 0;
-        verticalMotorsVar = 1500;
+        verticalMotorsVar1 = 1500;
+        verticalMotorsVar2 = 1500;
     }
 
     if(event.isButton())
@@ -172,7 +184,6 @@ void BackEnd::call(JoystickEvent event)
         }
         button[number] = valueIn;
     }
-
     emit sendData();
 }
 
@@ -210,18 +221,13 @@ void BackEnd::get_I_facrot(float I){I_const = I; emit sendData();}
 
 void BackEnd::get_D_facrot(float D){D_const = D; emit sendData();}
 
-void BackEnd::sensors(std::vector<int> sensors)
-{
-    tempreatureValue = sensors[0];
-    qDebug()<< tempreatureValue;
-    emit frontEnd();
-}
-
 void BackEnd::prepareData()
 {
     std::vector<unsigned char> message;
-    SHORT V;
-    V.num = verticalMotorsVar;
+    SHORT V1;
+    V1.num = verticalMotorsVar1;
+    SHORT V2;
+    V2.num = verticalMotorsVar2;
     FLOAT P;
     P.num = P_const;
     FLOAT I;
@@ -232,25 +238,26 @@ void BackEnd::prepareData()
     message.insert(message.end(), P.bytes, P.bytes + 4); // index 0:3 in QByteArray & 0 in FLOAT union (P in PID)
     message.insert(message.end(), I.bytes, I.bytes + 4); // index 4:7 in QByteArray & 1 in FLOAT union (I in PID)
     message.insert(message.end(), D.bytes, D.bytes + 4); // index 8:11 in QByteArray & 2 in FLOAT union (D in PID)
-    message.insert(message.end(), V.bytes, V.bytes+2); // index 12,13 in QByteArray & 7 in SHORT union
-    message.push_back((char)horizontalMotorsVar); // index 14
-    message.push_back(motorArd[0]); // index 15
-    message.push_back(motorArd[1]); // index 16
-    message.push_back(motorArd[2]); // index 17
-    message.push_back(motorArd[3]); // index 18
-    message.push_back(pnu[0]); // index 19 --> front camera flash
-    message.push_back(pnu[1]); // index 20 --> bottom camera flash
-    message.push_back(pnu[2]); // index 21 --> micro camera flash
-    message.push_back(pnu[5]); // index 22 --> pneumatic arm
-    message.push_back(DC_armValue); // index 23 --> DC arm value
-    message.push_back(DC_armDirection); // index 24 --> DC arm direction
-    message.push_back(microValue); // index 25 --> micro motor value
-    message.push_back(microDirection); // index 26 --> micro motor direction
-    message.push_back(microArmValue); // index 27 --> micro arm value
-    message.push_back(microArmDirection); // index 28 --> micro arm direction
-    message.push_back(rollerValue); // index 29 --> roller motor value
-    message.push_back(rollerDirection); // index 30 --> roller motor direction
-    message.push_back(flyTransactState); // index 31 --> fly transact mood control (a.k.a pid mood)
+    message.insert(message.end(), V1.bytes, V1.bytes+2); // index 12,13 in QByteArray & 6 in SHORT union
+    message.insert(message.end(), V2.bytes, V2.bytes+2); // index 14,15 in QByteArray & 7 in SHORT union
+    message.push_back(horizontalMotorsVar); // index 16
+    message.push_back(motorArd[0]); // index 17
+    message.push_back(motorArd[1]); // index 18
+    message.push_back(motorArd[2]); // index 19
+    message.push_back(motorArd[3]); // index 20
+    message.push_back(pnu[2]); // index 21 --> front camera flash
+    message.push_back(pnu[1]); // index 22 --> bottom camera flash
+    message.push_back(pnu[0]); // index 23 --> micro camera flash
+    message.push_back(pnu[5]); // index 24 --> pneumatic arm
+    message.push_back(DC_armValue); // index 25 --> DC arm value
+    message.push_back(DC_armDirection); // index 26 --> DC arm direction
+    message.push_back(microValue); // index 27 --> micro motor value
+    message.push_back(microDirection); // index 28 --> micro motor direction
+    message.push_back(microArmValue); // index 29 --> micro arm value
+    message.push_back(microArmDirection); // index 30 --> micro arm direction
+    message.push_back(rollerValue); // index 31 --> roller motor value
+    message.push_back(rollerDirection); // index 32 --> roller motor direction
+    message.push_back(flyTransactState); // index 33 --> fly transact mood control (a.k.a pid mood)
     socket->send(message.data(),message.size());
 }
 // axises
@@ -345,7 +352,7 @@ bool BackEnd::button12(){return button[12];}
 
 int BackEnd::horizontalMotors(){ return horizontalMotorsVar;}
 
-int BackEnd::verticalMotors(){ return verticalMotorsVar;}
+int BackEnd::verticalMotors(){ return verticalMotorsVar1;}
 
 int BackEnd::frontRightMotorDir(){return motorDirections[frontRightDir];}
 

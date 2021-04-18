@@ -25,7 +25,6 @@ public:
     }FLOAT;
 
 signals:
-    void gotSensors(std::vector<int>);
 
 public slots:
     void processPendingDatagrams();

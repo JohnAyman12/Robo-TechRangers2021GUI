@@ -5,6 +5,7 @@ myUDP::myUDP(QObject *parent) :
 {
     socket = new QUdpSocket(this);
     socket->bind(QHostAddress::Any,8888);
+    // to get data from the UI and send it to the arduino
     connect(socket,SIGNAL(readyRead()),this,SLOT(processPendingDatagrams()));
 }
 
@@ -22,27 +23,29 @@ void myUDP::send(unsigned char* myData,int length)
     sentData += " :: " + QString::number((float)PID[1].num);
     sentData += " :: " + QString::number((float)PID[2].num);
     sentData += " :: " + QString::number((int)V[6].num);
-    for (int i = 14; i < data.size(); i++){sentData += " :: " + QString::number((int)buffer[i]);}
-    qDebug()<< "Sent:" << sentData;
+    sentData += " :: " + QString::number((int)V[7].num);
+    for (int i = 16; i < data.size(); i++){sentData += " :: " + QString::number((int)buffer[i]);}
+//    qDebug()<< "Sent:" << sentData;
 }
 
 void myUDP::processPendingDatagrams()
 {
     QHostAddress sender;
     quint16 senderport;
-    while (socket->hasPendingDatagrams()){
-        QByteArray buffer1;
-        buffer1.resize(socket->pendingDatagramSize());
-        socket->readDatagram(buffer1.data(), buffer1.size(), &sender, &senderport);
-        std::vector<unsigned char> buffer(buffer1.size());
-        std::copy(buffer1.begin(), buffer1.end(), buffer.begin());
-        QString sensors = "";
-        int bufferSize = buffer.size();
-        for(int i = 0; i < bufferSize; i++){sensors+= QString::number((int)buffer[i]) + " :: ";}
-        qDebug()<< "recieved" << sensors;
-        std::vector<int> sensorsValues;
-        sensorsValues[0] = 20;
-        emit gotSensors(sensorsValues);
-    }
+//    while (socket->hasPendingDatagrams()){
+//        qDebug()<< "in";
+//        QByteArray buffer1;
+//        buffer1.resize(socket->pendingDatagramSize());
+//        socket->readDatagram(buffer1.data(), buffer1.size(), &sender, &senderport);
+//        std::vector<unsigned char> buffer(buffer1.size());
+//        std::copy(buffer1.begin(), buffer1.end(), buffer.begin());
+//        QString sensors = "";
+//        int bufferSize = buffer.size();
+//        for(int i = 0; i < bufferSize; i++){sensors+= QString::number((int)buffer[i]) + " :: ";}
+//        qDebug()<< "recieved" << sensors;
+//        std::vector<int> sensorsValues;
+//        sensorsValues[0] = 20;
+//        emit gotSensors(sensorsValues);
+//    }
 }
 

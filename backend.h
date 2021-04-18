@@ -29,6 +29,8 @@ class BackEnd : public QObject
     Q_PROPERTY(int axis3 READ axis3 NOTIFY frontEnd)
     Q_PROPERTY(int axis4 READ axis4 NOTIFY frontEnd)
     Q_PROPERTY(int axis5 READ axis5 NOTIFY frontEnd)
+    Q_PROPERTY(int axis6 READ axis6 NOTIFY frontEnd)
+    Q_PROPERTY(int axis7 READ axis7 NOTIFY frontEnd)
 
     Q_PROPERTY(int pureAxis0 READ pureAxis0 NOTIFY frontEnd)
     Q_PROPERTY(int pureAxis1 READ pureAxis1 NOTIFY frontEnd)
@@ -67,6 +69,7 @@ class BackEnd : public QObject
     Q_PROPERTY(bool pnu9 READ pnu9 NOTIFY frontEnd)
     Q_PROPERTY(bool pnu10 READ pnu10 NOTIFY frontEnd)
     Q_PROPERTY(bool pnu11 READ pnu11 NOTIFY frontEnd)
+    Q_PROPERTY(bool pnu12 READ pnu11 NOTIFY frontEnd)
 
     // motors values properties
     Q_PROPERTY(int horizontalMotor READ horizontalMotors NOTIFY frontEnd)
@@ -202,12 +205,12 @@ public slots:
     void get_I_facrot(float);
     void get_D_facrot(float);
     void prepareData();
-    void sensors(std::vector<int>);
 
 signals:
     void frontEnd();
     void readjoy();
     void sendData();
+    void getSensors();
 
 };
 
