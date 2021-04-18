@@ -100,7 +100,6 @@ Item {
             text: "Pause"
             onClicked:{
                 timer.stop()
-                playSound.play()
             }
         }
 

@@ -12,18 +12,18 @@ void joystickreader::read(){
     if (!joystick.isFound())
     {
         qDebug() << "open failed.\n";
-        //        exit(1);
+        exit(1);
     }
     while (joystick.isFound()) {
         // Restrict rate
-        usleep(10000);
+        usleep(1000);
 
         // Attempt to sample an event from the joystick
         JoystickEvent event;
         if (joystick.sample(&event))
         {
             //  qDebug()<< event.number << event.value;
-            emit send(event);
+            emit eventDetected(event);
         }
     }
 }

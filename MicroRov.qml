@@ -193,8 +193,8 @@ Item {
         name: "Micro Arm Motor"
         value: microArm
         motorEnable: (checkBoxMicro.checkState && !flyTransect)
-        directionIamgeSource: if (rollerMotorDir == 0) {"images/hold.png"}
-                              else if (rollerMotorDir == 1){"images/clockwise.jpeg"}
+        directionIamgeSource: if (microArmDir == 0) {"images/hold.png"}
+                              else if (microArmDir == 1){"images/clockwise.jpeg"}
                               else {"images/anticlockwise.png"}
         xAll: microBorder.x + 94
         yAll: microBorder.y + 220
