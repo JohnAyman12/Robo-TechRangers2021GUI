@@ -54,7 +54,7 @@ Item {
 
     RecievedData {
         dataName: "Humidity"
-        dataValue: 0
+        dataValue: backend.yaw
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 1.4)
         dataNameX: 17
@@ -62,7 +62,7 @@ Item {
 
     RecievedData {
         dataName: "X-axis"
-        dataValue: 90
+        dataValue: 20
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 2.4)
         dataNameX: 27

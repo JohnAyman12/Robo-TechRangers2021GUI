@@ -129,6 +129,7 @@ Item {
         }
 
         CheckBox {
+            id: musselCheck
             text: "<font color=\"white\">Estimating the number of mussels and the total amount of water filtered by the mussel bed"
             font.pixelSize: 17
             onCheckStateChanged:
@@ -159,10 +160,10 @@ Item {
             TextField {
                 id:mussleField
                 y: -5
-                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 60
+                enabled: musselCheck.checkState
                 placeholderText: "Mussel"
                 background: Rectangle {
                     implicitWidth: 220
@@ -180,10 +181,11 @@ Item {
             TextField {
                 id:heightField
                 y: -5
-                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 60
+                font.pixelSize: 18
+                enabled: musselCheck.checkState
                 placeholderText: "Height"
                 background: Rectangle {
                     implicitWidth: 220
@@ -201,10 +203,11 @@ Item {
             TextField {
                 id:widthField
                 y: -5
-                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 60
+                font.pixelSize: 18
+                enabled: musselCheck.checkState
                 placeholderText: "Width"
                 background: Rectangle {
                     implicitWidth: 220
@@ -229,10 +232,11 @@ Item {
             TextField {
                 id:filtrationField
                 y: -5
-                color: textColor
                 inputMethodHints: Qt.ImhDigitsOnly
                 horizontalAlignment: Text.AlignHCenter
                 width: 60
+                font.pixelSize: 18
+                enabled: musselCheck.checkState
                 placeholderText: "Rate"
                 background: Rectangle {
                     implicitWidth: 220

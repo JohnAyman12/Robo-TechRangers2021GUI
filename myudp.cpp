@@ -1,4 +1,6 @@
+
 #include "myudp.h"
+#include <QtEndian>
 
 myUDP::myUDP(QObject *parent) :
     QObject(parent)
@@ -32,20 +34,13 @@ void myUDP::processPendingDatagrams()
 {
     QHostAddress sender;
     quint16 senderport;
-//    while (socket->hasPendingDatagrams()){
+    while (socket->hasPendingDatagrams()){
 //        qDebug()<< "in";
-//        QByteArray buffer1;
-//        buffer1.resize(socket->pendingDatagramSize());
-//        socket->readDatagram(buffer1.data(), buffer1.size(), &sender, &senderport);
-//        std::vector<unsigned char> buffer(buffer1.size());
-//        std::copy(buffer1.begin(), buffer1.end(), buffer.begin());
-//        QString sensors = "";
-//        int bufferSize = buffer.size();
-//        for(int i = 0; i < bufferSize; i++){sensors+= QString::number((int)buffer[i]) + " :: ";}
-//        qDebug()<< "recieved" << sensors;
-//        std::vector<int> sensorsValues;
-//        sensorsValues[0] = 20;
-//        emit gotSensors(sensorsValues);
-//    }
+        QByteArray buffer1;
+        buffer1.resize(socket->pendingDatagramSize());
+        socket->readDatagram(buffer1.data(), buffer1.size(), &sender, &senderport);
+        std::vector<float> buffer(buffer1.size());
+        std::copy(buffer1.begin(), buffer1.end(), buffer.begin());
+        emit gotSensors(buffer);
+    }
 }
-

@@ -87,9 +87,7 @@ class BackEnd : public QObject
 
     //sesnors
     Q_PROPERTY(int tempreature READ tempreature NOTIFY frontEnd)
-
-    // sensors
-//    Q_PROPERTY(int tempreature READ tempreature NOTIFY frontEnd)
+    Q_PROPERTY(double yaw READ yawAxis NOTIFY frontEnd)
 
 public:
 
@@ -194,6 +192,13 @@ public:
     int tempreatureValue = 20;
     int tempreature();
 
+    FLOAT yaw;
+    double yawValue;
+    double yawAxis();
+
+    FLOAT pitch;
+    FLOAT roll;
+
 public slots:
     void call(JoystickEvent);
     void getMaxSpeed(int);
@@ -205,12 +210,12 @@ public slots:
     void get_I_facrot(float);
     void get_D_facrot(float);
     void prepareData();
+    void prepareSensors(std::vector<float>);
 
 signals:
     void frontEnd();
     void readjoy();
     void sendData();
-    void getSensors();
 
 };
 

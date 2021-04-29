@@ -5,7 +5,7 @@ import QtQuick.Controls.Styles 1.4
 Item {
     id:item
     property string dataName
-    property int dataValue
+    property double dataValue
     property int xAll
     property int yAll
     property int dataNameX : 0
@@ -23,7 +23,7 @@ Item {
         from: 0
         to: 255
         value: item.dataValue
-        x: item.xAll + /*70*/120
+        x: item.xAll + 120
         y: item.yAll + 10
     }
 

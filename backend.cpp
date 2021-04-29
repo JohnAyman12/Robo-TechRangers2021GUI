@@ -19,8 +19,6 @@ bool button[13] = {false};
 short verticalMotorsVar1 = 0;
 short verticalMotorsVar2 = 0;
 
-// back right will be reversed
-
 // variables related to the front end
 int maxSpeed = 255;
 int microValue = 0;
@@ -49,7 +47,7 @@ BackEnd::BackEnd(QObject *parent) :
     // to send data to the arduino
     connect(this, SIGNAL(sendData()), this, SLOT(prepareData()));
     // to get data from the arduino
-    connect(this, SIGNAL(getSensors()), socket, SLOT(processPendingDatagrams()));
+    connect(socket, SIGNAL(gotSensors(std::vector<float>)), this, SLOT(prepareSensors(std::vector<float>)));
     emit readjoy(); // to get in the infinity loop of the UI
 }
 
@@ -186,6 +184,26 @@ void BackEnd::call(JoystickEvent event)
     }
     emit sendData();
 }
+
+void BackEnd::prepareSensors(std::vector<float> buffer)
+{
+    std::copy(buffer.begin(), buffer.begin() + 4, yaw.bytes);
+    std::copy(buffer.begin() + 4, buffer.begin() + 8, pitch.bytes);
+    std::copy(buffer.begin() + 8, buffer.begin() + 12, roll.bytes);
+
+//    yawValue = QString::number((float)yaw.num);
+    yawValue = (double)yaw.num;
+    qDebug()<< yawValue;
+
+    QString sensors = "";
+    sensors += QString::number((float)yaw.num);
+    sensors += " :: " + QString::number((float)pitch.num);
+    sensors += " :: " + QString::number((float)roll.num);
+//    qDebug()<< "recieved" << sensors;
+    emit frontEnd();
+}
+
+double BackEnd::yawAxis(){return yawValue;}
 
 void BackEnd::getMaxSpeed(int speed){maxSpeed = speed;}
 

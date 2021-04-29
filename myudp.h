@@ -5,6 +5,8 @@
 #include <QUdpSocket>
 #include <QString>
 
+using namespace std;
+
 
 class myUDP:public QObject
 {
@@ -25,6 +27,7 @@ public:
     }FLOAT;
 
 signals:
+    void gotSensors(std::vector<float>);
 
 public slots:
     void processPendingDatagrams();
