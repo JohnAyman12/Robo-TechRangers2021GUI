@@ -6,6 +6,7 @@ ApplicationWindow {
     property int timeSecs: 0
     property int timeMins: 15
     property int pointsCounter: 0
+    property bool flyTransect: false
 
     id: mainWindow
     width: 1200
@@ -30,6 +31,35 @@ ApplicationWindow {
         Page3 {}
         Page4 {}
     }
+
+//    ApplicationWindow {
+//        id: window
+//        width: 400
+//        height: 400
+//        visible: true
+
+//        Button {
+//            text: "Open"
+//            onClicked: popup.open()
+//        }
+
+//        Popup {
+//            id: popup
+//            x: 100
+//            y: 100
+//            width: 200
+//            height: 300
+//            modal: true
+//            focus: true
+//            Column {
+//                anchors.fill: parent
+//                CheckBox { text: qsTr("E-mail") }
+//                CheckBox { text: qsTr("Calendar") }
+//                CheckBox { text: qsTr("Contacts") }
+//            }
+//            closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+//        }
+//    }
 
     footer: TabBar {
         id: tabBar
@@ -56,7 +86,7 @@ ApplicationWindow {
         }
 
         TabButton {
-            text: qsTr("<font color=\"white\">Connection Page")
+            text: qsTr("<font color=\"white\">Control Page")
             Image {
                 id: tab3Background
                 source: "images/cennectionButton.jpeg"

@@ -15,7 +15,7 @@ Item {
             source: "images/about.jpeg"
             height: 60
             Label {
-                text: qsTr("Connection page")
+                text: qsTr("Control page")
                 font.pixelSize: Qt.application.font.pixelSize * 2
                 padding: 10
                 color:"white"
@@ -42,6 +42,10 @@ Item {
             }
         }
 
+        BackEnd {
+            id: backend
+        }
+
         Image {
             id: background
             source: "images/black.jpg"
@@ -54,6 +58,88 @@ Item {
             buttons_y: 110
         }
 
+        Rectangle{
+            id: horizontalMaxSpeedBorder
+            x: 900
+            y: 277.5
+            color: "transparent"
+            width: 264
+            height: 95
+            border.color: "deeppink"
+            border.width: 2
+            radius: 10
+        }
+
+        Column {
+            spacing: 5
+            x: horizontalMaxSpeedBorder.x + 22
+            y: horizontalMaxSpeedBorder.y + 7
+
+            Label {
+                text: "Horizontal max speed"
+                color:"white"
+                font.bold : true
+                font.pixelSize: 18
+                x: 18
+            }
+
+            SpinBox {
+                editable: true
+                to:255
+                value: 180
+                stepSize: 15
+                font.bold: true
+                enabled: !flyTransect
+                onValueChanged: {backend.getPilgeMaxSpeed(value)}
+                background: Rectangle {
+                    implicitWidth: 220
+                    implicitHeight: 20
+                    radius: 2
+                }
+            }
+        }
+
+
+        Rectangle{
+            id: verticalMaxSpeedBorder
+            x: 900
+            y: 400
+            color: "transparent"
+            width: 264
+            height: 95
+            border.color: "deeppink"
+            border.width: 2
+            radius: 10
+        }
+
+        Column {
+            spacing: 5
+            x: verticalMaxSpeedBorder.x + 22
+            y: verticalMaxSpeedBorder.y + 7
+
+            Label {
+                text: "Vertical max speed"
+                color:"white"
+                font.bold : true
+                font.pixelSize: 18
+                x: 28
+            }
+
+            SpinBox {
+                editable: true
+                to: 400
+                value: 400
+                stepSize: 15
+                font.bold: true
+                enabled: !flyTransect
+                onValueChanged: {backend.getT100MaxSpeed(value)}
+                background: Rectangle {
+                    implicitWidth: 220
+                    implicitHeight: 20
+                    radius: 2
+                }
+            }
+        }
         AxisPart {
             id: axisPart
             fields_xAxis: 685

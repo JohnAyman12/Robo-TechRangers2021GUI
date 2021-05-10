@@ -4,7 +4,6 @@ import io.qt.examples.backend 1.0
 
 Item {
     property int horizontalMotor: backend.horizontalMotor
-    property int verticalMotor: backend.verticalMotor
 
     property int frontRightDir: backend.frontRightMotorDir
     property int frontLeftDir: backend.frontLeftMotorDir
@@ -52,23 +51,24 @@ Item {
         height: mainImg.width
     }
 
-    Motor { // horizontal motors
-        id: horizontalMotorsID
-        name: "Horizontal Motors"
-        value: horizontalMotor
+//    Motor { // horizontal motors
+//        id: horizontalMotorsID
+//        name: "Horizontal Motors"
+//        value: horizontalMotor
+//        motorMinimum: 0
+//        motorEnable:  !flyTransect
+//        xAll: rovBorder.x + 30
+//        yAll: rovBorder.y + 32
+//        motorDirectionVisible: false
+//    }
+
+    Motor { // vertical motor 1
+        id:verticalMotor1
+        name: "Vertical Front"
+        value: backend.verticalMotor1
         motorEnable:  !flyTransect
         xAll: rovBorder.x + 30
         yAll: rovBorder.y + 32
-        motorDirectionVisible: false
-    }
-
-    Motor { // vertical motor
-        id:verticalMotors
-        name: "Vertical Motors"
-        value: verticalMotor
-        motorEnable:  !flyTransect
-        xAll: rovBorder.x + 174
-        yAll: horizontalMotorsID.yAll
 
         motorDirectionVisible: false
         motorSpeedFieldWidth: 50
@@ -77,51 +77,77 @@ Item {
         motorIamgeSource: "images/pinkDialT100.png"
     }
 
-    Label {
-        id:horizontalMotorsDirLbl
-        text: "Horizontal Motors"
-        color: textColor
-        anchors.centerIn: rovBorder
-        anchors.verticalCenterOffset: -98
-        font.pixelSize: 20
-        font.bold: true
+    Motor { // vertical motor 2
+        id:verticalMotor2
+        name: "Vertical Back"
+        value: backend.verticalMotor2
+        motorEnable:  !flyTransect
+        xAll: rovBorder.x + 174
+        yAll: rovBorder.y + 32
+
+        motorDirectionVisible: false
+        motorSpeedFieldWidth: 50
+        motorMinimum: 1100
+        motorMaxmum: 1900
+        motorIamgeSource: "images/pinkDialT100.png"
     }
 
-    PilgeMotors {
-        itemX: horizontalMotorsDirLbl.x + 21
-        itemY: horizontalMotorsDirLbl.y + 30
-        lableText: "Front Right: " + frontRightDir
-        imgSource: if (frontRightDir == 0) {"images/hold.png"}
-                   else if (frontRightDir == 1){"images/clockwise.jpeg"}
-                   else {"images/anticlockwise.png"}
-    }
+        Motor { // horizontal motors
+            id: horizontalMotorsID
+            name: "Horizontal Motors"
+            value: horizontalMotor
+            motorMinimum: 0
+            motorEnable:  !flyTransect
+            xAll: rovBorder.x + 30
+            yAll: rovBorder.y + 170
+            motorDirectionVisible: false
+        }
 
-    PilgeMotors {
-        itemX: horizontalMotorsDirLbl.x + 21
-        itemY: horizontalMotorsDirLbl.y + 60
-        lableText: "Front Left:   " + frontLeftDir
-        imgSource: if (frontLeftDir == 0) {"images/hold.png"}
-                   else if (frontLeftDir == 1){"images/clockwise.jpeg"}
-                   else {"images/anticlockwise.png"}
-    }
+//    Label {
+//        id:horizontalMotorsDirLbl
+//        text: "Horizontal Motors"
+//        color: textColor
+//        anchors.centerIn: rovBorder
+//        anchors.verticalCenterOffset: -98
+//        font.pixelSize: 20
+//        font.bold: true
+//    }
 
-    PilgeMotors {
-        itemX: horizontalMotorsDirLbl.x + 21
-        itemY: horizontalMotorsDirLbl.y + 90
-        lableText: "Back Right:  " + backRightDir
-        imgSource: if (backRightDir == 0) {"images/hold.png"}
-                   else if (backRightDir == 1){"images/clockwise.jpeg"}
-                   else {"images/anticlockwise.png"}
-    }
+//    PilgeMotors {
+//        itemX: horizontalMotorsDirLbl.x + 21
+//        itemY: horizontalMotorsDirLbl.y + 30
+//        lableText: "Front Right: " + frontRightDir
+//        imgSource: if (frontRightDir == 0) {"images/hold.png"}
+//                   else if (frontRightDir == 1){"images/clockwise.jpeg"}
+//                   else {"images/anticlockwise.png"}
+//    }
 
-    PilgeMotors {
-        itemX: horizontalMotorsDirLbl.x + 21
-        itemY: horizontalMotorsDirLbl.y + 120
-        lableText: "Back Left:    " + backLeftDir
-        imgSource: if (backLeftDir == 0) {"images/hold.png"}
-                   else if (backLeftDir == 1){"images/clockwise.jpeg"}
-                   else {"images/anticlockwise.png"}
-    }
+//    PilgeMotors {
+//        itemX: horizontalMotorsDirLbl.x + 21
+//        itemY: horizontalMotorsDirLbl.y + 60
+//        lableText: "Front Left:   " + frontLeftDir
+//        imgSource: if (frontLeftDir == 0) {"images/hold.png"}
+//                   else if (frontLeftDir == 1){"images/clockwise.jpeg"}
+//                   else {"images/anticlockwise.png"}
+//    }
+
+//    PilgeMotors {
+//        itemX: horizontalMotorsDirLbl.x + 21
+//        itemY: horizontalMotorsDirLbl.y + 90
+//        lableText: "Back Right:  " + backRightDir
+//        imgSource: if (backRightDir == 0) {"images/hold.png"}
+//                   else if (backRightDir == 1){"images/clockwise.jpeg"}
+//                   else {"images/anticlockwise.png"}
+//    }
+
+//    PilgeMotors {
+//        itemX: horizontalMotorsDirLbl.x + 21
+//        itemY: horizontalMotorsDirLbl.y + 120
+//        lableText: "Back Left:    " + backLeftDir
+//        imgSource: if (backLeftDir == 0) {"images/hold.png"}
+//                   else if (backLeftDir == 1){"images/clockwise.jpeg"}
+//                   else {"images/anticlockwise.png"}
+//    }
 
     // main ROV images
 

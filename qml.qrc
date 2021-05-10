@@ -22,6 +22,7 @@
         <file>DoubleSpinBox.qml</file>
         <file>PilgeMotors.qml</file>
         <file>MicroRov.qml</file>
+        <file>MaxSpeed.qml</file>
     </qresource>
     <qresource prefix="/images">
         <file>hold.png</file>

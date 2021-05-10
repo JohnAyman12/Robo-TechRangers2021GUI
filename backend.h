@@ -73,7 +73,8 @@ class BackEnd : public QObject
 
     // motors values properties
     Q_PROPERTY(int horizontalMotor READ horizontalMotors NOTIFY frontEnd)
-    Q_PROPERTY(int verticalMotor READ verticalMotors NOTIFY frontEnd)
+    Q_PROPERTY(int verticalMotor1 READ verticalMotor1 NOTIFY frontEnd)
+    Q_PROPERTY(int verticalMotor2 READ verticalMotor2 NOTIFY frontEnd)
 
     // motors directions properties
     Q_PROPERTY(int frontRightMotorDir READ frontRightMotorDir NOTIFY frontEnd)
@@ -86,8 +87,11 @@ class BackEnd : public QObject
     Q_PROPERTY(bool DC_armDir READ DC_armDir NOTIFY frontEnd)
 
     //sesnors
-    Q_PROPERTY(int tempreature READ tempreature NOTIFY frontEnd)
+    Q_PROPERTY(double tempreature READ tempreature NOTIFY frontEnd)
+    Q_PROPERTY(double humidity READ humidity NOTIFY frontEnd)
     Q_PROPERTY(double yaw READ yawAxis NOTIFY frontEnd)
+    Q_PROPERTY(double pitch READ pitchAxis NOTIFY frontEnd)
+    Q_PROPERTY(double roll READ rollAxis NOTIFY frontEnd)
 
 public:
 
@@ -104,11 +108,13 @@ public:
     joystickreader *reader;
     explicit BackEnd(QObject *parent = nullptr);
     QThread thread;
+    QThread communication;
 
     myUDP *socket;
 
     int number;  // axis or button number
     int valueIn;  // axis or button value
+    bool axisState = true;
 
     // axises variables and functions
 \
@@ -172,9 +178,10 @@ public:
     short motors[6];
     short horizontalMotorsVar = 0;
     int horizontalMotors();
-    int verticalMotors();
+    int verticalMotor1();
+    int verticalMotor2();
 
-    QMap<int, int> motorDirections;
+    int motorDirections[4];
     int frontRightMotorDir();
     int frontLeftMotorDir();
     int backRightMotorDir();
@@ -189,19 +196,30 @@ public:
     int DC_arm();
     bool DC_armDir();
 
-    int tempreatureValue = 20;
-    int tempreature();
+    FLOAT tempreatureUnion;
+    double tempreatureValue = 3.14;
+    double tempreature();
+
+    FLOAT humidityUnion;
+    double humidityValue = 3.14;
+    double humidity();
 
     FLOAT yaw;
-    double yawValue;
+    double yawValue = 3.14;
     double yawAxis();
 
     FLOAT pitch;
+    double pitchValue = 3.14;
+    double pitchAxis();
+
     FLOAT roll;
+    double rollValue = 3.14;
+    double rollAxis();
 
 public slots:
     void call(JoystickEvent);
-    void getMaxSpeed(int);
+    void getPilgeMaxSpeed(int);
+    void getT100MaxSpeed(int);
     void getMicro(int, int);
     void getMicroArm(int, int);
     void getRoller(int, int);
@@ -216,7 +234,8 @@ signals:
     void frontEnd();
     void readjoy();
     void sendData();
-
+    void syncSignal();
+    void sendToArduino(unsigned char* myData,int length);
 };
 
 #endif // BACKEND_H

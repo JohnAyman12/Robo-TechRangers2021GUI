@@ -1,7 +1,8 @@
-
 #include "myudp.h"
+#include"unistd.h"
 #include <QtEndian>
 
+bool firstDataReceived = false;
 myUDP::myUDP(QObject *parent) :
     QObject(parent)
 {
@@ -13,9 +14,11 @@ myUDP::myUDP(QObject *parent) :
 
 void myUDP::send(unsigned char* myData,int length)
 {
+//    data.clear();
+//    data.append((const char*) myData, length);
     QByteArray data;
-    data.append((const char*)myData,length);
-    socket->writeDatagram(data,QHostAddress("192.168.0.7"),8888);
+    data.append((const char*)myData, length);
+    socket->writeDatagram(data, QHostAddress("192.168.0.7"),8888);
     unsigned char buffer[data.size()];
     std::copy(data.begin(),data.end(),buffer);
     SHORT *V = (SHORT*)buffer;
@@ -27,7 +30,30 @@ void myUDP::send(unsigned char* myData,int length)
     sentData += " :: " + QString::number((int)V[6].num);
     sentData += " :: " + QString::number((int)V[7].num);
     for (int i = 16; i < data.size(); i++){sentData += " :: " + QString::number((int)buffer[i]);}
-//    qDebug()<< "Sent:" << sentData;
+    qDebug()<< "Sent:" << sentData;
+}
+
+void myUDP::syncWithArduino(){
+    int i = 0;
+    qDebug()<< "in";
+    while(true){
+        i++;
+        usleep(1000);
+        if (data.isEmpty()){continue;}
+        socket->writeDatagram(data, QHostAddress("192.168.0.7"),8888);
+        unsigned char buffer[data.size()];
+        std::copy(data.begin(),data.end(),buffer);
+        SHORT *V = (SHORT*)buffer;
+        FLOAT *PID = (FLOAT*)buffer;
+        QString sentData;
+        sentData += QString::number((float)PID[0].num);
+        sentData += " :: " + QString::number((float)PID[1].num);
+        sentData += " :: " + QString::number((float)PID[2].num);
+        sentData += " :: " + QString::number((int)V[6].num);
+        sentData += " :: " + QString::number((int)V[7].num);
+        for (int i = 16; i < data.size(); i++){sentData += " :: " + QString::number((int)buffer[i]);}
+                if (i % 1000 == 0){qDebug()<< "Sent:" << sentData;}
+    }
 }
 
 void myUDP::processPendingDatagrams()
@@ -35,7 +61,7 @@ void myUDP::processPendingDatagrams()
     QHostAddress sender;
     quint16 senderport;
     while (socket->hasPendingDatagrams()){
-//        qDebug()<< "in";
+        //        qDebug()<< "in";
         QByteArray buffer1;
         buffer1.resize(socket->pendingDatagramSize());
         socket->readDatagram(buffer1.data(), buffer1.size(), &sender, &senderport);

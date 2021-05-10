@@ -54,7 +54,7 @@ Item {
 
     RecievedData {
         dataName: "Humidity"
-        dataValue: backend.yaw
+        dataValue: backend.humidity
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 1.4)
         dataNameX: 17
@@ -62,7 +62,7 @@ Item {
 
     RecievedData {
         dataName: "X-axis"
-        dataValue: 20
+        dataValue: Math.round(backend.yaw * 100) / 100
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 2.4)
         dataNameX: 27
@@ -70,7 +70,7 @@ Item {
 
     RecievedData {
         dataName: "Y-axis"
-        dataValue: 0
+        dataValue: Math.round(backend.pitch * 100) / 100
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 3.4)
         dataNameX: 27
@@ -78,7 +78,7 @@ Item {
 
     RecievedData {
         dataName: "Z-axis"
-        dataValue: 0
+        dataValue: Math.round(backend.roll * 100) / 100
         xAll: dataBorder.x + 10
         yAll: dataBorder.y + (spaceBetweenLablesY * 4.4)
         dataNameX: 27

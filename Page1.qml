@@ -4,7 +4,6 @@ import QtQuick.Controls 2.15
 import io.qt.examples.backend 1.0
 
 Item {
-    property bool flyTransect: false
 
     Page {
         id:mainPage
@@ -52,49 +51,6 @@ Item {
             microROV_y: 73
         }
 
-        Rectangle{
-            id: maxSpeedBorder
-            x: 120
-            y: 466
-            color: "transparent"
-            width: 264
-            height: 95
-            border.color: "deeppink"
-            border.width: 2
-            radius: 10
-        }
-
-        Column {
-            id: column // maximum speed spinbox
-            spacing: 5
-            x: maxSpeedBorder.x + 48
-            y: maxSpeedBorder.y + 7
-
-            Label {
-                id: maximumSpeedLable
-                text: "Maximum speed"
-                color:"white"
-                font.bold : true
-                font.pixelSize: 18
-            }
-
-            SpinBox {
-                editable: true
-                to:255
-                value: 255
-                stepSize: 15
-                x: maximumSpeedLable.x - 25
-                font.bold: true
-                enabled: !flyTransect
-                onValueChanged: {backend.getMaxSpeed(value)}
-                background: Rectangle {
-                    implicitWidth: 220
-                    implicitHeight: 20
-                    radius: 2
-                }
-            }
-        }
-
         MainRov {
             id: mainPart
             mainROV_x: 450
@@ -110,9 +66,9 @@ Item {
 
         CheckBox {
             id:flyTransectCheckbox
-            x: 977
-            y: 239
-            text: "<font color=\"white\"><b>Fly transact mood"
+            x: 978
+            y: 247
+            text: "<font color=\"white\"><b>Fly transact mode"
             font.pixelSize: 17
             onCheckStateChanged:{
                 flyTransect = flyTransectCheckbox.checkState;
@@ -140,7 +96,7 @@ Item {
 
         ArmPart {
             buttons_x: 768
-            buttons_y: 331
+            buttons_y: 391
         }
 
         TimerPart {

@@ -14,8 +14,6 @@ class myUDP:public QObject
 public:
     explicit myUDP(QObject *parent = 0);
 
-    void send(unsigned char*,int);
-
     typedef union{
         char bytes[2];
         short num;
@@ -26,11 +24,15 @@ public:
         float num;
     }FLOAT;
 
+    QByteArray data;
+
 signals:
     void gotSensors(std::vector<float>);
 
 public slots:
     void processPendingDatagrams();
+    void syncWithArduino();
+    void send(unsigned char*,int);
 
 private:
     QUdpSocket *socket;

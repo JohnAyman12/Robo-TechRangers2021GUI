@@ -167,7 +167,7 @@ Item {
     Motor { // micro motor
         id:microMotorID
         name: "Micro Motor"
-        value: microMotor
+        value: microMotor * microMotorDir
         motorEnable: (checkBoxMicro.checkState && !flyTransect)
         directionIamgeSource: if (microMotorDir == 0) {"images/hold.png"}
                               else if (microMotorDir == 1){"images/clockwise.jpeg"}
@@ -179,7 +179,7 @@ Item {
     Motor { // roller motor
         id:rollerMotorID
         name: "Roller Motor"
-        value: rollerMotor
+        value: rollerMotor * rollerMotorDir
         motorEnable: (checkBoxMicro.checkState && !flyTransect)
         directionIamgeSource: if (rollerMotorDir == 0) {"images/hold.png"}
                               else if (rollerMotorDir == 1){"images/clockwise.jpeg"}
@@ -191,7 +191,7 @@ Item {
     Motor { // roller motor
         id:microArmMotorID
         name: "Micro Arm Motor"
-        value: microArm
+        value: microArm * microArmDir
         motorEnable: (checkBoxMicro.checkState && !flyTransect)
         directionIamgeSource: if (microArmDir == 0) {"images/hold.png"}
                               else if (microArmDir == 1){"images/clockwise.jpeg"}

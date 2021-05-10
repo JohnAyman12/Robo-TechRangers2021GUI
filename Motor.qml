@@ -7,7 +7,7 @@ Item {
     property string name
     property int value
     property int motorSpeedFieldWidth: 35
-    property int motorMinimum: 0
+    property int motorMinimum: -255
     property int motorMaxmum: 255
     property bool motorEnable: true
     property bool motorDirectionVisible: true
@@ -48,7 +48,6 @@ Item {
         value: motor.value
         x: motor.xAll
         y: motor.yAll
-//        Component.onCompleted: dial.baseline.color = "red"
     }
 
     Image {
@@ -58,12 +57,13 @@ Item {
         height: dialImg.width
         anchors.centerIn: dial
         anchors.verticalCenterOffset: -11
-        visible: motorEnable
+//        visible: motorEnable
+        opacity: motorEnable ? 1 : 0.5
     }
 
     TextField { // motor value
         id: motorInput
-        text: motorEnable? motor.value : 0
+        text: motorEnable? Math.abs(motor.value) : 0
         font.pixelSize: 20
         horizontalAlignment: Text.AlignHCenter
         width: motor.motorSpeedFieldWidth
@@ -73,25 +73,25 @@ Item {
         enabled: motorEnable
     }
 
-    Row{
-        spacing: 5
-        anchors.centerIn: dial
-        anchors.verticalCenterOffset: 65
-        visible: motorDirectionVisible
+//    Row{
+//        spacing: 5
+//        anchors.centerIn: dial
+//        anchors.verticalCenterOffset: 65
+//        visible: motorDirectionVisible
 
-        Label {
-            text: "Direction"
-            color: textColor
-            font.pixelSize: 17
-            font.bold: true
-        }
+//        Label {
+//            text: "Direction"
+//            color: textColor
+//            font.pixelSize: 17
+//            font.bold: true
+//        }
 
-        Image {
-            source: directionIamgeSource
-            width: 20
-            height: 20
-        }
-    }
+//        Image {
+//            source: directionIamgeSource
+//            width: 20
+//            height: 20
+//        }
+//    }
 }
 /*##^##
 Designer {

@@ -58,7 +58,7 @@ bool Joystick::sample(JoystickEvent* event)
     return false;
 
   // NOTE if this condition is not met, we're probably out of sync and this
-  // Joystick instance is likely unusable
+  // Joystick instance is likely unusable hi
   return bytes == sizeof(*event);
 }
 

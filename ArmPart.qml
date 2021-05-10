@@ -19,7 +19,7 @@ Item {
         y:buttons_y
         color: "transparent"
         width: 205
-        height: 230
+        height: 175
         border.color: "deeppink"
         border.width: 2
         radius: 10
@@ -63,19 +63,11 @@ Item {
         }
 
         SwitchDelegate {
-            id: microCamera
-            checked: backend.pnu0
-            text: "<font color=\"white\">Micro Camera<font>"
-            font.bold: true
-        }
-
-        SwitchDelegate {
             id: penumaticArm
             checked: (backend.pnu5 && !flyTransect)
             enabled: !flyTransect
             text: "<font color=\"white\">Pneumatic Arm<font>"
             font.bold: true
-            onCheckedChanged: {console.log(armDC)}
         }
 
         Row{
