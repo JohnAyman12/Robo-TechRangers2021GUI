@@ -1,0 +1,64 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>Motor.qml</file>
+        <file>AxisPart.qml</file>
+        <file>ButtonPart.qml</file>
+        <file>MainRov.qml</file>
+        <file>Page1.qml</file>
+        <file>Page2.qml</file>
+        <file>Page3.qml</file>
+        <file>Page4.qml</file>
+        <file>RecievedDataPart.qml</file>
+        <file>RecievedData.qml</file>
+        <file>Task1.qml</file>
+        <file>Task2.qml</file>
+        <file>Task3.qml</file>
+        <file>Axis.qml</file>
+        <file>ArmPart.qml</file>
+        <file>TimerPart.qml</file>
+        <file>PIDvalues.qml</file>
+        <file>DoubleSpinBox.qml</file>
+        <file>PilgeMotors.qml</file>
+        <file>MicroRov.qml</file>
+        <file>MainDirection.qml</file>
+        <file>SpeedMode.qml</file>
+        <file>MaxSpeed.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>hold.png</file>
+        <file>left.png</file>
+        <file>right.png</file>
+        <file>black.jpg</file>
+        <file>back.png</file>
+        <file>forward.png</file>
+        <file>main.png</file>
+        <file>micro.png</file>
+        <file>arm.png</file>
+        <file>axis.png</file>
+        <file>logo.png</file>
+        <file>button.png</file>
+        <file>missionButton.jpeg</file>
+        <file>PID.png</file>
+        <file>timer.png</file>
+        <file>mainButton.jpeg</file>
+        <file>cennectionButton.jpeg</file>
+        <file>sensors.jpeg</file>
+        <file>about.jpeg</file>
+        <file>pinkDialDC.png</file>
+        <file>pinkDialT100.png</file>
+        <file>clockwise.jpeg</file>
+        <file>anticlockwise.png</file>
+        <file>propulsion.png</file>
+        <file>closed.png</file>
+        <file>opened.png</file>
+        <file>axisSwitcing.png</file>
+        <file>ourROV.png</file>
+        <file>aboutButton.jpg</file>
+        <file>anticlockwise.jpeg</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>pip.wav</file>
+    </qresource>
+</RCC>
