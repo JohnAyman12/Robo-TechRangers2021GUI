@@ -84,7 +84,7 @@ void BackEnd::call(JoystickEvent event)
         if(pnu[1])
         {
             verticalMotorsVar1 = (int)((pureAxis[4] / 32767.0) * 500) + 1500;
-            verticalMotorsVar2 = (int)((pureAxis[4] / 32767.0) * 300) + 1500;
+            verticalMotorsVar2 = (int)((pureAxis[4] / 32767.0) * 500) + 1500;
         }
         else
         {
@@ -261,13 +261,11 @@ void BackEnd::prepareData()
     message.push_back(motorArdDirections[frontLeft]); // index 2
     message.push_back(motorArdDirections[backRight]); // index 3
     message.push_back(motorArdDirections[backLeft]); // index 4
-    message.push_back(pnu[2]); // index 5 --> front camera flash
-    message.push_back(pnu[1]); // index 6 --> bottom camera flash
-    message.push_back(pnu[5]); // index 7 --> pneumatic arm
-    message.push_back(DC_armValue); // index 8 --> DC arm value
-    message.push_back(DC_armDirection); // index 9 --> DC arm direction
-    message.insert(message.end(), V1.bytes, V1.bytes+2); // index 10,11 in QByteArray & 6 in SHORT union
-    message.insert(message.end(), V2.bytes, V2.bytes+2); // index 12,13 in QByteArray & 7 in SHORT union
+    message.push_back(pnu[5]); // index 5 --> pneumatic arm
+    message.insert(message.end(), V1.bytes, V1.bytes+2); // index 6,7 in QByteArray & 3 in SHORT union
+    message.insert(message.end(), V2.bytes, V2.bytes+2); // index 8,9 in QByteArray & 4 in SHORT union
+    message.push_back(DC_armValue); // index 10 --> DC arm value
+    message.push_back(DC_armDirection); // index 11 --> DC arm direction
     socket->send(message.data(),message.size());
 }
 // axises

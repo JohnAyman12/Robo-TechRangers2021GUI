@@ -28,6 +28,15 @@ Item {
         y:speedMode.y - 23
     }
 
+    Image {
+        id: imgPID
+        x: mainLbl.x - 45
+        y: mainLbl.y
+        source: "images/speedMode.png"
+        width: 42
+        height: imgPID.width * 0.5
+    }
+
     CheckBox {
         id: highSpeed
         x: speedMode.x + 6

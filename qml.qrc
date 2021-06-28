@@ -57,6 +57,7 @@
         <file>ourROV.png</file>
         <file>aboutButton.jpg</file>
         <file>anticlockwise.jpeg</file>
+        <file>speedMode.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>pip.wav</file>

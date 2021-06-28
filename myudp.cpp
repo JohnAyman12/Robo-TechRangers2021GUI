@@ -21,10 +21,10 @@ void myUDP::send(unsigned char* myData,int length)
     std::copy(data.begin(),data.end(),buffer);
     SHORT *V = (SHORT*)buffer;
     QString sentData;
-    for (int i = 0; i < data.size() - 4; i++){sentData += QString::number((int)buffer[i]) + " :: ";}
-    sentData += QString::number((int)V[5].num);
-    sentData += " :: " + QString::number((int)V[6].num);
-//    qDebug()<< "Sent:" << sentData;
+    sentData += QString::number((int)V[3].num) +  " :: ";
+    sentData += QString::number((int)V[4].num) +  " :: ";
+    for (int i = 0; i < 5; i++){sentData += QString::number((int)buffer[i]) + " :: ";}
+//        qDebug()<< "Sent:" << sentData;
 }
 
 void myUDP::processPendingDatagrams()

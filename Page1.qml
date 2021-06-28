@@ -110,7 +110,7 @@ Item {
             text: "Pilge Max Speed"
             from: 0
             to: 255
-            value: 200
+            value: 2259
             stepSize: 10
             selectFunction: true
         }
