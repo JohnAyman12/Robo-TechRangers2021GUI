@@ -78,7 +78,7 @@ Item {
 
     Motor { // vertical motor 1
         id:verticalMotor1
-        name: "Front T100"
+        name: "Front T200"
         value: backend.verticalMotor1
         xAll: rovBorder.x + 30
         yAll: rovBorder.y + 308
@@ -90,7 +90,7 @@ Item {
 
     Motor { // vertical motor 2
         id:verticalMotor2
-        name: "Back T100"
+        name: "Back T200"
         value: backend.verticalMotor2
         xAll: rovBorder.x + 174
         yAll: rovBorder.y + 308

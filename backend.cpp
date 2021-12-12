@@ -20,7 +20,7 @@ bool button[13] = {false};
 short verticalMotorsVar1 = 0;
 short verticalMotorsVar2 = 0;
 
-int pilgeMaxSpeed = 200;
+int pilgeMaxSpeed = 255;
 int T100MaxSpeed = 400;
 bool hasSpeedControl = false;
 int microValue = 0;
@@ -81,19 +81,28 @@ void BackEnd::call(JoystickEvent event)
             abs(abs(pureAxis[4]) - abs(pureAxis[3])) > linearDeadzone and !button[12])
         // up down (heave degree of freedom)
     {
+        pureAxis[4] > 0 ? direction = -1 : direction = 1;
         if(pnu[1])
         {
-            verticalMotorsVar1 = (int)((pureAxis[4] / 32767.0) * 500) + 1500;
-            verticalMotorsVar2 = (int)((pureAxis[4] / 32767.0) * 500) + 1500;
+            verticalMotorsVar1 = (int)((-pureAxis[4] / 32767.0) * 500) + 1500;
+            verticalMotorsVar2 = (int)((-pureAxis[4] / 32767.0) * 500) + 1500;
         }
         else
         {
-            verticalMotorsVar1 = (int)((pureAxis[4] / 32767.0) * T100MaxSpeed) + 1500;
-            verticalMotorsVar2 = (int)((pureAxis[4] / 32767.0) * T100MaxSpeed) + 1500;
+            if(direction == 1)
+            {
+                verticalMotorsVar1 = (int)((-pureAxis[4] / 32767.0) * T100MaxSpeed - 75) + 1500;
+                verticalMotorsVar2 = (int)((-pureAxis[4] / 32767.0) * T100MaxSpeed + 75) + 1500;
+            }
+            else if(direction == -1)
+            {
+                verticalMotorsVar1 = (int)((-pureAxis[4] / 32767.0) * T100MaxSpeed) + 1500;
+                verticalMotorsVar2 = (int)((-pureAxis[4] / 32767.0) * T100MaxSpeed + 50) + 1500;
+            }
         }
     }
     if (event.isAxis() and pureAxis[5] > 0)
-        // up down with angel forward (pitch degree of freedom)
+        // up down with angel back (pitch degree of freedom)
     {
         verticalMotorsVar1 = (int)((pureAxis[5] / 32767.0) * T100MaxSpeed) + 1500;
         verticalMotorsVar2 = (int)((-pureAxis[5] / 32767.0) * T100MaxSpeed) + 1500;
@@ -113,13 +122,13 @@ void BackEnd::call(JoystickEvent event)
         horizontalMotorsVar = abs(pureAxis[3]) * pilgeMaxSpeed / 32767;
         motorDirections[frontRightDir] = direction; motorDirections[frontLeftDir] = -1 * direction;
         motorDirections[backRightDir] = direction; motorDirections[backLeftDir] = -1 * direction;
-        if (direction == 1){ // clockwise
-            motorArdDirections[frontRight] = 0; motorArdDirections[frontLeft] = 1;
-            motorArdDirections[backRight] = 1; motorArdDirections[backLeft] = 0;
+        if (direction == -1){ // clockwise
+            motorArdDirections[frontRight] = 1; motorArdDirections[frontLeft] = 1;
+            motorArdDirections[backRight] = 0; motorArdDirections[backLeft] = 0;
         }
-        else if (direction == -1){ // anticlockwise
-            motorArdDirections[frontRight] = 1; motorArdDirections[frontLeft] = 0;
-            motorArdDirections[backRight] = 0; motorArdDirections[backLeft] = 1;
+        else if (direction == 1){ // anticlockwise
+            motorArdDirections[frontRight] = 0; motorArdDirections[frontLeft] = 0;
+            motorArdDirections[backRight] = 1; motorArdDirections[backLeft] = 1;
         }
     }
     if(event.isAxis() and abs(pureAxis[1]) > abs(pureAxis[0]) and abs(pureAxis[1]) > circuralDeadzone
@@ -130,12 +139,12 @@ void BackEnd::call(JoystickEvent event)
         horizontalMotorsVar = abs(pureAxis[1]) * pilgeMaxSpeed / 32767;
         for (counter = 0; counter <=3; counter++){motorDirections[counter] = direction;}
         if (direction == 1){ // forward
-            motorArdDirections[frontRight] = 1; motorArdDirections[frontLeft] = 1;
-            motorArdDirections[backRight] = 0; motorArdDirections[backLeft] = 0;
+            motorArdDirections[frontRight] = 1; motorArdDirections[frontLeft] = 0;
+            motorArdDirections[backRight] = 0; motorArdDirections[backLeft] = 1;
         }
         else if (direction == -1){ // back
-            motorArdDirections[frontRight] = 0; motorArdDirections[frontLeft] = 0;
-            motorArdDirections[backRight] = 1; motorArdDirections[backLeft] = 1;
+            motorArdDirections[frontRight] = 0; motorArdDirections[frontLeft] = 1;
+            motorArdDirections[backRight] = 1; motorArdDirections[backLeft] = 0;
         }
     }
     if(event.isAxis() and abs(pureAxis[0]) > abs(pureAxis[1]) and abs(pureAxis[0]) > circuralDeadzone
@@ -146,13 +155,13 @@ void BackEnd::call(JoystickEvent event)
         horizontalMotorsVar = abs(pureAxis[0]) * pilgeMaxSpeed / 32767;
         motorDirections[frontRightDir] = direction; motorDirections[frontLeftDir] = -1 * direction;
         motorDirections[backLeftDir] = direction; motorDirections[backRightDir] =  -1 * direction;
-        if (direction == -1){ // left
-            motorArdDirections[frontRight] = 1; motorArdDirections[frontLeft] = 0;
-            motorArdDirections[backRight] = 1; motorArdDirections[backLeft] = 0;
+        if (direction == 1){ // left
+            motorArdDirections[frontRight] = 0; motorArdDirections[frontLeft] = 0;
+            motorArdDirections[backRight] = 0; motorArdDirections[backLeft] = 0;
         }
-        else if (direction == 1){ // right
-            motorArdDirections[frontRight] = 0; motorArdDirections[frontLeft] = 1;
-            motorArdDirections[backRight] = 0; motorArdDirections[backLeft] = 1;
+        else if (direction == -1){ // right
+            motorArdDirections[frontRight] = 1; motorArdDirections[frontLeft] = 1;
+            motorArdDirections[backRight] = 1; motorArdDirections[backLeft] = 1;
         }
     }
     if (event.isButton() and valueIn == 1
@@ -257,10 +266,10 @@ void BackEnd::prepareData()
     V2.num = verticalMotorsVar2;
 
     message.push_back(horizontalMotorsVar); // index 0
-    message.push_back(motorArdDirections[frontRight]); // index 1
-    message.push_back(motorArdDirections[frontLeft]); // index 2
-    message.push_back(motorArdDirections[backRight]); // index 3
-    message.push_back(motorArdDirections[backLeft]); // index 4
+    message.push_back(motorArdDirections[backRight]); // index 1
+    message.push_back(motorArdDirections[frontRight]); // index 2
+    message.push_back(motorArdDirections[backLeft]); // index 3
+    message.push_back(motorArdDirections[frontLeft]); // index 4
     message.push_back(pnu[5]); // index 5 --> pneumatic arm
     message.insert(message.end(), V1.bytes, V1.bytes+2); // index 6,7 in QByteArray & 3 in SHORT union
     message.insert(message.end(), V2.bytes, V2.bytes+2); // index 8,9 in QByteArray & 4 in SHORT union

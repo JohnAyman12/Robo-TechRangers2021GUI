@@ -72,7 +72,7 @@ Item {
         onCheckStateChanged:
         {
             if(lowSpeed.checked){horizontalMaxSpeed.value = 150; verticalMaxSpeed.value = 250}
-            else{horizontalMaxSpeed.value = 200; verticalMaxSpeed.value = 400}
+            else{horizontalMaxSpeed.value = 255; verticalMaxSpeed.value = 400}
         }
     }
 
